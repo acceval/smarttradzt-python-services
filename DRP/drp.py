@@ -428,38 +428,61 @@ LS_supp = supp_params.columns.get_loc('Lot Size (MT)')
 MDP_supp = supp_params.columns.get_loc('Max Daily Production')
 
 for i in range(1, len(supp)):
+    
     # Net Requirements
+    
     if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
         supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+        
     else:
         supp.iloc[i, NR_supp] = 0
     
     # Master Production Schedule
+    
     if i >= supp_params.iloc[0, LT_supp]:
         supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
     
     # Projected Ending Inventory
+    
     supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
 
-wk_ind_list = []
-for i in range(0, len(supp)-int(supp_params.iloc[0, LT_supp])):
+# wk_ind_list = []
+
+# for i in range(0, len(supp)-int(supp_params.iloc[0, LT_supp])):
+#     print(i)
+#     # Planned Orders
+#     supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
     
-    # Planned Orders
-    supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
-    
-    # Supplier Amount to Reduce
-    if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
+#     # Supplier Amount to Reduce
+#     if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
         
-        supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp]
+#         supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp]
         
-        wk_ind_list.append(i)
-    else:
-        supp.iloc[i, STR_supp] = 0
+#         # wk_ind_list.append(i)
+        
+#     else:
+#         supp.iloc[i, STR_supp] = 0
 
 #%% Calculating profit loss for each Demand Centre
+amt_to_reduce = 0
 
 # Spot Demand to reduce
 for i in range(0, len(supp)):
+
+    if i < len(supp)-int(supp_params.iloc[0, LT_supp]):
+        # print(i)
+        # Planned Orders
+        supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
+        
+        # Supplier Amount to Reduce
+        if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
+            
+            supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] - amt_to_reduce
+            
+            # wk_ind_list.append(i)
+            
+        else:
+            supp.iloc[i, STR_supp] = 0
     
     # Spot Demand to Reduce - DC1, DC2, DC3
     
@@ -511,17 +534,20 @@ for i in range(0, len(supp)):
 
 #%% Optimisation
     
-    # 
+    # Spot Profit
     spot_pf1 = dc1.iloc[i, SP_1]
     spot_pf2 = dc2.iloc[i, SP_2]
     spot_pf3 = dc3.iloc[i, SP_3]
     
-    buffer = 8
+    buffer = 8  # This is just assumption for the algo to work. Needs a more concrete value.
     
+    # Setting spot profit to high value to prevent from being selected during minimisation.
     if int(dc1.iloc[i, SD_1]) < supp.iloc[i, STR_supp] - buffer:
         spot_pf1 = 1e5
+        
     if int(dc2.iloc[i, SD_2]) < supp.iloc[i, STR_supp] - buffer:
         spot_pf2 = 1e5
+        
     if int(dc3.iloc[i, SD_3]) < supp.iloc[i, STR_supp] - buffer:
         spot_pf3 = 1e5
     
@@ -535,11 +561,16 @@ for i in range(0, len(supp)):
         
         if index_min==0:    # Demand Centre 1
             print(f"For best profit, Spot Order for Demand Centre 1 in {dc1.index[i + int(dc1_params.iloc[0, LT_1])]} is recommended to be reduced by {int(dc1.iloc[i, SDTR_1])} MT.")
+            amt_to_reduce = amt_to_reduce + int(dc1.iloc[i, SDTR_1])
+            # saved_value.append(int(dc1.iloc[i, SDTR_1]))
             
         elif index_min==1:  # Demand Centre 2
             print(f"For best profit, Spot Order for Demand Centre 2 in {dc2.index[i + int(dc2_params.iloc[0, LT_2])]} is recommended to be reduced by {int(dc2.iloc[i, SDTR_2])} MT.")
-        
+            amt_to_reduce = amt_to_reduce + int(dc2.iloc[i, SDTR_2])
+            # saved_value.append(int(dc2.iloc[i, SDTR_2]))
+            
         else:               # Demand Centre 3
             print(f"For best profit, Spot Order for Demand Centre 3 in {dc3.index[i + int(dc3_params.iloc[0, LT_3])]} is recommended to be reduced by {int(dc3.iloc[i, SDTR_3])} MT.")
-
+            amt_to_reduce = amt_to_reduce + int(dc3.iloc[i, SDTR_3])
+            # saved_value.append(int(dc3.iloc[i, SDTR_3]))
 
