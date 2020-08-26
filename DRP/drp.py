@@ -385,7 +385,7 @@ for i in range(0, len(dc3)-int(dc3_params.iloc[0, LT_3])):
     
 #%% Supplier
 
-supp_params = pd.read_excel('demand_data.xlsx',sheet_name='Sup', skiprows = 2, nrows= 5, usecols = 'B:C')
+supp_params = pd.read_excel('demand_data.xlsx',sheet_name='Sup', skiprows = 2, nrows= 6, usecols = 'B:C')
 supp_params.index = supp_params['Category']
 supp_params.drop('Category', axis=1, inplace=True)
 supp_params = supp_params.transpose().fillna(0)
@@ -397,11 +397,14 @@ supp['Net Requirements'] = 0
 supp['Master Production Schedule'] = 0
 supp['Planned Orders (MT)'] = 0
 supp['Spot to reduce'] = 0
+supp['Amount to Move'] = 0
+supp['Updated MPS'] = 0
 
 # Initial Net Requirements
 
 if supp_params.loc['Value','Initial Ending Inventory (MT)'] - supp.loc[first_week, 'Supplier Demand'] <= supp_params.loc['Value', 'Safety Stock (MT)']:
     supp.loc[first_week, 'Net Requirements'] = supp.loc[first_week, 'Supplier Demand'] - supp_params.loc['Value','Initial Ending Inventory (MT)'] + supp_params.loc['Value', 'Safety Stock (MT)']
+
 else:
     supp.loc[first_week, 'Net Requirements'] = 0
 
@@ -413,164 +416,176 @@ supp.loc[first_week,'Proj End Inv'] = supp_params.loc['Value','Initial Ending In
                                     supp.loc[first_week,'Master Production Schedule'] -\
                                     supp.loc[first_week,'Supplier Demand']
 
-
-
 PEI_supp = supp.columns.get_loc('Proj End Inv')
 MPS_supp = supp.columns.get_loc('Master Production Schedule')
 NR_supp = supp.columns.get_loc('Net Requirements')
 SD_supp = supp.columns.get_loc('Supplier Demand')
 PO_supp = supp.columns.get_loc('Planned Orders (MT)')
 STR_supp = supp.columns.get_loc('Spot to reduce')
+ATM_supp = supp.columns.get_loc('Amount to Move')
+UMPS_supp = supp.columns.get_loc('Updated MPS')
 
 SS_supp = supp_params.columns.get_loc('Safety Stock (MT)')
 LT_supp = supp_params.columns.get_loc('Lead Time (weeks)')
 LS_supp = supp_params.columns.get_loc('Lot Size (MT)')
 MDP_supp = supp_params.columns.get_loc('Max Daily Production')
+MT_supp = supp_params.columns.get_loc('Method')
 
-for i in range(1, len(supp)):
-    
-    # Net Requirements
-    
-    if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
-        supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
-        
-    else:
-        supp.iloc[i, NR_supp] = 0
-    
-    # Master Production Schedule
-    
-    if i >= supp_params.iloc[0, LT_supp]:
-        supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
-    
-    # Projected Ending Inventory
-    
-    supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
-
-# wk_ind_list = []
-
-# for i in range(0, len(supp)-int(supp_params.iloc[0, LT_supp])):
-#     print(i)
-#     # Planned Orders
-#     supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
-    
-#     # Supplier Amount to Reduce
-#     if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
-        
-#         supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp]
-        
-#         # wk_ind_list.append(i)
-        
-#     else:
-#         supp.iloc[i, STR_supp] = 0
+if supp_params.iloc[0, MT_supp] == 'Cut':
+    print('Cut method selected.')
+else:
+    print('Move method selected.')
 
 #%% Calculating profit loss for each Demand Centre
 amt_to_reduce = 0
 
 # Spot Demand to reduce
 for i in range(0, len(supp)):
+    
+    if i > 0:
+
+        # Net Requirements
+        
+        if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
+            supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+            
+        else:
+            supp.iloc[i, NR_supp] = 0
+        
+        # Master Production Schedule
+        
+        if i >= supp_params.iloc[0, LT_supp]:
+            supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
+            supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+        # Projected Ending Inventory
+        
+        supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
 
     if i < len(supp)-int(supp_params.iloc[0, LT_supp]):
-        # print(i)
+        
         # Planned Orders
         supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
         
         # Supplier Amount to Reduce
         if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
             
+            # Amount to Reduce
             supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] - amt_to_reduce
             
-            # wk_ind_list.append(i)
-            
+            # Amount to Move
+            supp.iloc[i, ATM_supp] = supp.iloc[i, MPS_supp] - supp_params.iloc[0, MDP_supp]
         else:
             supp.iloc[i, STR_supp] = 0
+            supp.iloc[i, ATM_supp] = 0
     
-    # Spot Demand to Reduce - DC1, DC2, DC3
-    
-    if i < len(dc1) - int(dc1_params.iloc[0, LT_1]):
-        dc1.iloc[i, SDTR_1] = min(supp.iloc[i, STR_supp] - (dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), PR_1] - dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), NR_1]) , dc1.iloc[i, SD_1])
-    
-    if i < len(dc2) - int(dc2_params.iloc[0, LT_2]):
-        dc2.iloc[i, SDTR_2] = min(supp.iloc[i, STR_supp] - (dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), PR_2] - dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), NR_2]) , dc2.iloc[i, SD_2])
-    
-    if i < len(dc3) - int(dc3_params.iloc[0, LT_3]):
-        dc3.iloc[i, SDTR_3] = min(supp.iloc[i, STR_supp] - (dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), PR_3] - dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), NR_3]) , dc3.iloc[i, SD_3])
-    
-    # Spot truck count - DC1
-    dc1.iloc[i, Sn10T_1] = ((dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1] - 1)%dc1_params.iloc[0, SC20T_1])//dc1_params.iloc[0, SC10T_1]
-    dc1.iloc[i, Sn20T_1] = (dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1] - 1)//dc1_params.iloc[0, SC20T_1]
-    
-    # Spot truck count - DC2
-    dc2.iloc[i, Sn10T_2] = ((dc2.iloc[i, SDTR_2] + dc2_params.iloc[0, SC10T_2] - 1)%dc2_params.iloc[0, SC20T_2])//dc2_params.iloc[0, SC10T_2]
-    dc2.iloc[i, Sn20T_2] = (dc2.iloc[i, SDTR_2] + dc2_params.iloc[0, SC10T_2] - 1)//dc2_params.iloc[0, SC20T_2]
-    
-    # Spot truck count - DC3
-    dc3.iloc[i, Sn10T_3] = ((dc3.iloc[i, SDTR_3] + dc3_params.iloc[0, SC10T_3] - 1)%dc3_params.iloc[0, SC20T_3])//dc3_params.iloc[0, SC10T_3]
-    dc3.iloc[i, Sn20T_3] = (dc3.iloc[i, SDTR_3] + dc3_params.iloc[0, SC10T_3] - 1)//dc3_params.iloc[0, SC20T_3]
-    
-    # Spot Transportation cost - DC1, DC2, DC3
-    dc1.iloc[i, STC_1] = dc1.iloc[i, Sn10T_1]*dc1_params.iloc[1, SC10T_1] + dc1.iloc[i, Sn20T_1]*dc1_params.iloc[1, SC20T_1]
-    dc2.iloc[i, STC_2] = dc2.iloc[i, Sn10T_2]*dc2_params.iloc[1, SC10T_2] + dc2.iloc[i, Sn20T_2]*dc2_params.iloc[1, SC20T_2]
-    dc3.iloc[i, STC_3] = dc3.iloc[i, Sn10T_3]*dc3_params.iloc[1, SC10T_3] + dc3.iloc[i, Sn20T_3]*dc3_params.iloc[1, SC20T_3]
-    
-    # Spot Product Cost
-    dc1.iloc[i, SPC_1] = dc1.iloc[i, PUC_1]*dc1.iloc[i, SDTR_1]
-    dc2.iloc[i, SPC_2] = dc2.iloc[i, PUC_2]*dc2.iloc[i, SDTR_2]
-    dc3.iloc[i, SPC_3] = dc3.iloc[i, PUC_3]*dc3.iloc[i, SDTR_3]
-    
-    # Spot Supply Cost
-    dc1.iloc[i, SSC_1] = dc1.iloc[i, STC_1] + dc1.iloc[i, SPC_1]
-    dc2.iloc[i, SSC_2] = dc2.iloc[i, STC_2] + dc2.iloc[i, SPC_2]
-    dc3.iloc[i, SSC_3] = dc3.iloc[i, STC_3] + dc3.iloc[i, SPC_3]
-    
-    # Spot Revenue
-    dc1.iloc[i, SRev_1] = dc1.iloc[i, PSP_1]*dc1.iloc[i, SDTR_1]
-    dc2.iloc[i, SRev_2] = dc2.iloc[i, PSP_2]*dc2.iloc[i, SDTR_2]
-    dc3.iloc[i, SRev_3] = dc3.iloc[i, PSP_3]*dc3.iloc[i, SDTR_3]
-    
-    # Spot Profit
-    dc1.iloc[i, SP_1] = dc1.iloc[i, SRev_1] - dc1.iloc[i, SSC_1]
-    dc2.iloc[i, SP_2] = dc2.iloc[i, SRev_2] - dc2.iloc[i, SSC_2]
-    dc3.iloc[i, SP_3] = dc3.iloc[i, SRev_3] - dc3.iloc[i, SSC_3]
-
-#%% Optimisation
-    
-    # Spot Profit
-    spot_pf1 = dc1.iloc[i, SP_1]
-    spot_pf2 = dc2.iloc[i, SP_2]
-    spot_pf3 = dc3.iloc[i, SP_3]
-    
-    buffer = 8  # This is just assumption for the algo to work. Needs a more concrete value.
-    
-    # Setting spot profit to high value to prevent from being selected during minimisation.
-    if int(dc1.iloc[i, SD_1]) < supp.iloc[i, STR_supp] - buffer:
-        spot_pf1 = 1e5
-        
-    if int(dc2.iloc[i, SD_2]) < supp.iloc[i, STR_supp] - buffer:
-        spot_pf2 = 1e5
-        
-    if int(dc3.iloc[i, SD_3]) < supp.iloc[i, STR_supp] - buffer:
-        spot_pf3 = 1e5
-    
-    min_list = [spot_pf1,spot_pf2,spot_pf3]
-    min_value = int(min(min_list))
-    
-    # Getting minimum profit Demand centre (DC1, DC2, or DC3)
-    index_min = min(range(len(min_list)),key=min_list.__getitem__)
-    
-    if min_value > 0:
-        
-        if index_min==0:    # Demand Centre 1
-            print(f"For best profit, Spot Order for Demand Centre 1 in {dc1.index[i + int(dc1_params.iloc[0, LT_1])]} is recommended to be reduced by {int(dc1.iloc[i, SDTR_1])} MT.")
-            amt_to_reduce = amt_to_reduce + int(dc1.iloc[i, SDTR_1])
-            # saved_value.append(int(dc1.iloc[i, SDTR_1]))
+    if supp_params.iloc[0, MT_supp] == 'Cut':
             
-        elif index_min==1:  # Demand Centre 2
-            print(f"For best profit, Spot Order for Demand Centre 2 in {dc2.index[i + int(dc2_params.iloc[0, LT_2])]} is recommended to be reduced by {int(dc2.iloc[i, SDTR_2])} MT.")
-            amt_to_reduce = amt_to_reduce + int(dc2.iloc[i, SDTR_2])
-            # saved_value.append(int(dc2.iloc[i, SDTR_2]))
+        # Spot Demand to Reduce - DC1, DC2, DC3
+        
+        if i < len(dc1) - int(dc1_params.iloc[0, LT_1]):
+            dc1.iloc[i, SDTR_1] = min(supp.iloc[i, STR_supp] - (dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), PR_1] - dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), NR_1]) , dc1.iloc[i, SD_1])
+        
+        if i < len(dc2) - int(dc2_params.iloc[0, LT_2]):
+            dc2.iloc[i, SDTR_2] = min(supp.iloc[i, STR_supp] - (dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), PR_2] - dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), NR_2]) , dc2.iloc[i, SD_2])
+        
+        if i < len(dc3) - int(dc3_params.iloc[0, LT_3]):
+            dc3.iloc[i, SDTR_3] = min(supp.iloc[i, STR_supp] - (dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), PR_3] - dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), NR_3]) , dc3.iloc[i, SD_3])
+        
+        # Spot truck count - DC1
+        dc1.iloc[i, Sn10T_1] = ((dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1] - 1)%dc1_params.iloc[0, SC20T_1])//dc1_params.iloc[0, SC10T_1]
+        dc1.iloc[i, Sn20T_1] = (dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1] - 1)//dc1_params.iloc[0, SC20T_1]
+        
+        # Spot truck count - DC2
+        dc2.iloc[i, Sn10T_2] = ((dc2.iloc[i, SDTR_2] + dc2_params.iloc[0, SC10T_2] - 1)%dc2_params.iloc[0, SC20T_2])//dc2_params.iloc[0, SC10T_2]
+        dc2.iloc[i, Sn20T_2] = (dc2.iloc[i, SDTR_2] + dc2_params.iloc[0, SC10T_2] - 1)//dc2_params.iloc[0, SC20T_2]
+        
+        # Spot truck count - DC3
+        dc3.iloc[i, Sn10T_3] = ((dc3.iloc[i, SDTR_3] + dc3_params.iloc[0, SC10T_3] - 1)%dc3_params.iloc[0, SC20T_3])//dc3_params.iloc[0, SC10T_3]
+        dc3.iloc[i, Sn20T_3] = (dc3.iloc[i, SDTR_3] + dc3_params.iloc[0, SC10T_3] - 1)//dc3_params.iloc[0, SC20T_3]
+        
+        # Spot Transportation cost - DC1, DC2, DC3
+        dc1.iloc[i, STC_1] = dc1.iloc[i, Sn10T_1]*dc1_params.iloc[1, SC10T_1] + dc1.iloc[i, Sn20T_1]*dc1_params.iloc[1, SC20T_1]
+        dc2.iloc[i, STC_2] = dc2.iloc[i, Sn10T_2]*dc2_params.iloc[1, SC10T_2] + dc2.iloc[i, Sn20T_2]*dc2_params.iloc[1, SC20T_2]
+        dc3.iloc[i, STC_3] = dc3.iloc[i, Sn10T_3]*dc3_params.iloc[1, SC10T_3] + dc3.iloc[i, Sn20T_3]*dc3_params.iloc[1, SC20T_3]
+        
+        # Spot Product Cost
+        dc1.iloc[i, SPC_1] = dc1.iloc[i, PUC_1]*dc1.iloc[i, SDTR_1]
+        dc2.iloc[i, SPC_2] = dc2.iloc[i, PUC_2]*dc2.iloc[i, SDTR_2]
+        dc3.iloc[i, SPC_3] = dc3.iloc[i, PUC_3]*dc3.iloc[i, SDTR_3]
+        
+        # Spot Supply Cost
+        dc1.iloc[i, SSC_1] = dc1.iloc[i, STC_1] + dc1.iloc[i, SPC_1]
+        dc2.iloc[i, SSC_2] = dc2.iloc[i, STC_2] + dc2.iloc[i, SPC_2]
+        dc3.iloc[i, SSC_3] = dc3.iloc[i, STC_3] + dc3.iloc[i, SPC_3]
+        
+        # Spot Revenue
+        dc1.iloc[i, SRev_1] = dc1.iloc[i, PSP_1]*dc1.iloc[i, SDTR_1]
+        dc2.iloc[i, SRev_2] = dc2.iloc[i, PSP_2]*dc2.iloc[i, SDTR_2]
+        dc3.iloc[i, SRev_3] = dc3.iloc[i, PSP_3]*dc3.iloc[i, SDTR_3]
+        
+        # Spot Profit
+        dc1.iloc[i, SP_1] = dc1.iloc[i, SRev_1] - dc1.iloc[i, SSC_1]
+        dc2.iloc[i, SP_2] = dc2.iloc[i, SRev_2] - dc2.iloc[i, SSC_2]
+        dc3.iloc[i, SP_3] = dc3.iloc[i, SRev_3] - dc3.iloc[i, SSC_3]
+    
+    #%% Optimisation
+        
+        # Spot Profit
+        spot_pf1 = dc1.iloc[i, SP_1]
+        spot_pf2 = dc2.iloc[i, SP_2]
+        spot_pf3 = dc3.iloc[i, SP_3]
+        
+        buffer = 8  # This is just assumption for the algo to work. Needs a more concrete value.
+        
+        # Setting spot profit to high value to prevent from being selected during minimisation.
+        if int(dc1.iloc[i, SD_1]) < supp.iloc[i, STR_supp] - buffer:
+            spot_pf1 = 1e5
             
-        else:               # Demand Centre 3
-            print(f"For best profit, Spot Order for Demand Centre 3 in {dc3.index[i + int(dc3_params.iloc[0, LT_3])]} is recommended to be reduced by {int(dc3.iloc[i, SDTR_3])} MT.")
-            amt_to_reduce = amt_to_reduce + int(dc3.iloc[i, SDTR_3])
-            # saved_value.append(int(dc3.iloc[i, SDTR_3]))
+        if int(dc2.iloc[i, SD_2]) < supp.iloc[i, STR_supp] - buffer:
+            spot_pf2 = 1e5
+            
+        if int(dc3.iloc[i, SD_3]) < supp.iloc[i, STR_supp] - buffer:
+            spot_pf3 = 1e5
+        
+        min_list = [spot_pf1,spot_pf2,spot_pf3]
+        min_value = int(min(min_list))
+        
+        # Getting minimum profit Demand centre (DC1, DC2, or DC3)
+        index_min = min(range(len(min_list)),key=min_list.__getitem__)
+        
+        if min_value > 0:
+            
+            if index_min==0:    # Demand Centre 1
+                print(f"For best profit, Spot Order for Demand Centre 1 in {dc1.index[i + int(dc1_params.iloc[0, LT_1])]} is recommended to be reduced by {int(dc1.iloc[i, SDTR_1])} MT.")
+                amt_to_reduce = amt_to_reduce + int(dc1.iloc[i, SDTR_1])
+                # saved_value.append(int(dc1.iloc[i, SDTR_1]))
+                
+            elif index_min==1:  # Demand Centre 2
+                print(f"For best profit, Spot Order for Demand Centre 2 in {dc2.index[i + int(dc2_params.iloc[0, LT_2])]} is recommended to be reduced by {int(dc2.iloc[i, SDTR_2])} MT.")
+                amt_to_reduce = amt_to_reduce + int(dc2.iloc[i, SDTR_2])
+                # saved_value.append(int(dc2.iloc[i, SDTR_2]))
+                
+            else:               # Demand Centre 3
+                print(f"For best profit, Spot Order for Demand Centre 3 in {dc3.index[i + int(dc3_params.iloc[0, LT_3])]} is recommended to be reduced by {int(dc3.iloc[i, SDTR_3])} MT.")
+                amt_to_reduce = amt_to_reduce + int(dc3.iloc[i, SDTR_3])
+                # saved_value.append(int(dc3.iloc[i, SDTR_3]))
 
+    else:
+        
+        supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp] - supp.iloc[i, ATM_supp]
+        ind_move = 1
+        
+        while supp.iloc[i, ATM_supp] != 0:
+            
+            # print(f'{supp.iloc[i, ATM_supp]}')
+                                    
+            if supp.iloc[i-ind_move, UMPS_supp] < supp_params.iloc[0, MDP_supp]:
+                supp.iloc[i-ind_move, UMPS_supp] = supp.iloc[i-ind_move, UMPS_supp] + supp_params.iloc[0, LS_supp]
+                supp.iloc[i, ATM_supp] = supp.iloc[i, ATM_supp] - supp_params.iloc[0, LS_supp]
+                
+            else:
+                ind_move +=1
+        print ('Orders Moved succesfully.')
+        print (f'Before: \n{supp.iloc[:, MPS_supp]}')
+        
+        print (f'After: \n{supp.iloc[:, UMPS_supp]}')
