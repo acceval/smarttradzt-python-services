@@ -400,7 +400,8 @@ supp_params.drop('Category', axis=1, inplace=True)
 supp_params = supp_params.transpose().fillna(0)
 
 FD = dc1['Planned Orders (MT)'] + dc2['Planned Orders (MT)'] + dc3['Planned Orders (MT)']
-supp = FD.to_frame().rename(columns={'Planned Orders (MT)': 'Supplier Demand'})
+supp = FD.to_frame().rename(columns={'Planned Orders (MT)': 'Supplier Demand Ori'})
+supp['Supplier Demand'] = supp['Supplier Demand Ori']
 supp['Proj End Inv'] = 0
 supp['Net Requirements'] = 0
 supp['Master Production Schedule'] = 0
@@ -453,21 +454,19 @@ for i in range(0, len(supp)):
     
     if i > 0:
 
-        # Net Requirements
-        
+        # Net Requirements        
         if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
             supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
             
         else:
             supp.iloc[i, NR_supp] = 0
         
-        # Master Production Schedule
-        
+        # Master Production Schedule        
         if i >= supp_params.iloc[0, LT_supp]:
             supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
             supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
-        # Projected Ending Inventory
         
+        # Projected Ending Inventory        
         supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
 
     if i < len(supp)-int(supp_params.iloc[0, LT_supp]):
@@ -491,7 +490,7 @@ for i in range(0, len(supp)):
             
         # Spot Demand to Reduce - DC1, DC2, DC3
         
-        if i < len(dc1) - int(dc1_params.iloc[0, LT_1]):
+        if i < len(dc1) - int(dc1_params.iloc[0, LT_1]):    
             dc1.iloc[i, SDTR_1] = min(max(supp.iloc[i, STR_supp] - (dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), PR_1] - dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), NR_1]),0) , dc1.iloc[i, SD_1])
                   
         if i < len(dc2) - int(dc2_params.iloc[0, LT_2]):
@@ -565,20 +564,97 @@ for i in range(0, len(supp)):
         if min_value > 0:
             
             if index_min==0:    # Demand Centre 1
-                print(f"For best profit, it is recommended to reduce Spot Order for Demand Centre 1 in {dc1.index[i + int(dc1_params.iloc[0, LT_1])]} by {int(dc1.iloc[i, SDTR_1])} MT.")
-                amt_to_reduce = amt_to_reduce + int(dc1.iloc[i, SDTR_1])
+            
+                print(f"For best profit, it is recommended to reduce Spot Order for Demand Centre 1 in {dc1.index[i + int(dc1_params.iloc[0, LT_1])]} by {int(math.ceil(dc1.iloc[i, SDTR_1]/dc1_params.iloc[0, LS_1])*dc1_params.iloc[0, LS_1])} MT.")
+                
+                # Update Spot Forecast Demand
                 dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), USFD_1] = dc1.iloc[i + int(dc1_params.iloc[0, LT_1]), USFD_1] - int(dc1.iloc[i, SDTR_1])
                 
+                # Update supplier demand
+                supp.iloc[i, SD_supp] = supp.iloc[i, SD_supp] - math.ceil(dc1.iloc[i, SDTR_1]/dc1_params.iloc[0, LS_1])*dc1_params.iloc[0, LS_1]
+                
+                if i > 0:
+
+                    # Net Requirements
+                    
+                    if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
+                        supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+                        
+                    else:
+                        supp.iloc[i, NR_supp] = 0
+                    
+                    # Master Production Schedule
+        
+                    if i >= supp_params.iloc[0, LT_supp]:
+                        supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
+                        supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+                        
+                    # Projected Ending Inventory
+        
+                    supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
+                
+                
             elif index_min==1:  # Demand Centre 2
+            
                 print(f"For best profit, it is recommended to reduce Spot Order for Demand Centre 2 in {dc2.index[i + int(dc2_params.iloc[0, LT_2])]} by {int(dc2.iloc[i, SDTR_2])} MT.")
-                amt_to_reduce = amt_to_reduce + int(dc2.iloc[i, SDTR_2])
+                
+                # Update Spot Forecast Demand
                 dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), USFD_2] = dc2.iloc[i + int(dc2_params.iloc[0, LT_2]), USFD_2] - int(dc2.iloc[i, SDTR_2])
                 
-            else:               # Demand Centre 3
-                print(f"For best profit, it is recommended to reduce Spot Order for Demand Centre 3 in {dc3.index[i + int(dc3_params.iloc[0, LT_3])]} by {int(dc3.iloc[i, SDTR_3])} MT.")
-                amt_to_reduce = amt_to_reduce + int(dc3.iloc[i, SDTR_3])
-                dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), USFD_3] = dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), USFD_3] - int(dc3.iloc[i, SDTR_3])
+                # Update supplier demand
+                supp.iloc[i, SD_supp] = supp.iloc[i, SD_supp] - math.ceil(dc2.iloc[i, SDTR_2]/dc2_params.iloc[0, LS_2])*dc2_params.iloc[0, LS_2]
 
+                if i > 0:
+
+                    # Net Requirements
+                    
+                    if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
+                        supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+                        
+                    else:
+                        supp.iloc[i, NR_supp] = 0
+                    
+                    # Master Production Schedule
+        
+                    if i >= supp_params.iloc[0, LT_supp]:
+                        supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
+                        supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+                        
+                    # Projected Ending Inventory
+        
+                    supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]        
+                
+                
+            else:               # Demand Centre 3
+                
+                print(f"For best profit, it is recommended to reduce Spot Order for Demand Centre 3 in {dc3.index[i + int(dc3_params.iloc[0, LT_3])]} by {int(dc3.iloc[i, SDTR_3])} MT.")
+                
+                # Update Spot Forecast Demand
+                dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), USFD_3] = dc3.iloc[i + int(dc3_params.iloc[0, LT_3]), USFD_3] - int(dc3.iloc[i, SDTR_3])
+                
+                # Update supplier demand
+                supp.iloc[i, SD_supp] = supp.iloc[i, SD_supp] - math.ceil(dc3.iloc[i, SDTR_3]/dc3_params.iloc[0, LS_3])*dc3_params.iloc[0, LS_3]
+                
+                if i > 0:
+
+                    # Net Requirements
+                    
+                    if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
+                        supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+                        
+                    else:
+                        supp.iloc[i, NR_supp] = 0
+                    
+                    # Master Production Schedule
+        
+                    if i >= supp_params.iloc[0, LT_supp]:
+                        supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
+                        supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+                        
+                    # Projected Ending Inventory
+        
+                    supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]                
+                
     else:   # Move
         
         supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp] - supp.iloc[i, ATM_supp]
