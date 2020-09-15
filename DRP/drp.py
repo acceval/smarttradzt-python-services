@@ -14,13 +14,14 @@ import copy
 os.chdir(r'C:/Users/User/Documents/ghub_acceval/smarttradzt-python-services/DRP/')
 
 #%% Import input data
+filename = 'demand_data_bug.xlsx'
 
-dc1 = pd.read_excel('demand_data.xlsx',sheet_name='DC1', skiprows = 11, usecols = 'B:L')
+dc1 = pd.read_excel(filename,sheet_name='DC1', skiprows = 11, usecols = 'B:L')
 dc1.index = dc1['Category']
 dc1.drop('Category', axis=1, inplace=True)
 dc1 = dc1.transpose().fillna(0)
 
-dc1_params = pd.read_excel('demand_data.xlsx',sheet_name='DC1', skiprows = 1, nrows= 9, usecols = 'B:D')
+dc1_params = pd.read_excel(filename,sheet_name='DC1', skiprows = 1, nrows= 9, usecols = 'B:D')
 dc1_params.index = dc1_params['Category']
 dc1_params.drop('Category', axis=1, inplace=True)
 dc1_params = dc1_params.transpose().fillna(0)
@@ -52,7 +53,6 @@ dc1['Spot Product Cost (RM)'] = 0
 dc1['Spot Supply Cost (RM)'] = 0
 dc1['Spot Revenue'] = 0
 dc1['Spot Profit'] = 0
-# dc1['Updated Spot Forecast Demand'] = 0
 
 first_week = dc1.index[0]
 dc1.loc[first_week,'Proj End Inv'] = dc1_params.loc['Value','Initial Ending Inventory (MT)'] +\
@@ -144,12 +144,12 @@ dc1_ori = copy.deepcopy(dc1)
 
 #% Import input data
 
-dc2 = pd.read_excel('demand_data.xlsx',sheet_name='DC2', skiprows = 11, usecols = 'B:L')
+dc2 = pd.read_excel(filename,sheet_name='DC2', skiprows = 11, usecols = 'B:L')
 dc2.index = dc2['Category']
 dc2.drop('Category', axis=1, inplace=True)
 dc2 = dc2.transpose().fillna(0)
 
-dc2_params = pd.read_excel('demand_data.xlsx',sheet_name='DC2', skiprows = 1, nrows= 9, usecols = 'B:D')
+dc2_params = pd.read_excel(filename,sheet_name='DC2', skiprows = 1, nrows= 9, usecols = 'B:D')
 dc2_params.index = dc2_params['Category']
 dc2_params.drop('Category', axis=1, inplace=True)
 dc2_params = dc2_params.transpose().fillna(0)
@@ -272,12 +272,12 @@ dc2_ori = copy.deepcopy(dc2)
 #%% Demand Centre 3
 
 #% Import input data
-dc3 = pd.read_excel('demand_data.xlsx',sheet_name='DC3', skiprows = 11, usecols = 'B:L')
+dc3 = pd.read_excel(filename,sheet_name='DC3', skiprows = 11, usecols = 'B:L')
 dc3.index = dc3['Category']
 dc3.drop('Category', axis=1, inplace=True)
 dc3 = dc3.transpose().fillna(0)
 
-dc3_params = pd.read_excel('demand_data.xlsx',sheet_name='DC3', skiprows = 1, nrows= 9, usecols = 'B:D')
+dc3_params = pd.read_excel(filename,sheet_name='DC3', skiprows = 1, nrows= 9, usecols = 'B:D')
 dc3_params.index = dc3_params['Category']
 dc3_params.drop('Category', axis=1, inplace=True)
 dc3_params = dc3_params.transpose().fillna(0)
@@ -402,7 +402,7 @@ dc3_ori = copy.deepcopy(dc3)
 
 #%% Supplier
 
-supp_params = pd.read_excel('demand_data.xlsx',sheet_name='Sup', skiprows = 2, nrows= 6, usecols = 'B:C')
+supp_params = pd.read_excel(filename,sheet_name='Sup', skiprows = 2, nrows= 6, usecols = 'B:C')
 supp_params.index = supp_params['Category']
 supp_params.drop('Category', axis=1, inplace=True)
 supp_params = supp_params.transpose().fillna(0)
@@ -597,14 +597,15 @@ for i in range(0, len(supp)):
         buffer = 8  # This is just assumption for the algo to work. Needs a more concrete value.
         
         # Setting spot profit to high value to prevent from being selected during minimisation.
-        if int(dc1.iloc[i, SD_1]) < supp.iloc[i, STR_supp] - buffer:
-            spot_pf1 = 1e5
-            
-        if int(dc2.iloc[i, SD_2]) < supp.iloc[i, STR_supp] - buffer:
-            spot_pf2 = 1e5
-            
-        if int(dc3.iloc[i, SD_3]) < supp.iloc[i, STR_supp] - buffer:
-            spot_pf3 = 1e5
+        if supp.iloc[i, STR_supp] > 0:
+            if int(dc1.iloc[i, SD_1]) < supp.iloc[i, STR_supp] - buffer or dc1.iloc[i, SDTR_1] ==0 :
+                spot_pf1 = 1e5
+                
+            if int(dc2.iloc[i, SD_2]) < supp.iloc[i, STR_supp] - buffer or dc2.iloc[i, SDTR_2] ==0 :
+                spot_pf2 = 1e5
+                
+            if int(dc3.iloc[i, SD_3]) < supp.iloc[i, STR_supp] - buffer or dc3.iloc[i, SDTR_3] ==0 :
+                spot_pf3 = 1e5
         
         min_list = [spot_pf1,spot_pf2,spot_pf3]
         min_value = int(min(min_list))
