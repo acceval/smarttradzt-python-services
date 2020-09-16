@@ -14,7 +14,7 @@ import copy
 os.chdir(r'C:/Users/User/Documents/ghub_acceval/smarttradzt-python-services/DRP/')
 
 #%% Import input data
-filename = 'demand_data_bug.xlsx'
+filename = 'demand_data.xlsx'
 
 dc1 = pd.read_excel(filename,sheet_name='DC1', skiprows = 11, usecols = 'B:L')
 dc1.index = dc1['Category']
@@ -32,7 +32,7 @@ dc1['Total Demand'] = dc1['Spot Forecast Demand(MT)'] +\
                     dc1['Term Forecast Demand (MT)'] +\
                     dc1['Term Order (MT)']
 
-# Setting Projected Inventory and it's initial value
+# Initialisation
 dc1['Proj End Inv'] = 0
 dc1['Net Requirements'] = 0
 dc1['Planned Receipts (MT)'] = 0
@@ -88,8 +88,8 @@ SRev_1 = dc1.columns.get_loc('Spot Revenue')
 SP_1 = dc1.columns.get_loc('Spot Profit')
 
 SS_1 = dc1_params.columns.get_loc('Safety Stock (MT)')
-LT_1_sup1 = dc1_params.columns.get_loc('Lead Time (weeks) - sup 1')
-LT_1_sup2 = dc1_params.columns.get_loc('Lead Time (weeks) - sup 2')
+LT_1_sup1 = dc1_params.columns.get_loc('Delivery Lead Time (weeks) - sup 1')
+LT_1_sup2 = dc1_params.columns.get_loc('Delivery Lead Time (weeks) - sup 2')
 LS_1 = dc1_params.columns.get_loc('Lot Size (MT)')
 SC10T_1_sup1 = dc1_params.columns.get_loc('Shipment cost (10 Ton) - sup 1')
 SC20T_1_sup1 = dc1_params.columns.get_loc('Shipment cost (20 Ton) - sup 1')
@@ -160,7 +160,7 @@ dc2['Total Demand'] = dc2['Spot Forecast Demand(MT)'] +\
                     dc2['Term Forecast Demand (MT)'] +\
                     dc2['Term Order (MT)']
 
-# Setting Projected Inventory and it's initial value
+# Initialisation
 dc2['Proj End Inv'] = 0
 dc2['Net Requirements'] = 0
 dc2['Planned Receipts (MT)'] = 0
@@ -215,8 +215,8 @@ SRev_2 = dc2.columns.get_loc('Spot Revenue')
 SP_2 = dc2.columns.get_loc('Spot Profit')
 
 SS_2 = dc2_params.columns.get_loc('Safety Stock (MT)')
-LT_2_sup1 = dc2_params.columns.get_loc('Lead Time (weeks) - sup 1')
-LT_2_sup2 = dc2_params.columns.get_loc('Lead Time (weeks) - sup 2')
+LT_2_sup1 = dc2_params.columns.get_loc('Delivery Lead Time (weeks) - sup 1')
+LT_2_sup2 = dc2_params.columns.get_loc('Delivery Lead Time (weeks) - sup 2')
 LS_2 = dc2_params.columns.get_loc('Lot Size (MT)')
 SC10T_2_sup1 = dc2_params.columns.get_loc('Shipment cost (10 Ton) - sup 1')
 SC20T_2_sup1 = dc2_params.columns.get_loc('Shipment cost (20 Ton) - sup 1')
@@ -288,7 +288,7 @@ dc3['Total Demand'] = dc3['Spot Forecast Demand(MT)'] +\
                     dc3['Term Forecast Demand (MT)'] +\
                     dc3['Term Order (MT)']
 
-# Setting Projected Inventory and it's initial value
+# Initialisation
 dc3['Proj End Inv'] = 0
 dc3['Net Requirements'] = 0
 dc3['Planned Receipts (MT)'] = 0
@@ -347,8 +347,8 @@ SP_3 = dc3.columns.get_loc('Spot Profit')
 
 
 SS_3 = dc3_params.columns.get_loc('Safety Stock (MT)')
-LT_3_sup1 = dc3_params.columns.get_loc('Lead Time (weeks) - sup 1')
-LT_3_sup2 = dc3_params.columns.get_loc('Lead Time (weeks) - sup 2')
+LT_3_sup1 = dc3_params.columns.get_loc('Delivery Lead Time (weeks) - sup 1')
+LT_3_sup2 = dc3_params.columns.get_loc('Delivery Lead Time (weeks) - sup 2')
 LS_3 = dc3_params.columns.get_loc('Lot Size (MT)')
 SC10T_3_sup1 = dc3_params.columns.get_loc('Shipment cost (10 Ton) - sup 1')
 SC20T_3_sup1 = dc3_params.columns.get_loc('Shipment cost (20 Ton) - sup 1')
@@ -402,14 +402,16 @@ dc3_ori = copy.deepcopy(dc3)
 
 #%% Supplier
 
-supp_params = pd.read_excel(filename,sheet_name='Sup', skiprows = 2, nrows= 6, usecols = 'B:C')
+supp_params = pd.read_excel(filename,sheet_name='Supplier1', skiprows = 2, nrows= 7, usecols = 'B:C')
 supp_params.index = supp_params['Category']
 supp_params.drop('Category', axis=1, inplace=True)
 supp_params = supp_params.transpose().fillna(0)
 
+# Supplier Forecasted Demand
 FD = dc1['Planned Orders (MT)'] + dc2['Planned Orders (MT)'] + dc3['Planned Orders (MT)']
 supp = FD.to_frame().rename(columns={'Planned Orders (MT)': 'Supplier Demand'})
-# supp['Supplier Demand'] = supp['Supplier Demand Ori']
+
+# Initialisation
 supp['Proj End Inv'] = 0
 supp['Net Requirements'] = 0
 supp['Master Production Schedule'] = 0
@@ -444,65 +446,61 @@ ATM_supp = supp.columns.get_loc('Amount to Move')
 UMPS_supp = supp.columns.get_loc('Updated MPS')
 
 SS_supp = supp_params.columns.get_loc('Safety Stock (MT)')
-LT_supp = supp_params.columns.get_loc('Lead Time (weeks)')
+LT_supp = supp_params.columns.get_loc('Production Lead Time (weeks)')
 LS_supp = supp_params.columns.get_loc('Lot Size (MT)')
-MDP_supp = supp_params.columns.get_loc('Max Daily Production')
+MDP_supp = supp_params.columns.get_loc('Max Weekly Production')
 MT_supp = supp_params.columns.get_loc('Method')
 
-if supp_params.iloc[0, MT_supp] == 'Cut':
-    print('Cut method selected.')
+if supp_params.iloc[0, MT_supp] == 'Reduce Demand':
+    print('Reduce Demand method selected.')
 else:
-    print('Move method selected.')
+    print('Prebuild Inventory method selected.')
 
-#%% Calculating profit loss for each Demand Centre
-# amt_to_reduce = 0
+#%% Calculating Supplier1
 
-# Spot Demand to reduce
-for i in range(0, len(supp)):
+for i in range(1, len(supp)):
+
+    # Net Requirements        
+    if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
+        supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
+        
+    else:
+        supp.iloc[i, NR_supp] = 0
     
-    if i > 0:
+    # Master Production Schedule        
+    if i >= supp_params.iloc[0, LT_supp]:
+        supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
+        supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+    
+    # Projected Ending Inventory        
+    supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
 
-        # Net Requirements        
-        if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
-            supp.iloc[i, NR_supp] = supp.iloc[i, SD_supp] - supp.iloc[i-1, PEI_supp] + supp_params.iloc[0, SS_supp]
-            
-        else:
-            supp.iloc[i, NR_supp] = 0
+for i in range(0, len(supp)-int(supp_params.iloc[0, LT_supp])):
         
-        # Master Production Schedule        
-        if i >= supp_params.iloc[0, LT_supp]:
-            supp.iloc[i, MPS_supp] = math.ceil(supp.iloc[i, NR_supp]/supp_params.iloc[0, LS_supp])*supp_params.iloc[0, LS_supp]
-            supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp]
+    # Planned Orders
+    supp.iloc[i, PO_supp] = supp.iloc[i + int(supp_params.iloc[0, LT_supp]), MPS_supp]
+    
+    # Supplier Amount to Reduce
+    if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
         
-        # Projected Ending Inventory        
-        supp.iloc[i, PEI_supp] = supp.iloc[i-1, PEI_supp] + supp.iloc[i, MPS_supp] - supp.iloc[i, SD_supp]
-
-    if i < len(supp)-int(supp_params.iloc[0, LT_supp]):
+        # Amount to Reduce
+        supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp]
         
-        # Planned Orders
-        supp.iloc[i - int(supp_params.iloc[0, LT_supp]), PO_supp] = supp.iloc[i, MPS_supp]
-        
-        # Supplier Amount to Reduce
-        if supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp] >=0:
-            
-            # Amount to Reduce
-            supp.iloc[i, STR_supp] = supp.iloc[i, NR_supp] - supp_params.iloc[0, MDP_supp]
-            
-            # Amount to Move
-            supp.iloc[i, ATM_supp] = supp.iloc[i, MPS_supp] - supp_params.iloc[0, MDP_supp]
-        else:
-            supp.iloc[i, STR_supp] = 0
-            supp.iloc[i, ATM_supp] = 0
+        # Amount to Move
+        supp.iloc[i, ATM_supp] = supp.iloc[i, MPS_supp] - supp_params.iloc[0, MDP_supp]
+    else:
+        supp.iloc[i, STR_supp] = 0
+        supp.iloc[i, ATM_supp] = 0
 
 supp_ori = copy.deepcopy(supp)
 
-###############################################################
-# Optimisation
+#%% Optimisation
 
 for i in range(0, len(supp)):
     
-    
-    if i > 0:
+    if i > 0: 
+    # Start with i=1 because PEI starts with i-1
+    # i=0 has been calculated during Initialisation
 
         # Net Requirements        
         if supp.iloc[i-1, PEI_supp] - supp.iloc[i, SD_supp] <= supp_params.iloc[0, SS_supp]:
@@ -537,7 +535,7 @@ for i in range(0, len(supp)):
             supp.iloc[i, ATM_supp] = 0
 
     
-    if supp_params.iloc[0, MT_supp] == 'Cut':
+    if supp_params.iloc[0, MT_supp] == 'Reduce Demand':
             
         # Spot Demand to Reduce - DC1, DC2, DC3
         
@@ -755,7 +753,7 @@ in {dc3.index[i + int(dc3_params.iloc[0, LT_3_sup1])]} by {int(math.ceil(dc3.ilo
             # Planned Orders
             supp.iloc[i - int(supp_params.iloc[0, LT_supp]), PO_supp] = supp.iloc[i, MPS_supp]
                 
-    # MOVE
+    # Prebuild Inventory
     else:
         
         supp.iloc[i, UMPS_supp] = supp.iloc[i, MPS_supp] - supp.iloc[i, ATM_supp]
@@ -773,13 +771,13 @@ in {dc3.index[i + int(dc3_params.iloc[0, LT_3_sup1])]} by {int(math.ceil(dc3.ilo
         # Planned Orders
         supp.iloc[i - int(supp_params.iloc[0, LT_supp]), PO_supp] = supp.iloc[i, UMPS_supp]
 
-if supp_params.iloc[0, MT_supp] == 'Cut':
+if supp_params.iloc[0, MT_supp] == 'Reduce Demand':
     pass
 
 else:
     for i in range(0,len(supp) - int(supp_params.iloc[0, LT_supp])):
         supp.iloc[i, PO_supp] = supp.iloc[i+int(supp_params.iloc[0, LT_supp]), UMPS_supp]
     
-    print ('MPS Orders Moved successfully.')
+    print ('Prebuilt Inventory done successfully without violation.')
     print (f'Before: \n{supp.iloc[:, MPS_supp]}')    
     print (f'After: \n{supp.iloc[:, UMPS_supp]}')
