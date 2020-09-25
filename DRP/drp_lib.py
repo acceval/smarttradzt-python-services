@@ -8,7 +8,7 @@ Created on Mon Sep  7 18:13:24 2020
 import pandas as pd
 import math
 
-class Demand_Centre():
+class Demand_Centre:
     
     # CLASS ATTRIBUTES
     
@@ -43,69 +43,143 @@ class Demand_Centre():
         self.spot_demand = pd.Series(data=[0]*len(self.table), index = self.table.index)
         self.first_week = self.table.index[0]
         
-    def calculate(self, dc_params): 
+        self.supplier_selection = ""
+        self.supplier_leadtime  = 0
+        self.ship10T_val = 0
+        self.ship10T_cost = 0
+        self.ship20T_val = 0
+        self.ship20T_cost = 0
+        
+    def calculate(self, supplier_params, dc_params): 
         
         # NEED TO INCLUDE SELECTION (SUPP1 or SUPP2) LATER
-        supplier_leadtime = dc_params.leadtime_sup1
-        ship10T_val = dc_params.ship_value10T_sup1
-        ship20T_val = dc_params.ship_value20T_sup1
-        ship10T_cost = dc_params.ship_cost10T_sup1
-        ship20T_cost = dc_params.ship_cost20T_sup1
+        for sup in supplier_params:
+            print(sup.supplier_availability)
+            
+        # print(supplier_params)
+        if supplier_params[0].supplier_availability == 'No' and supplier_params[1].supplier_availability == 'No':
+            print('All Suppliers are not available!')
         
-        self.proj_end_inv[0] = dc_params.init_end_inv +\
-                            self.table['Scheduled Receipts (MT)'][0] +\
-                            self.planned_receipts[0] -\
-                            self.total_demand[0]
-        
-        for i in range(1, len(self.table)):
-    
-            # Net Requirements
-            if self.proj_end_inv[i-1] - self.total_demand[i] <= dc_params.safety_stock:
-                self.net_requirements[i] = self.total_demand[i] - self.proj_end_inv[i-1] + dc_params.safety_stock
+        else:
+            
+            if dc_params.ship_cost20T_sup1 < dc_params.ship_cost20T_sup2:
+                
+                if supplier_params[0].supplier_availability == 'Yes':                
+                
+                    self.supplier_selection = "Supplier 1"
+                    self.supplier_leadtime = dc_params.leadtime_sup1
+                    
+                    self.ship10T_val = dc_params.ship_value10T_sup1
+                    self.ship10T_cost = dc_params.ship_cost10T_sup1
+                    
+                    self.ship20T_val = dc_params.ship_value20T_sup1
+                    self.ship20T_cost = dc_params.ship_cost20T_sup1
+                
+                elif supplier_params[0].supplier_availability == 'No':
+                    
+                    self.supplier_selection = "Supplier 2"
+                    self.supplier_leadtime = dc_params.leadtime_sup2
+                    
+                    self.ship10T_val = dc_params.ship_value10T_sup2
+                    self.ship10T_cost = dc_params.ship_cost10T_sup2
+                    
+                    self.ship20T_val = dc_params.ship_value20T_sup2
+                    self.ship20T_cost = dc_params.ship_cost20T_sup2
+                
+                else:
+                    pass
+                
             else:
-                self.net_requirements[i] = 0 
+                
+                if supplier_params[1].supplier_availability == 'Yes':
+                    
+                    self.supplier_selection = "Supplier 2"
+                    self.supplier_leadtime = dc_params.leadtime_sup2
+                    
+                    self.ship10T_val = dc_params.ship_value10T_sup2
+                    self.ship10T_cost = dc_params.ship_cost10T_sup2
+                    
+                    self.ship20T_val = dc_params.ship_value20T_sup2
+                    self.ship20T_cost = dc_params.ship_cost20T_sup2
+                    
+                else:
+                    
+                    self.supplier_selection = "Supplier 1"
+                    self.supplier_leadtime = dc_params.leadtime_sup1
+                    
+                    self.ship10T_val = dc_params.ship_value10T_sup1
+                    self.ship10T_cost = dc_params.ship_cost10T_sup1
+                    
+                    self.ship20T_val = dc_params.ship_value20T_sup1
+                    self.ship20T_cost = dc_params.ship_cost20T_sup1
+        
+        
+            # DC INITIALISATIONS
+            
+            # Net Requirements            
+            if dc_params.init_end_inv + self.table['Scheduled Receipts (MT)'][0] - self.total_demand[0] <= dc_params.safety_stock:
+                self.net_requirements[0] = self.total_demand[0] - dc_params.init_end_inv - self.table['Scheduled Receipts (MT)'][0] + dc_params.safety_stock
+            else:
+                self.net_requirements[0] = 0
             
             # Planned Receipts
-            if i >= supplier_leadtime:
-                self.planned_receipts[i] = math.ceil(self.net_requirements[i]/dc_params.lotsize)*dc_params.lotsize
+            self.planned_receipts[0] = math.ceil(self.net_requirements[0]/dc_params.lotsize)*dc_params.lotsize
             
             # Projected Ending Inventory
-            self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.table['Scheduled Receipts (MT)'][i] + self.planned_receipts[i] - self.total_demand[i]
-
-        for i in range(0, len(self.table)-int(supplier_leadtime)):
+            self.proj_end_inv[0] = dc_params.init_end_inv + self.table['Scheduled Receipts (MT)'][0] + self.planned_receipts[0] - self.total_demand[0]
+    
             
-            # Planned Orders
-            self.planned_orders[i] = self.planned_receipts[i + int(supplier_leadtime)]        
-
-            # Adding truck count
-            self.truck_count_10T[i] = ((self.planned_orders[i] + ship10T_val - 1)%ship20T_val)//ship10T_val
-            self.truck_count_20T[i] = (self.planned_orders[i] + ship10T_val - 1)//ship20T_val
             
-            # Total Transportation Cost
-            self.total_shipment_cost[i] = self.truck_count_10T[i]*ship10T_cost + self.truck_count_20T[i]*ship20T_cost
-            
-            # Product Cost
-            self.product_cost[i] = self.product_unit_cost[i]*self.planned_orders[i]
-            
-            # Total Supply Cost
-            self.totalsupply_cost[i] = self.total_shipment_cost[i] + self.product_cost[i]
-            
-            # Revenue
-            self.revenue[i] = self.product_selling_price[i]*self.planned_orders[i]
-            
-            # Profit
-            self.profit[i] = self.revenue[i] - self.totalsupply_cost[i]
-            
-            # Spot Demand
-            self.spot_demand[i] = self.spot_forecast_demand[i + int(supplier_leadtime)] + self.spot_order[i + int(supplier_leadtime)]
+            for i in range(1, len(self.table)):
+        
+                # Net Requirements
+                if self.proj_end_inv[i-1] + self.table['Scheduled Receipts (MT)'][i] - self.total_demand[i] <= dc_params.safety_stock:
+                    self.net_requirements[i] = self.total_demand[i] - self.proj_end_inv[i-1] - self.table['Scheduled Receipts (MT)'][i] + dc_params.safety_stock
+                else:
+                    self.net_requirements[i] = 0 
+                
+                # Planned Receipts
+                if i >= self.supplier_leadtime:
+                    self.planned_receipts[i] = math.ceil(self.net_requirements[i]/dc_params.lotsize)*dc_params.lotsize
+                
+                # Projected Ending Inventory
+                self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.table['Scheduled Receipts (MT)'][i] + self.planned_receipts[i] - self.total_demand[i]
+    
+            for i in range(0, len(self.table)-int(self.supplier_leadtime)):
+                
+                # Planned Orders
+                self.planned_orders[i] = self.planned_receipts[i + int(self.supplier_leadtime)]        
+    
+                # Adding truck count
+                self.truck_count_10T[i] = ((self.planned_orders[i] + self.ship10T_val - 1)%self.ship20T_val)//self.ship10T_val
+                self.truck_count_20T[i] = (self.planned_orders[i] + self.ship10T_val - 1)//self.ship20T_val
+                
+                # Total Transportation Cost
+                self.total_shipment_cost[i] = self.truck_count_10T[i]*self.ship10T_cost + self.truck_count_20T[i]*self.ship20T_cost
+                
+                # Product Cost
+                self.product_cost[i] = self.product_unit_cost[i]*self.planned_orders[i]
+                
+                # Total Supply Cost
+                self.totalsupply_cost[i] = self.total_shipment_cost[i] + self.product_cost[i]
+                
+                # Revenue
+                self.revenue[i] = self.product_selling_price[i]*self.planned_orders[i]
+                
+                # Profit
+                self.profit[i] = self.revenue[i] - self.totalsupply_cost[i]
+                
+                # Spot Demand
+                self.spot_demand[i] = self.spot_forecast_demand[i + int(self.supplier_leadtime)] + self.spot_order[i + int(self.supplier_leadtime)]
         
         return self.proj_end_inv, self.planned_receipts, self.net_requirements
 
 
-class Demand_Centre_Params():
+class Demand_Centre_Params:
     
     # INSTANCE ATTRIBUTES
     def __init__(self, excelfile, sheet_name): 
+        
         self.excelfile = excelfile
         self.sheet_name = sheet_name
         self.table = pd.read_excel(self.excelfile, sheet_name = self.sheet_name, skiprows = 1, nrows = 9, usecols = 'B:D')
@@ -125,14 +199,17 @@ class Demand_Centre_Params():
         self.ship_cost20T_sup1 = self.table.loc['Price','Shipment cost (20 Ton) - sup 1']
         self.ship_cost10T_sup2 = self.table.loc['Price','Shipment cost (10 Ton) - sup 2']
         self.ship_cost20T_sup2 = self.table.loc['Price','Shipment cost (20 Ton) - sup 2']
-    
-class Supplier_Params():
+        
+
+class Supplier_Params:
     
     # INSTANCE ATTRIBUTES
-    def __init__(self, excelfile, sheet_name): 
+    
+    def __init__(self, excelfile, sheet_name):
+        
         self.excelfile = excelfile
         self.sheet_name = sheet_name
-        self.table = pd.read_excel(self.excelfile, sheet_name = self.sheet_name, skiprows = 2, nrows= 6, usecols = 'B:C')
+        self.table = pd.read_excel(self.excelfile, sheet_name = self.sheet_name, skiprows = 2, nrows= 8, usecols = 'B:C')
         self.table.index = self.table['Category']
         self.table.drop('Category', axis=1, inplace=True)
         self.table = self.table.transpose().fillna(0)
@@ -142,15 +219,35 @@ class Supplier_Params():
         self.method = self.table.loc['Value','Method']
         self.production_leadtime = self.table.loc['Value','Production Lead Time (weeks)']
         self.max_weekly_production = self.table.loc['Value','Max Weekly Production']
+        self.supplier_availability = self.table.loc['Value','Supplier Availability']
         
-class Supplier():
+class Supplier:
     
     # INSTANCE ATTRIBUTES
-    def __init__(self, *demand_centres):
+    
+    def __init__(self, supplier_params, supp_num, demand_centres):
         
-        self.forecast_demand = 0
-        for dc in demand_centres:
-            self.forecast_demand += dc.planned_orders
+        self.respective_dc_demands = []        
+        
+        for i in range (0,len(demand_centres)):
+            # print(demand_centres[i].supplier_selection)
+            
+            if demand_centres[i].supplier_selection == supp_num:
+                # print(supplier_params.supplier_availability)
+                
+                if supplier_params.supplier_availability == 'Yes':
+                    
+                    self.respective_dc_demands.append(demand_centres[i].planned_orders)
+            
+                else:
+                    
+                    self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
+            
+            else:
+                
+                self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
+        
+        self.forecast_demand = sum(self.respective_dc_demands)
 
         self.proj_end_inv = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
         self.net_requirements = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
@@ -158,8 +255,8 @@ class Supplier():
         self.master_production_schedule = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
         self.qty_to_move = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
         self.qty_to_reduce = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        # self.updated_MPS = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-    
+   
+            
     # METHODS
     def calculate(self, supplier_params):
         
@@ -218,17 +315,17 @@ class Supplier():
                 self.qty_to_reduce[i] = 0
                 self.qty_to_move[i] = 0
 
-class Optimize_DRP():
+class Optimize_DRP:
     
-    def __init__(self, supplier1, demand_centres):
-        self.supplier1 = supplier1
+    def __init__(self, supplier, demand_centres):
+        self.supplier = supplier
         self.num_of_dc = len(demand_centres)
         self.dcs = [demand_centres[i] for i in range(0, self.num_of_dc)]
            
     def optimize(self):
         # pass
 
-        for i in range(0, len(self.supplier1)):
+        for i in range(0, len(self.supplier)):
         
             if i > 0:
         
