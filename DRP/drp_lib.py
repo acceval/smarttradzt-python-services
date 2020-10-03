@@ -40,8 +40,18 @@ class Demand_Centre:
         self.totalsupply_cost = pd.Series(data=[0]*len(self.table), index = self.table.index)
         self.revenue = pd.Series(data=[0]*len(self.table), index = self.table.index)
         self.profit = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        
+        # Spot Variables
         self.spot_demand = pd.Series(data=[0]*len(self.table), index = self.table.index)
         self.spot_demand_to_reduce = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_truck_count_10T = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_truck_count_20T = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_shipment_cost = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_product_cost = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_total_supply_cost = pd.Series(data=[0]*len(self.table), index = self.table.index) 
+        self.spot_drop_in_revenue = pd.Series(data=[0]*len(self.table), index = self.table.index)
+        self.spot_profit_loss = pd.Series(data=[0]*len(self.table), index = self.table.index) 
+        self.final_profit = pd.Series(data=[0]*len(self.table), index = self.table.index)
         # self.first_week = self.table.index[0]
         
         self.supplier_selection = ""
@@ -222,101 +232,102 @@ class Supplier_Params:
         self.max_weekly_production = self.table.loc['Value','Max Weekly Production']
         self.supplier_availability = self.table.loc['Value','Supplier Availability']
         
+# class Supplier:
+
+#     def __init__(self, supplier_params, supp_num, demand_centres):
+        
+#         self.respective_dc_demands = []        
+        
+#         for i in range (0,len(demand_centres)):
+#             # print(demand_centres[i].supplier_selection)
+            
+#             if demand_centres[i].supplier_selection == supp_num:
+#                 # print(supplier_params.supplier_availability)
+                
+#                 if supplier_params.supplier_availability == 'Yes':                    
+#                     self.respective_dc_demands.append(demand_centres[i].planned_orders)
+            
+#                 else:                    
+#                     self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
+            
+#             else:                
+#                 self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
+        
+#         self.forecast_demand = sum(self.respective_dc_demands)
+
+#         self.proj_end_inv = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+#         self.net_requirements = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+#         self.planned_orders = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+#         self.master_production_schedule = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+#         self.qty_to_move = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+#         self.qty_to_reduce = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
+            
+#     #%% INITIALISATIONS, i = 0
+#     def calculate(self, supplier_params):
+        
+#         # Initial Net Requirements
+#         if supplier_params.init_end_inv - self.forecast_demand[0] <= supplier_params.safety_stock:
+#             self.net_requirements[0] = self.forecast_demand[0] - supplier_params.init_end_inv + supplier_params.safety_stock
+        
+#         else:
+#             self.net_requirements[0] = 0
+            
+#         # Initial Master Production Schedule
+#         self.master_production_schedule[0] = math.ceil(self.net_requirements[0]/supplier_params.lotsize)*supplier_params.lotsize
+        
+#         # Initial Project Ending Inventory
+#         self.proj_end_inv[0] = supplier_params.init_end_inv +\
+#                                 self.master_production_schedule[0] -\
+#                                 self.forecast_demand[0]
+        
+#         if supplier_params.method == 'Reduce Demand':
+#             print("'Reduce Spot Demand' selected.")
+#         else:
+#             print("'Prebuild Inventory' selected.")
+        
+#         #%% CALCULATIONS, i > 0
+#         for i in range(1, len(self.forecast_demand)):
+        
+#             # Net Requirements        
+#             if self.proj_end_inv[i-1] - self.forecast_demand[i] <= supplier_params.safety_stock:
+#                 self.net_requirements[i] = self.forecast_demand[i] - self.proj_end_inv[i-1] + supplier_params.safety_stock
+                
+#             else:
+#                 self.net_requirements[i] = 0
+            
+#             # Master Production Schedule        
+#             if i >= supplier_params.production_leadtime:
+#                 self.master_production_schedule[i] = math.ceil(self.net_requirements[i]/supplier_params.lotsize)*supplier_params.lotsize
+#                 # self.updated_MPS[i] = self.master_production_schedule[i]
+            
+#             # Projected Ending Inventory        
+#             self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.master_production_schedule[i] - self.forecast_demand[i]
+
+#         for i in range(0, len(self.forecast_demand)-int(supplier_params.production_leadtime)):
+        
+#             # Planned Orders
+#             self.planned_orders[i] = self.master_production_schedule[i + int(supplier_params.production_leadtime)]
+            
+#             # Supplier Amount to Reduce
+#             if self.net_requirements[i] - supplier_params.max_weekly_production >=0:
+                
+#                 # Spot Quantity to Reduce
+#                 self.qty_to_reduce[i] = self.net_requirements[i] - supplier_params.max_weekly_production
+                
+#                 # Amount to Move
+#                 self.qty_to_move[i] = self.master_production_schedule[i] - supplier_params.max_weekly_production
+#             else:
+#                 self.qty_to_reduce[i] = 0
+#                 self.qty_to_move[i] = 0
+
+
+
 class Supplier:
     
     def __init__(self, supplier_params, supp_num, demand_centres):
         
-        self.respective_dc_demands = []        
-        
-        for i in range (0,len(demand_centres)):
-            # print(demand_centres[i].supplier_selection)
-            
-            if demand_centres[i].supplier_selection == supp_num:
-                # print(supplier_params.supplier_availability)
-                
-                if supplier_params.supplier_availability == 'Yes':                    
-                    self.respective_dc_demands.append(demand_centres[i].planned_orders)
-            
-                else:                    
-                    self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
-            
-            else:                
-                self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
-        
-        self.forecast_demand = sum(self.respective_dc_demands)
-
-        self.proj_end_inv = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        self.net_requirements = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        self.planned_orders = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        self.master_production_schedule = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        self.qty_to_move = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-        self.qty_to_reduce = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
-            
-    #%% INITIALISATIONS, i = 0
-    def calculate(self, supplier_params):
-        
-        # Initial Net Requirements
-        if supplier_params.init_end_inv - self.forecast_demand[0] <= supplier_params.safety_stock:
-            self.net_requirements[0] = self.forecast_demand[0] - supplier_params.init_end_inv + supplier_params.safety_stock
-        
-        else:
-            self.net_requirements[0] = 0
-            
-        # Initial Master Production Schedule
-        self.master_production_schedule[0] = math.ceil(self.net_requirements[0]/supplier_params.lotsize)*supplier_params.lotsize
-        
-        # Initial Project Ending Inventory
-        self.proj_end_inv[0] = supplier_params.init_end_inv +\
-                                self.master_production_schedule[0] -\
-                                self.forecast_demand[0]
-        
-        if supplier_params.method == 'Reduce Demand':
-            print("'Reduce Spot Demand' selected.")
-        else:
-            print("'Prebuild Inventory' selected.")
-        
-        #%% CALCULATIONS, i > 0
-        for i in range(1, len(self.forecast_demand)):
-        
-            # Net Requirements        
-            if self.proj_end_inv[i-1] - self.forecast_demand[i] <= supplier_params.safety_stock:
-                self.net_requirements[i] = self.forecast_demand[i] - self.proj_end_inv[i-1] + supplier_params.safety_stock
-                
-            else:
-                self.net_requirements[i] = 0
-            
-            # Master Production Schedule        
-            if i >= supplier_params.production_leadtime:
-                self.master_production_schedule[i] = math.ceil(self.net_requirements[i]/supplier_params.lotsize)*supplier_params.lotsize
-                # self.updated_MPS[i] = self.master_production_schedule[i]
-            
-            # Projected Ending Inventory        
-            self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.master_production_schedule[i] - self.forecast_demand[i]
-
-        for i in range(0, len(self.forecast_demand)-int(supplier_params.production_leadtime)):
-        
-            # Planned Orders
-            self.planned_orders[i] = self.master_production_schedule[i + int(supplier_params.production_leadtime)]
-            
-            # Supplier Amount to Reduce
-            if self.net_requirements[i] - supplier_params.max_weekly_production >=0:
-                
-                # Spot Quantity to Reduce
-                self.qty_to_reduce[i] = self.net_requirements[i] - supplier_params.max_weekly_production
-                
-                # Amount to Move
-                self.qty_to_move[i] = self.master_production_schedule[i] - supplier_params.max_weekly_production
-            else:
-                self.qty_to_reduce[i] = 0
-                self.qty_to_move[i] = 0
-
-
-
-class Optimize_DRP:
-    
-    def __init__(self, supplier_params, supp_num, demand_centres):
-        
         self.respective_dc_demands = []
+        self.supp_num = supp_num
         
         for i in range (0,len(demand_centres)):
             # print(demand_centres[i].supplier_selection)
@@ -330,11 +341,10 @@ class Optimize_DRP:
                 else:                    
                     self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
             
-            else:                
+            else:
                 self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
         
         self.forecast_demand = sum(self.respective_dc_demands)
-
         self.proj_end_inv = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
         self.net_requirements = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
         self.planned_orders = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
@@ -343,7 +353,7 @@ class Optimize_DRP:
         self.qty_to_reduce = pd.Series(data=[0]*len(self.forecast_demand), index = self.forecast_demand.index)
             
     #%% INITIALISATIONS, i = 0
-    def optimize(self, supplier_params, demand_centres, dc_params):
+    def calculate(self, supplier_params, demand_centres, dc_params):
         
         # Initial Net Requirements
         if supplier_params.init_end_inv - self.forecast_demand[0] <= supplier_params.safety_stock:
@@ -361,13 +371,13 @@ class Optimize_DRP:
                                 self.forecast_demand[0]
         
         if supplier_params.method == 'Reduce Demand':
-            print("'Reduce Spot Demand' selected.")
+            print("Optimized - 'Reduce Spot Demand' selected.")
         else:
-            print("'Prebuild Inventory' selected.")
+            print("Optimized - 'Prebuild Inventory' selected.")
         
         #%% CALCULATIONS, i > 0
         
-        for i in range(1, len(self.forecast_demand)):
+        for i in range(0, len(self.forecast_demand)):
 
             if i > 0:
             # Start with i=1 because PEI starts    i-1
@@ -389,11 +399,13 @@ class Optimize_DRP:
                 # Projected Ending Inventory        
                 self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.master_production_schedule[i] - self.forecast_demand[i]
 
-            if i < len(self.forecast_demand)-int(supplier_params.production_leadtime):
-                    
-                # # Planned Orders
-                # self.planned_orders[i] = self.master_production_schedule[i + int(supplier_params.production_leadtime)]
+            if i >= int(supplier_params.production_leadtime):
                 
+                # Planned Orders
+                self.planned_orders[i - int(supplier_params.production_leadtime)] = self.master_production_schedule[i]
+
+            if i < len(self.forecast_demand)-int(supplier_params.production_leadtime):
+                                                    
                 # Supplier Amount to Reduce
                 if self.net_requirements[i] - supplier_params.max_weekly_production >=0:
                     
@@ -411,23 +423,50 @@ class Optimize_DRP:
         
             if supplier_params.method == 'Reduce Demand':
                 
-            # Spot Demand to Reduce - DC1, DC2, DC3
-                # for dc_num in len(demand_centres):
-                #     print(dc_num)
-                if i < len(demand_centres[0].table) - demand_centres[0].supplier_leadtime:
-                    demand_centres[0].spot_demand_to_reduce[i] = min(max(math.ceil(self.qty_to_reduce[i]/dc_params[0].lotsize)*dc_params[0].lotsize - (demand_centres[0].planned_receipts[i + int(demand_centres[0].supplier_leadtime)] - demand_centres[0].net_requirements[i + int(demand_centres[0].supplier_leadtime)]),0) , demand_centres[0].spot_demand[i])
-                                
-                if i < len(demand_centres[1].table) - demand_centres[1].supplier_leadtime:
-                    demand_centres[1].spot_demand_to_reduce[i] = min(max(math.ceil(self.qty_to_reduce[i]/dc_params[1].lotsize)*dc_params[1].lotsize - (demand_centres[1].planned_receipts[i + int(demand_centres[1].supplier_leadtime)] - demand_centres[1].net_requirements[i + int(demand_centres[1].supplier_leadtime)]),0) , demand_centres[1].spot_demand[i])
-                
-                if i < len(demand_centres[2].table) - demand_centres[2].supplier_leadtime:
-                    demand_centres[2].spot_demand_to_reduce[i] = min(max(math.ceil(self.qty_to_reduce[i]/dc_params[2].lotsize)*dc_params[2].lotsize - (demand_centres[2].planned_receipts[i + int(demand_centres[2].supplier_leadtime)] - demand_centres[2].net_requirements[i + int(demand_centres[2].supplier_leadtime)]),0) , demand_centres[2].spot_demand[i])
+            
+                for dc_num in range(0,len(demand_centres)):
+                    # print(dc_num)
+                    if demand_centres[dc_num].supplier_selection == self.supp_num:
+                    
+                        if i < len(demand_centres[dc_num].table) - demand_centres[dc_num].supplier_leadtime:
+                            
+                            # Spot Demand to Reduce
+                            demand_centres[dc_num].spot_demand_to_reduce[i] = \
+                                min(max(math.ceil(self.qty_to_reduce[i]/dc_params[dc_num].lotsize)*dc_params[dc_num].lotsize \
+                                - (demand_centres[dc_num].planned_receipts[i + int(demand_centres[dc_num].supplier_leadtime)] \
+                                - demand_centres[dc_num].net_requirements[i + int(demand_centres[dc_num].supplier_leadtime)]),0), \
+                                demand_centres[dc_num].spot_demand[i])
+                                    
+                        # Spot truck count - DC1
+                        demand_centres[dc_num].spot_truck_count_10T[i] = \
+                            ((demand_centres[dc_num].spot_demand_to_reduce[i] + demand_centres[dc_num].ship10T_val - 1)%demand_centres[dc_num].ship20T_val)//demand_centres[dc_num].ship10T_val
+                        
+                        demand_centres[dc_num].spot_truck_count_20T[i] = \
+                            (demand_centres[dc_num].spot_demand_to_reduce[i] + demand_centres[dc_num].ship10T_val - 1)//demand_centres[dc_num].ship20T_val
+                        
+                        # Spot Transportation cost - DC1, DC2, DC3
+                        demand_centres[dc_num].spot_shipment_cost[i] = \
+                            demand_centres[dc_num].spot_truck_count_10T[i]*demand_centres[dc_num].ship10T_cost \
+                            + demand_centres[dc_num].spot_truck_count_20T[i]*demand_centres[dc_num].ship20T_cost
+                        
+                        # Spot Product Cost
+                        demand_centres[dc_num].spot_product_cost[i] = \
+                            demand_centres[dc_num].product_unit_cost[i]*demand_centres[dc_num].spot_demand_to_reduce[i]
+                        
+                        # Spot Total Supply Cost
+                        demand_centres[dc_num].spot_total_supply_cost[i] = \
+                            demand_centres[dc_num].spot_shipment_cost[i] + demand_centres[dc_num].spot_product_cost[i]
+                        
+                        # Spot Drop in Revenue
+                        demand_centres[dc_num].spot_drop_in_revenue[i] = \
+                            demand_centres[dc_num].product_selling_price[i]*demand_centres[dc_num].spot_demand_to_reduce[i]
+                        
+                        # Spot Profit Loss
+                        demand_centres[dc_num].spot_profit_loss[i] = \
+                            demand_centres[dc_num].spot_drop_in_revenue[i] - demand_centres[dc_num].spot_total_supply_cost[i]
+
+                        # Final profit
+                        demand_centres[dc_num].final_profit[i] = \
+                            demand_centres[dc_num].profit[i] - demand_centres[dc_num].spot_profit_loss[i]
 
 
-# Derived class
-class test(Demand_Centre):
-    
-    def speak(self):
-        print('a')
-    # def __init__(self, excelfile, sheet_name):
-    #     Demand_Centre.__init__(self, excelfile, sheet_name)
