@@ -331,7 +331,7 @@ class Supplier:
         for i in range (0,len(demand_centres)):
             # print(demand_centres[i].supplier_selection)
             
-            if demand_centres[i].supplier_selection == supp_num:
+            if demand_centres[i].supplier_selection == self.supp_num:
                 # print(supplier_params.supplier_availability)
                 
                 if supplier_params.supplier_availability == 'Yes':                    
@@ -474,14 +474,14 @@ class Optimize_DRP:
         self.respective_dc_demands = []
         self.supp_num = supp_num
         
-        for i in range (0,len(demand_centres)):
-            # print(demand_centres[i].supplier_selection)
+        for dc_count in range (0,len(demand_centres)):
+            # print(demand_centres[dc_count].supplier_selection)
             
-            if demand_centres[i].supplier_selection == supp_num:
+            if demand_centres[dc_count].supplier_selection == supp_num:
                 # print(supplier_params.supplier_availability)
                 
                 if supplier_params.supplier_availability == 'Yes':                    
-                    self.respective_dc_demands.append(demand_centres[i].planned_orders)
+                    self.respective_dc_demands.append(demand_centres[dc_count].planned_orders)
             
                 else:                    
                     self.respective_dc_demands.append(pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index))
@@ -543,10 +543,10 @@ class Optimize_DRP:
                 # Projected Ending Inventory        
                 self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.master_production_schedule[i] - self.forecast_demand[i]
 
-            if i >= int(supplier_params.production_leadtime):
+            # if i >= int(supplier_params.production_leadtime):
                 
-                # Planned Orders - can only be calculated backwards after leadtime has passed
-                self.planned_orders[i - int(supplier_params.production_leadtime)] = self.master_production_schedule[i]
+            #     # Planned Orders - can only be calculated backwards after leadtime has passed
+            #     self.planned_orders[i - int(supplier_params.production_leadtime)] = self.master_production_schedule[i]
 
             if i < len(self.forecast_demand)-int(supplier_params.production_leadtime):
                                                     
@@ -672,4 +672,65 @@ in {demand_centres[self.min_index[i]].table.index[i + demand_centres[self.min_in
 
                         # Planned Orders
                         demand_centres[self.min_index[i]].planned_orders[temp_ind - int(demand_centres[self.min_index[i]].supplier_leadtime)] = demand_centres[self.min_index[i]].planned_receipts[temp_ind]
+                    
+                    if i > 0:
+                                        
+                        for dc_count in range (0,len(demand_centres)):
+                            # print(demand_centres[dc_count].supplier_selection)
+                            
+                            if demand_centres[dc_count].supplier_selection == self.supp_num:
+                                # print(supplier_params.supplier_availability)
+                                
+                                if supplier_params.supplier_availability == 'Yes':
+                                    # self.respective_dc_demands.append(demand_centres[dc_count].planned_orders)
+                                    self.respective_dc_demands[dc_count] = demand_centres[dc_count].planned_orders
+                            
+                                else:
+                                    self.respective_dc_demands[dc_count] = pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index)
+                            
+                            else:
+                                self.respective_dc_demands[dc_count] = pd.Series(data=[0]*len(demand_centres[0].planned_orders), index = demand_centres[0].planned_orders.index)
                         
+                        self.forecast_demand = sum(self.respective_dc_demands)
+                        
+                        # Supplier Net Requirements
+                        
+                        if self.proj_end_inv[i-1] - self.forecast_demand[i] <= supplier_params.safety_stock:
+                            self.net_requirements[i] = self.forecast_demand[i] - self.proj_end_inv[i-1] + supplier_params.safety_stock
+                            
+                        else:
+                            self.net_requirements[i] = 0
+                        
+                        # Supplier Master Production Schedule
+                        if i >= supplier_params.production_leadtime:
+                            self.master_production_schedule[i] = math.ceil(self.net_requirements[i]/supplier_params.lotsize)*supplier_params.lotsize
+                            # self.updated_MPS[i] = self.master_production_schedule[i]
+                        
+                        # Projected Ending Inventory
+                        self.proj_end_inv[i] = self.proj_end_inv[i-1] + self.master_production_schedule[i] - self.forecast_demand[i]
+                        
+                        if i >= int(supplier_params.production_leadtime):
+                    
+                            # Planned Orders - can only be calculated backwards after leadtime has passed
+                            self.planned_orders[i - int(supplier_params.production_leadtime)] = self.master_production_schedule[i]
+            
+            elif supplier_params.method == 'Prebuild Inventory':
+                
+                self.master_production_schedule[i] = self.master_production_schedule[i] - self.qty_to_move[i]
+                ind_move = 1
+                
+                while self.qty_to_move[i] != 0:
+
+                    if self.master_production_schedule[i-ind_move] < supplier_params.max_weekly_production:
+                        self.master_production_schedule[i-ind_move] = self.master_production_schedule[i-ind_move] + supplier_params.lotsize
+                        self.qty_to_move[i] = self.qty_to_move[i] - supplier_params.lotsize
+                
+                    else:
+                        ind_move +=1
+                        
+        if supplier_params.method == 'Prebuild Inventory':
+            
+            for i in range(int(supplier_params.production_leadtime),len(self.forecast_demand)):
+                
+                # Planned Orders - can only be calculated backwards after leadtime has passed
+                self.planned_orders[i - int(supplier_params.production_leadtime)] = self.master_production_schedule[i]
