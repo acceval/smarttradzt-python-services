@@ -402,7 +402,7 @@ dc3_ori = copy.deepcopy(dc3)
 
 #%% Supplier
 
-supp_params = pd.read_excel(filename,sheet_name='Supplier1', skiprows = 2, nrows= 7, usecols = 'B:C')
+supp_params = pd.read_excel(filename,sheet_name='Supplier1', skiprows = 2, nrows= 8, usecols = 'B:C')
 supp_params.index = supp_params['Category']
 supp_params.drop('Category', axis=1, inplace=True)
 supp_params = supp_params.transpose().fillna(0)
@@ -540,14 +540,14 @@ for i in range(0, len(supp)):
         # Spot Demand to Reduce - DC1, DC2, DC3
         
         if i < len(dc1) - int(dc1_params.iloc[0, LT_1_sup1]):
-            dc1.iloc[i, SDTR_1] = min(max(supp.iloc[i, STR_supp] - (dc1.iloc[i + int(dc1_params.iloc[0, LT_1_sup1]), PR_1] - dc1.iloc[i + int(dc1_params.iloc[0, LT_1_sup1]), NR_1]),0) , dc1.iloc[i, SD_1])
-                  
+            dc1.iloc[i, SDTR_1] = min(max(math.ceil(supp.iloc[i, STR_supp]/dc1_params.iloc[0, LS_1])*dc1_params.iloc[0, LS_1] - (dc1.iloc[i + int(dc1_params.iloc[0, LT_1_sup1]), PR_1] - dc1.iloc[i + int(dc1_params.iloc[0, LT_1_sup1]), NR_1]),0) , dc1.iloc[i, SD_1])
+                        
         if i < len(dc2) - int(dc2_params.iloc[0, LT_2_sup1]):
-            dc2.iloc[i, SDTR_2] = min(max(supp.iloc[i, STR_supp] - (dc2.iloc[i + int(dc2_params.iloc[0, LT_2_sup1]), PR_2] - dc2.iloc[i + int(dc2_params.iloc[0, LT_2_sup1]), NR_2]),0) , dc2.iloc[i, SD_2])
+            dc2.iloc[i, SDTR_2] = min(max(math.ceil(supp.iloc[i, STR_supp]/dc2_params.iloc[0, LS_2])*dc2_params.iloc[0, LS_2] - (dc2.iloc[i + int(dc2_params.iloc[0, LT_2_sup1]), PR_2] - dc2.iloc[i + int(dc2_params.iloc[0, LT_2_sup1]), NR_2]),0) , dc2.iloc[i, SD_2])
         
         if i < len(dc3) - int(dc3_params.iloc[0, LT_3_sup1]):
-            dc3.iloc[i, SDTR_3] = min(max(supp.iloc[i, STR_supp] - (dc3.iloc[i + int(dc3_params.iloc[0, LT_3_sup1]), PR_3] - dc3.iloc[i + int(dc3_params.iloc[0, LT_3_sup1]), NR_3]),0) , dc3.iloc[i, SD_3])
-        
+            dc3.iloc[i, SDTR_3] = min(max(math.ceil(supp.iloc[i, STR_supp]/dc3_params.iloc[0, LS_3])*dc3_params.iloc[0, LS_3] - (dc3.iloc[i + int(dc3_params.iloc[0, LT_3_sup1]), PR_3] - dc3.iloc[i + int(dc3_params.iloc[0, LT_3_sup1]), NR_3]),0) , dc3.iloc[i, SD_3])
+
         # Spot truck count - DC1
         dc1.iloc[i, Sn10T_1] = ((dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1_sup1] - 1)%dc1_params.iloc[0, SC20T_1_sup1])//dc1_params.iloc[0, SC10T_1_sup1]
         dc1.iloc[i, Sn20T_1] = (dc1.iloc[i, SDTR_1] + dc1_params.iloc[0, SC10T_1_sup1] - 1)//dc1_params.iloc[0, SC20T_1_sup1]
