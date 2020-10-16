@@ -8,7 +8,7 @@ Created on Mon Sep  7 18:16:41 2020
 
 #% Set Directory
 import os
-os.chdir(r'C:/Users/User/Documents/ghub_acceval/smarttradzt-python-services/DRP/')
+os.chdir(r'C:/Users/User/Documents/ghub_acceval/smarttradzt-python-services/DRP_v2/')
 
 #%%
 import copy
@@ -20,9 +20,9 @@ pd.set_option('display.width', 200)
 from IPython.display import display
 from drp_lib import Demand_Centre, Demand_Centre_Params, Supplier, Supplier_Params, Optimize_DRP, print_out
 
-excelfilename = 'demand_data_2suppliers.xlsx'
 
-#% Import Data
+#%% Import Data
+excelfilename = 'input_data.xlsx'
 
 # DC1 Input Data
 dc1 = Demand_Centre(excelfilename, 'DC1')
