@@ -92,7 +92,6 @@ class Gen_Supp_Plan:
         # Outputs
         self.initial_end_inv_next_month = self.starting_inventory[0] - self.final_month_end_total_order
         if self.initial_end_inv_next_month < self.safety_stock:
-            print('Ending Inventory is below Safety Stock level at the end of execution month.')
+            print(f'Execution Month Ending Inventory is below Safety Stock level ({self.safety_stock} MT) at {self.initial_end_inv_next_month} MT.')
         
         self.supply_plan_next_month = self.prod_plan[1]
-        
