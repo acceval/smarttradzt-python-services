@@ -15,35 +15,33 @@ import copy
 excelfilename = 'input_data.xlsx'
 rank = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 1, usecols = 'E:J')#.iloc[0,0]
 
-rank1 = copy.deepcopy(rank)
-rank1 = rank1.loc[rank1['term_spot'] == "Spot"]
+all_ranks = copy.deepcopy(rank)
+all_ranks = all_ranks.loc[all_ranks['term_spot'] == "Spot"]
 
-rank1['country_cust'] = rank1['country_rank'] + rank1['customer_rank']
-rank1['country_prio'] = ss.rankdata(rank1['country_cust'], 'dense')
+all_ranks['country_cust'] = all_ranks['country_rank'] + all_ranks['customer_rank']
+all_ranks['country_prio'] = ss.rankdata(all_ranks['country_cust'], 'dense')
 
-rank1['cust_country'] = rank1['customer_rank'] + rank1['country_rank']
-rank1['cust_prio'] = ss.rankdata(rank1['cust_country'], 'dense')
+all_ranks['cust_country'] = all_ranks['customer_rank'] + all_ranks['country_rank']
+all_ranks['cust_prio'] = ss.rankdata(all_ranks['cust_country'], 'dense')
 
-rank_by_customer = copy.deepcopy(rank1.sort_values(by=['cust_prio'],ascending=False))#.reset_index(drop=True)
-rank_by_country = copy.deepcopy(rank1.sort_values(by=['country_prio'],ascending=False))#.reset_index(drop=True)
+cut_method = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 0, nrows = 1, usecols = 'N').iloc[0,0]
+
+alloc_to_trim = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 9, nrows = 1, usecols = 'N').iloc[0,0]
+
+#%% By Country
+rank_by_country = copy.deepcopy(all_ranks.sort_values(by=['country_prio'],ascending=False))#.reset_index(drop=True)
 rank_by_country['Final Allocated Quantity'] = rank_by_country['Forecast']
-
-cut_method = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 1, nrows = 1, usecols = 'N').iloc[0,0]
 
 
 # Percentage cut tables
 country_perctg_cut = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 2, nrows = 4, usecols = 'N:O')#.iloc[0,0]
 
-company_perctg_cut = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 2, nrows = 4, usecols = 'Q:R')#.iloc[0,0]
-
 # Totals
-country_total = pd.DataFrame(copy.deepcopy(rank1.groupby(['country_rank'])['Forecast'].sum()))
+country_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['Forecast'].sum()))
 country_total['Percent cut'] = 0
 country_total['Max cut qty'] = 0
 
-company_total = copy.deepcopy(rank1.groupby(['country_rank','customer_rank'])['Forecast'].sum())
-
-# country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'A', 'perctg cut']
+customer_total = copy.deepcopy(all_ranks.groupby(['country_rank','customer_rank'])['Forecast'].sum())
 
 for i in range(0,len(country_total)):
     if 'A' in country_total.index[i]:
@@ -70,25 +68,30 @@ for i in range(0,len(country_total)):
         pass
 
 total_max_cut_qty = country_total['Max cut qty'].sum()
-country_total['Country'] = pd.DataFrame(copy.deepcopy(rank1.groupby(['country_rank'])['ship_to_country'].unique()))
+country_total['Country'] = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['ship_to_country'].unique()))
 country_total['Country'] = [a[0] for a in country_total['Country']]
 
 #%% Cut Allocation by country
-alloc_to_trim = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 9, nrows = 1, usecols = 'N').iloc[0,0]
+# alloc_to_trim = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 9, nrows = 1, usecols = 'N').iloc[0,0]
 
-if alloc_to_trim <= total_max_cut_qty:
-    pass
-else:    
-    alloc_to_trim = total_max_cut_qty
-    print(f'Requested Allocation Quantity to Trim ({alloc_to_trim} MT) from Supply Demand Plan \
-\nis more than the Total Allowable Trim Quantity ({total_max_cut_qty} MT) set according to Country Trim Percentage.\
-\nTherefore, Maximum Allocation Trim Quantity is set at {total_max_cut_qty} MT.')
 
-accumulated_all_country_trimmed_quantity = 0
 
-if cut_method == 'country_rank':
+if cut_method == 'Country level':
+    print('Calculate by Country level')
     
-    # Looping Through Country    
+    if alloc_to_trim <= total_max_cut_qty:
+        pass
+    else:    
+        print(f'Allocation Quantity to Trim ({alloc_to_trim} MT) calculated from Supply Demand Plan \
+    \nis more than the Total Allowable Trim Quantity ({total_max_cut_qty} MT) set according to Country Trim Percentage.\
+    \nTherefore, Maximum Allocation Trim Quantity is set at {total_max_cut_qty} MT.')
+        alloc_to_trim = total_max_cut_qty
+        
+    accumulated_all_country_trimmed_quantity = 0
+        
+        
+    
+    # Looping Through Country
     for i in range(len(country_total),0,-1):    # <-- Count backwards because lowest rank to be trimmed first
         
         if accumulated_all_country_trimmed_quantity >= alloc_to_trim:
@@ -125,7 +128,7 @@ if cut_method == 'country_rank':
             if sum(temp_df['Forecast'][0:j+1]) <= qty_to_trim:
                 
                 if temp_df['Forecast'].iloc[j] != 0:
-                    # print('\t\tAA')
+                    print('\t\tAA')
                     cut = temp_df['Forecast'].iloc[j]
                     print('\t\tOriginal Allocated Quantity: ' + str(temp_df['Forecast'].iloc[j]) + ' MT')
                     if accumulated_all_country_trimmed_quantity + temp_df['Forecast'].iloc[j] >  alloc_to_trim:
@@ -136,7 +139,7 @@ if cut_method == 'country_rank':
                     accumulated_all_country_trimmed_quantity += cut #temp_df['Forecast'].iloc[j]
                     print(f"\t\tAccumulated Trimmed Quantity for {temp_df['ship_to_country'].unique().tolist()[0]} = {accumulated_trimmed_qty} MT.")
                     print(f"\t\tAccumulated Trimmed Quantity for All Countries = {accumulated_all_country_trimmed_quantity} MT.")
-                                                
+    
                     rank_by_country.loc[ind_country[j],'Final Allocated Quantity'] = temp_df.loc[ind_country[j],'Forecast'] - cut
                     print(f"\t\tFinal Allocated Quantity: {rank_by_country.loc[ind_country[j],'Final Allocated Quantity']} MT")
                     
@@ -144,7 +147,7 @@ if cut_method == 'country_rank':
                     print(f"\t\tNothing to Remove from customer '{temp_df['cust_code'].iloc[j]}' from {temp_df['ship_to_country'].iloc[j]}.")
                 
             else:
-                # print('\t\tBB')
+                print('\t\tBB')
                 print('\t\tOriginal Allocated Quantity: ' + str(temp_df['Forecast'].iloc[j]) + ' MT')
                 
                 last_cut =  qty_to_trim - sum(temp_df['Forecast'][0:j])
@@ -170,38 +173,140 @@ if cut_method == 'country_rank':
                 print(f"\nEnd of Allocation planning for {temp_df['ship_to_country'].unique().tolist()[0]}.")
                 print("===================================================================================")
                 break
-                
-                
-                # if temp_df['customer_rank'][i] == 'P':
-                # print(f"Customer {rank_by_customer['cust_code'][i]} is a 'P' ranked customer")
-                # print(f"\tRemove {rank_by_customer['Forecast'][i]} MT from customer '{rank_by_customer['cust_code'][i]}' from {rank_by_customer['ship_to_country'][i]}.")
 
-                
+#% By Customer
+elif cut_method == 'Customer level':
+    
+    print('Calculate by Customer level')
+    
+    rank_by_customer = copy.deepcopy(all_ranks.sort_values(by=['cust_prio'],ascending=False))#.reset_index(drop=True)
+    rank_by_customer['Final Allocated Quantity'] = rank_by_customer['Forecast']
+    
+    # Percentage cut table
+    customer_perctg_cut = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 2, nrows = 4, usecols = 'Q:R')#.iloc[0,0]
+    
+    # Totals
+    customer_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['customer_rank'])['Forecast'].sum()))
+    # customer_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['customer_rank', 'country_rank'])['Forecast'].sum()))
+
+    customer_total['Percent cut'] = 0
+    customer_total['Max cut qty'] = 0
+    
+    for i in range(0,len(customer_total)):
+        # print(i)
+        if 'A' in customer_total.index[i]:
+            customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'A', 'cust_perctg cut']
+            customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'A', 'cust_perctg cut']
+            
+        elif 'B' in customer_total.index[i]:
+            customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'B', 'cust_perctg cut']
+            customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'B', 'cust_perctg cut']
+            
+        elif 'C' in customer_total.index[i]:
+            customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'C', 'cust_perctg cut']
+            customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'C', 'cust_perctg cut']
+            
+        # elif 'D' in customer_total.index[i]:
+        #     customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'D', 'cust_perctg cut']
+        #     customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'D', 'cust_perctg cut']
         
-        # for j in rank_by_country.loc[rank_by_country['country_rank'] == country_total.index[i-1], 'Forecast']:
-        #     print('\t'+str(j))
-        #     if sum(rank_by_country['Forecast'][0:i+1]) <= alloc_to_trim:
+        elif 'P' in customer_total.index[i]:
+            customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'P', 'cust_perctg cut']
+            customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'P', 'cust_perctg cut']
+            
+        else:
+            pass
+    
+    total_max_cut_qty = customer_total['Max cut qty'].sum()
+
+    # customer_total['Country'] = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['customer_rank','country_rank'])['ship_to_country'].unique()))
+    # customer_total['Country'] = [a[0] for a in customer_total['Country']]
+
+    if alloc_to_trim <= total_max_cut_qty:
+        pass
+    else:        
+        print(f'Allocation Quantity to Trim ({alloc_to_trim} MT) calculated from Supply Demand Plan \
+    \nis more than the Total Allowable Trim Quantity ({total_max_cut_qty} MT) set according to Country Trim Percentage.\
+    \nTherefore, Maximum Allocation Trim Quantity is set at {total_max_cut_qty} MT.')
+        alloc_to_trim = total_max_cut_qty
+    
+    accumulated_all_customer_trimmed_quantity = 0
+    
+    # Looping Through Individual Customers
+    
+    for i in range(len(customer_total),0,-1):    # <-- Count backwards because lowest rank to be trimmed first
+        
+        if accumulated_all_customer_trimmed_quantity >= alloc_to_trim:
+            print('ALLOCATION PLAN (Customer Level) COMPLETED!')
+            
+            break
+
+        accumulated_trimmed_qty = 0
+        qty_to_trim = customer_total['Max cut qty'][i-1]
+        temp_df = copy.deepcopy(rank_by_customer.loc[rank_by_customer['customer_rank'] == customer_total.index[i-1], :])
+        ind_customer = rank_by_customer[rank_by_customer['customer_rank'] == customer_total.index[i-1]].index
+        
+        # print('\nCustomer: ' + temp_df['ship_to_country'].unique().tolist()[0])
+        print('Customer Rank: ' + str(customer_total.index[i-1]))
+        print('Planned Percentage cut: ' + str(customer_total['Percent cut'][i-1]) + ' %')
+        print('Original customer Allocation: ' + str(customer_total['Forecast'][i-1]) + ' MT')
+        print(f"Maximum Trim Quantity for Customer Rank {str(customer_total.index[i-1])} = {qty_to_trim} MT")
+        
+        if alloc_to_trim - accumulated_all_customer_trimmed_quantity >= qty_to_trim:
+            print(f"Quantity to trim for {str(customer_total.index[i-1])} = {qty_to_trim} MT")
+        else:
+            print(f"Quantity to trim for Customer Rank {str(customer_total.index[i-1])} = {alloc_to_trim - accumulated_all_customer_trimmed_quantity} MT")
+            
+        # Looping Through Individual Countries
+        for j in range(0,len(temp_df)):
+            
+            if accumulated_all_customer_trimmed_quantity >= alloc_to_trim:
+                print(f"\nEnd of Allocation adjustment for {str(customer_total.index[i-1])}.")
+                print("===================================================================================")
+                break
+            
+            print('\n\tCountry: ' + str(temp_df['ship_to_country'].iloc[j]))
+            print('\tCountry rank: ' + str(temp_df['country_rank'].iloc[j]))
+            #=================
+            if sum(temp_df['Forecast'][0:j+1]) <= qty_to_trim:
+                print('\t\tAA')
+                if temp_df['Forecast'].iloc[j] != 0:
+                    # print('\t\tAA')
+                    cut = temp_df['Forecast'].iloc[j]
+                    print('\t\tOriginal Allocated Quantity: ' + str(temp_df['Forecast'].iloc[j]) + ' MT')
+                    if accumulated_all_customer_trimmed_quantity + temp_df['Forecast'].iloc[j] >  alloc_to_trim:
+                        cut = alloc_to_trim - accumulated_all_customer_trimmed_quantity
+                    
+                    print(f"\t\tReduce Allocation Quantity by {cut} MT from country '{temp_df['ship_to_country'].iloc[j]}'.")
+                    accumulated_trimmed_qty+= cut # temp_df['Forecast'].iloc[j]
+                    accumulated_all_customer_trimmed_quantity += cut #temp_df['Forecast'].iloc[j]
+                    print(f"\t\tAccumulated Trimmed Quantity for Customer Rank {str(customer_total.index[i-1])} = {accumulated_trimmed_qty} MT.")
+                    print(f"\t\tAccumulated Trimmed Quantity for All Countries = {accumulated_all_customer_trimmed_quantity} MT.")
+    
+                    rank_by_customer.loc[ind_customer[j],'Final Allocated Quantity'] = temp_df.loc[ind_customer[j],'Forecast'] - cut
+                    print(f"\t\tFinal Allocated Quantity: {rank_by_customer.loc[ind_customer[j],'Final Allocated Quantity']} MT")
+                    
+                else:
+                    print(f"\t\tNothing to Remove from country {temp_df['ship_to_country'].iloc[j]} for customer '{temp_df['cust_code'].iloc[j]}'.")
+
+            else:
+                print('\t\tBB')
+                print('\t\tOriginal Allocated Quantity: ' + str(temp_df['Forecast'].iloc[j]) + ' MT')
                 
-
-
-
-
-# for i in range(0,len(rank_by_customer)):
-#     # print(i)
-    
-#         # print(sum(rank_by_customer['Forecast'][0:i+1]))
-#         if rank_by_customer['Forecast'][i] != 0:
-                        
-#             if rank_by_customer['customer_rank'][i] == 'P':
-#                 print(f"Customer {rank_by_customer['cust_code'][i]} is a 'P' ranked customer")
-#                 print(f"\tRemove {rank_by_customer['Forecast'][i]} MT from customer '{rank_by_customer['cust_code'][i]}' from {rank_by_customer['ship_to_country'][i]}.")
-    
-#             elif rank_by_customer['customer_rank'][i] == 'C':
-#                 print(f"Customer {rank_by_customer['cust_code'][i]} is a 'C' ranked customer")
-#                 print(f"Remove {rank_by_customer['Forecast'][i]} MT from customer '{rank_by_customer['cust_code'][i]}' from {rank_by_customer['ship_to_country'][i]}.")
-    
-#     else:    
-#         last_cut = sum(rank_by_customer['Forecast'][0:i+1])- alloc_to_trim
-#         print(f"Reduce Allocation by {last_cut} MT from customer '{rank_by_customer['cust_code'][i]}' from {rank_by_customer['ship_to_country'][i]}.")
-#         print('End of cutting Allocation.')
-#         break
+                last_cut =  qty_to_trim - sum(temp_df['Forecast'][0:j])
+                
+                if accumulated_all_customer_trimmed_quantity + last_cut >  alloc_to_trim:
+                    last_cut = alloc_to_trim - accumulated_all_customer_trimmed_quantity
+                
+                
+                print(f"\t\tReduce Allocation Quantity by {last_cut} MT from country {temp_df['ship_to_country'].iloc[j]}.")
+                accumulated_trimmed_qty+= last_cut
+                accumulated_all_customer_trimmed_quantity += last_cut
+                print(f"\t\tAccumulated Trimmed Quantity for Customer Rank {str(customer_total.index[i-1])} = {accumulated_trimmed_qty} MT.")
+                print(f"\t\tAccumulated Trimmed Quantity for All Countries = {accumulated_all_customer_trimmed_quantity} MT.")
+                
+                rank_by_customer.loc[ind_customer[j],'Final Allocated Quantity'] = temp_df.loc[ind_customer[j],'Forecast'] - last_cut
+                print(f"\t\tFinal Allocated Quantity: {rank_by_customer.loc[ind_customer[j],'Final Allocated Quantity']} MT")
+                print(f"\nEnd of Allocation planning Customer Rank {str(customer_total.index[i-1])}.")
+                print("===================================================================================")
+                break
