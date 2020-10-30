@@ -28,56 +28,53 @@ cut_method = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 0, nrows
 
 alloc_to_trim = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 9, nrows = 1, usecols = 'N').iloc[0,0]
 
-#%% By Country
-rank_by_country = copy.deepcopy(all_ranks.sort_values(by=['country_prio'],ascending=False))#.reset_index(drop=True)
-rank_by_country['Final Allocated Quantity'] = rank_by_country['Forecast']
-
-
-# Percentage cut tables
-country_perctg_cut = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 2, nrows = 4, usecols = 'N:O')#.iloc[0,0]
-
-# Totals
-country_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['Forecast'].sum()))
-country_total['Percent cut'] = 0
-country_total['Max cut qty'] = 0
-
-customer_total = copy.deepcopy(all_ranks.groupby(['country_rank','customer_rank'])['Forecast'].sum())
-
-for i in range(0,len(country_total)):
-    if 'A' in country_total.index[i]:
-        country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'A', 'perctg cut']
-        country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'A', 'perctg cut']
-        
-    elif 'B' in country_total.index[i]:
-        country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'B', 'perctg cut']
-        country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'B', 'perctg cut']
-        
-    elif 'C' in country_total.index[i]:
-        country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'C', 'perctg cut']
-        country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'C', 'perctg cut']
-        
-    elif 'D' in country_total.index[i]:
-        country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'D', 'perctg cut']
-        country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'D', 'perctg cut']
-    
-    elif 'P' in country_total.index[i]:
-        country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'P', 'perctg cut']
-        country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'P', 'perctg cut']
-        
-    else:
-        pass
-
-total_max_cut_qty = country_total['Max cut qty'].sum()
-country_total['Country'] = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['ship_to_country'].unique()))
-country_total['Country'] = [a[0] for a in country_total['Country']]
-
 #%% Cut Allocation by country
-# alloc_to_trim = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 9, nrows = 1, usecols = 'N').iloc[0,0]
-
-
 
 if cut_method == 'Country level':
     print('Calculate by Country level')
+    
+    rank_by_country = copy.deepcopy(all_ranks.sort_values(by=['country_prio'],ascending=False))#.reset_index(drop=True)
+    rank_by_country['Final Allocated Quantity'] = rank_by_country['Forecast']
+    
+    
+    # Percentage cut tables
+    country_perctg_cut = pd.read_excel(excelfilename, sheet_name='exec', skiprows = 2, nrows = 4, usecols = 'N:O')#.iloc[0,0]
+    
+    # Totals
+    country_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['Forecast'].sum()))
+    country_total['Percent cut'] = 0
+    country_total['Max cut qty'] = 0
+        
+    
+    for i in range(0,len(country_total)):
+        if 'A' in country_total.index[i]:
+            country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'A', 'perctg cut']
+            country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'A', 'perctg cut']
+            
+        elif 'B' in country_total.index[i]:
+            country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'B', 'perctg cut']
+            country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'B', 'perctg cut']
+            
+        elif 'C' in country_total.index[i]:
+            country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'C', 'perctg cut']
+            country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'C', 'perctg cut']
+            
+        elif 'D' in country_total.index[i]:
+            country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'D', 'perctg cut']
+            country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'D', 'perctg cut']
+        
+        elif 'P' in country_total.index[i]:
+            country_total['Max cut qty'][i] = country_total['Forecast'][i] * 0.01 * country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'P', 'perctg cut']
+            country_total['Percent cut'][i] = country_perctg_cut.loc[country_perctg_cut['country_rank'] == 'P', 'perctg cut']
+            
+        else:
+            pass
+    
+       
+    total_max_cut_qty = country_total['Max cut qty'].sum()
+    country_total['Country'] = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['country_rank'])['ship_to_country'].unique()))
+    country_total['Country'] = [a[0] for a in country_total['Country']]
+    
     
     if alloc_to_trim <= total_max_cut_qty:
         pass
@@ -247,7 +244,7 @@ elif cut_method == 'Customer level':
         ind_customer = rank_by_customer[rank_by_customer['customer_rank'] == customer_total.index[i-1]].index
         
         # print('\nCustomer: ' + temp_df['ship_to_country'].unique().tolist()[0])
-        print('Customer Rank: ' + str(customer_total.index[i-1]))
+        print('\nCustomer Rank: ' + str(customer_total.index[i-1]))
         print('Planned Percentage cut: ' + str(customer_total['Percent cut'][i-1]) + ' %')
         print('Original customer Allocation: ' + str(customer_total['Forecast'][i-1]) + ' MT')
         print(f"Maximum Trim Quantity for Customer Rank {str(customer_total.index[i-1])} = {qty_to_trim} MT")
