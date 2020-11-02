@@ -76,8 +76,7 @@ if cut_method == 'Country level':
     
     
     while alloc_to_trim > total_max_cut_qty:
-    #     pass
-    # else:    
+   
         print(f'Allocation Quantity to Trim ({alloc_to_trim} MT) calculated from Supply Demand Plan \
     \nis more than the Total Allowable Trim Quantity ({total_max_cut_qty} MT) set according to Country Trim Percentage.\
     \nTherefore, additional {alloc_to_trim - total_max_cut_qty} MT will be trimmed above user setting.')
@@ -249,13 +248,49 @@ elif cut_method == 'Customer level':
     total_max_cut_qty = customer_total['Max cut qty'].sum()
     total_max_cut_qty_ori = total_max_cut_qty
 
-    if alloc_to_trim <= total_max_cut_qty:
-        pass
-    else:
+    while alloc_to_trim > total_max_cut_qty:
+    #     pass
+    # else:
         print(f'Allocation Quantity to Trim ({alloc_to_trim} MT) calculated from Supply Demand Plan \
     \nis more than the Total Allowable Trim Quantity ({total_max_cut_qty} MT) set according to Country Trim Percentage.\
-    \nTherefore, Maximum Allocation Trim Quantity is set at {total_max_cut_qty} MT.')
-        alloc_to_trim = total_max_cut_qty
+    \nTherefore, additional {alloc_to_trim - total_max_cut_qty} MT will be trimmed above user setting.')
+        # alloc_to_trim = total_max_cut_qty
+        
+        # Percentage cut table
+        customer_perctg_cut.loc[:,'cust_perctg cut'] = customer_perctg_cut.loc[:,'cust_perctg cut'] + customer_perctg_cut.loc[:,'cust_perctg cut']*0.1
+        customer_perctg_cut.loc[customer_perctg_cut.loc[:,'cust_perctg cut']>100,'cust_perctg cut'] = 100
+
+        # Totals
+        customer_total = pd.DataFrame(copy.deepcopy(all_ranks.groupby(['customer_rank'])['Forecast'].sum()))
+        customer_total['Percent cut'] = 0
+        customer_total['Max cut qty'] = 0
+        
+        for i in range(0,len(customer_total)):
+            if 'A' in customer_total.index[i]:
+                customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'A', 'cust_perctg cut']
+                customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'A', 'cust_perctg cut']
+                
+            elif 'B' in customer_total.index[i]:
+                customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'B', 'cust_perctg cut']
+                customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'B', 'cust_perctg cut']
+                
+            elif 'C' in customer_total.index[i]:
+                customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'C', 'cust_perctg cut']
+                customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'C', 'cust_perctg cut']
+                
+            # elif 'D' in customer_total.index[i]:
+            #     customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'D', 'cust_perctg cut']
+            #     customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'D', 'cust_perctg cut']
+            
+            elif 'P' in customer_total.index[i]:
+                customer_total['Max cut qty'][i] = customer_total['Forecast'][i] * 0.01 * customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'P', 'cust_perctg cut']
+                customer_total['Percent cut'][i] = customer_perctg_cut.loc[customer_perctg_cut['customer_rank'] == 'P', 'cust_perctg cut']
+                
+            else:
+                pass
+        
+        total_max_cut_qty = customer_total['Max cut qty'].sum()
+    
     
     accumulated_all_customer_trimmed_quantity = 0
     
