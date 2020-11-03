@@ -1,0 +1,21 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname=helvetica] ;
+edge [fontname=helvetica] ;
+0 [label=<order_times_changed &le; 0.5<br/>gini = 0.419<br/>samples = 714<br/>value = [530, 116, 39, 6, 23]<br/>class = Normal>, fillcolor="#eda876"] ;
+1 [label=<Quan_amt_changed &le; 5.0<br/>gini = 0.146<br/>samples = 575<br/>value = [530, 0, 39, 6, 0]<br/>class = Normal>, fillcolor="#e78c4a"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label=<gini = 0.0<br/>samples = 530<br/>value = [530, 0, 0, 0, 0]<br/>class = Normal>, fillcolor="#e58139"] ;
+1 -> 2 ;
+3 [label=<Formula &le; 0.5<br/>gini = 0.231<br/>samples = 45<br/>value = [0, 0, 39, 6, 0]<br/>class = Quan_changer_small>, fillcolor="#57e9ce"] ;
+1 -> 3 ;
+4 [label=<gini = 0.0<br/>samples = 39<br/>value = [0, 0, 39, 0, 0]<br/>class = Quan_changer_small>, fillcolor="#39e5c5"] ;
+3 -> 4 ;
+5 [label=<gini = 0.0<br/>samples = 6<br/>value = [0, 0, 0, 6, 0]<br/>class = Quan_changer_large>, fillcolor="#3c39e5"] ;
+3 -> 5 ;
+6 [label=<Final_quan &le; 23.515<br/>gini = 0.276<br/>samples = 139<br/>value = [0, 116, 0, 0, 23]<br/>class = Date_changer>, fillcolor="#95ea60"] ;
+0 -> 6 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+7 [label=<gini = 0.0<br/>samples = 116<br/>value = [0, 116, 0, 0, 0]<br/>class = Date_changer>, fillcolor="#7be539"] ;
+6 -> 7 ;
+8 [label=<gini = 0.0<br/>samples = 23<br/>value = [0, 0, 0, 0, 23]<br/>class = Date_changer_critical>, fillcolor="#e539c0"] ;
+6 -> 8 ;
+}
