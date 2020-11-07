@@ -37,7 +37,7 @@ urls = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='A')
 
 #%% Linkedin: Set Driver and open webpage
 print('\nMREPC: Open URL...')
-chrome_driver = r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-services\WS_mrepc\chromedriver.exe'
+chrome_driver = r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-services\chromedriver.exe'
 
 from selenium.webdriver.chrome.options import Options
 
