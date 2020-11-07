@@ -1,12 +1,21 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun May  3 20:43:28 2020
+Created on Thu Nov  5 15:22:39 2020
 
-@author: jamesv2
+@author: James Ang
 """
 
+#% Set Directory
+import os, sys, subprocess
+os.chdir(r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-services\WS_mrepc')
+
+import re
+import time
+import pandas as pd
+from datetime import datetime
+
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -15,28 +24,20 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 # import pkg_resources.py2_warn
 
-import pandas as pd
-import os, sys, subprocess
-import time
-from datetime import datetime
-import re
-# import common_ws_lib
-
-# from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-
-driver = webdriver.Chrome(ChromeDriverManager().install())
-
-
-#%% Set Directory
-os.chdir('C:/Users/User/Documents/James/Webscrape/chemicals1/')
+from lib_scrape import append_df_to_excel
 
 #%% Set URL
-url = 'https://www.chemicals1.com/chemical-suppliers/asia'
+# url = 'http://www.myrubbercouncil.com/marketplace/public/rubberproduct.php?rubbertype=RMD'
+# url = 'http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=002&subcategory=0000' #2pages
+# url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=167&subcategory=0000'
+# url ='http://www.myrubbercouncil.com/marketplace/public/search_productscat.php?category=003&subcategory=0010' #3pages
+url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=003&subcategory=0000' # 9 pages
+
+urls = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='A')
 
 #%% Linkedin: Set Driver and open webpage
-print('\nChemicals1: Open URL...')
-chrome_driver = 'C:/Users/User/Documents/James/Webscrape/chromedriver.exe'
+print('\nMREPC: Open URL...')
+chrome_driver = r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-services\chromedriver.exe'
 
 from selenium.webdriver.chrome.options import Options
 
@@ -52,123 +53,219 @@ else:
 # options.add_argument("--window-size=1920,1080");
 options.add_argument("--start-maximized");
 
-#%% 
-# driver = webdriver.Chrome(chrome_driver, options=options)
-driver.get(url)
-
-#%%
-# ex_search = WebDriverWait(driver,10).until(
-#                 EC.presence_of_element_located((By.CLASS_NAME,'builder-block.builder-c3fe009066f44de4af750ff4ad3477d9.css-1lqyowm')))
-
-# ex_container = ex_search.find_elements_by_tag_name('a')
-# x = 3
-# item_name = ex_container[x].text
-# ex_container[x].click()
-# time.sleep(2)
-
-# #%% Prepare for scrape
-# driver.execute_script("window.scrollTo(0, 500);")
-# driver.find_element_by_class_name('text-size.normal').click()
-# # time.sleep(0.5)
-# list_views = WebDriverWait(driver,5).until(
-#                 EC.presence_of_all_elements_located((By.CLASS_NAME,'knowde-icons.ki-listview')))
-# list_views[1].click()
-
 #%% Linkedin: Initialisation
-name = []
-products_services = []
-types = []
-country = []
-# info2 = []
-address = []
 companies = []
-url =[]
+contact_person = []
+e_mail = []
+contact_number = []
+fax = []
+website = []
+company_profile = []
+category_name = []
+
 count= 0
 page = 1
 
+driver = webdriver.Chrome(chrome_driver, options=options)
+
 #%% : Scraping Products
-
-WebDriverWait(driver,5).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME,'anchor')))
-
-# got_it=WebDriverWait(driver,5).until(
-#             EC.presence_of_element_located((By.CLASS_NAME,'cc-btn.cc-dismiss')))
-# got_it.click()
-
-f = driver.find_element_by_class_name('pagination')
-g= f.find_elements_by_tag_name("li")
-
-print('Chemicals1: Webscraping starts')
-
-try:
+for url in urls.iloc[:,0]:
+    # print(url)
+    # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     
-    total_page = int(g[-2].text)
+    driver.get(url)
     
-except Exception as e:
+    # WebDriverWait(driver,5).until(
+    #             EC.presence_of_all_elements_located((By.CLASS_NAME,'anchor')))
     
-    print(e)
-    total_page = 1
     
-finally:
+    name = driver.find_element_by_class_name('crumb.global')
+    cat_name = name.text.split(' > ')[-1].split(' | ')[0]
     
-    while page <= int(total_page):
-        print(page)
-        articles = WebDriverWait(driver,5).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME,'anchor')))
-
-        for article in articles:
-            count = count + 1
-            ActionChains(driver).move_to_element(article).perform()
-            # article = articles[0]
-            """Name"""
-            try:
-                article.text.split('\n')[0]
-                article.find_element_by_class_name('col-xs-6.col-md-4.col-sm-4.min-height150').text
-                article.find_element_by_class_name('section-types.height17-overflowhidden').text
-                article.find_element_by_class_name('section-services').text
-                article.get_attribute('data-anchor')
-
-            except NoSuchElementException:
-                companies.append(article.text.split('\n')[0])
-                address.append(article.find_element_by_class_name('col-xs-12.col-md-6').text)
-                country.append(article.find_element_by_class_name('col-xs-12.col-md-6').text.split()[-1])
-                print(article.find_element_by_class_name('col-xs-12.col-md-6').text.split()[-1])
-                types.append(article.find_element_by_class_name('section-types.height17-overflowhidden').text)
-                products_services.append(article.find_element_by_class_name('section-services').text)
-                url.append(article.get_attribute('data-anchor'))
-                print(f'Company {count}x')
-                continue
+    if 'Search' in cat_name:
+        cat_name = cat_name.split(" : ")[-1]
+        
+    print('\n' + cat_name)
+    f = driver.find_elements_by_class_name('box4')
+    # g = f.find_elements_by_class_name("detail")
+    
+    page = driver.find_elements_by_class_name('page_count')
+    
+    if  page ==[] or page[0].text =='':
+        print('1 page')
+        num_page = 0               
+        
+        for item in f:
+            count += 1
+            print(f'Item {count}')
             
+            category_name.append(cat_name)
+            companies.append(item.text.split('\n')[0])
+            
+            # Contact person
+            if len(item.text.split('\n')[1].split(': ')) > 1:
+                contact_person.append(item.text.split('\n')[1].split(': ')[1])
             else:
-                companies.append(article.text.split('\n')[0])
-                address.append(article.find_element_by_class_name('col-xs-6.col-md-4.col-sm-4.min-height150').text)
-                country.append(article.find_element_by_class_name('col-xs-6.col-md-4.col-sm-4.min-height150').text.split()[-1])
-                print(article.find_element_by_class_name('col-xs-6.col-md-4.col-sm-4.min-height150').text.split()[-1])
-                types.append(article.find_element_by_class_name('section-types.height17-overflowhidden').text)
-                products_services.append(article.find_element_by_class_name('section-services').text)
-                url.append(article.get_attribute('data-anchor'))
-
-                print(f'Company {count}')
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(2)
-        f = driver.find_element_by_class_name('pagination')
-        g= f.find_elements_by_tag_name("li")
-        next_page = g[-1]
-        next_page.click()
+                contact_person.append('NA')
+            
+            # E-mail
+            if len(item.text.split('\n')[2].split(': ')) > 1:
+                e_mail.append(item.text.split('\n')[2].split(': ')[1])
+            else:
+                e_mail.append('NA')
+                
+            # Contact Number
+            if len(item.text.split('\n')[3].split(': ')) > 1:
+                contact_number.append(item.text.split('\n')[3].split(': ')[1])
+            else:
+                contact_number.append('NA')
+            
+            # fax
+            if len(item.text.split('\n')[4].split(': ')) > 1:
+                fax.append(item.text.split('\n')[4].split(': ')[1])
+            else:
+                fax.append('NA')
+                        
+            # website
+            if len(item.text.split('\n')[5].split(': ')) > 1:
+                website.append(item.text.split('\n')[5].split(': ')[1])
+            else:
+                website.append('NA')
         
-        page = page + 1
-
-#%% Chemicals1: Close website
-# driver.close()
-# driver.switch_to.window(main_page)
-# driver.close()
+    else:
+        print('More than 2 pages')        
         
+        for item in f:
+            count += 1
+            print(f'Item {count}')
+            
+            category_name.append(cat_name)
+            companies.append(item.text.split('\n')[0])
+            
+            # Contact person
+            if len(item.text.split('\n')[1].split(': ')) > 1:
+                contact_person.append(item.text.split('\n')[1].split(': ')[1])
+            else:
+                contact_person.append('NA')
+            
+            # E-mail
+            if len(item.text.split('\n')[2].split(': ')) > 1:
+                e_mail.append(item.text.split('\n')[2].split(': ')[1])
+            else:
+                e_mail.append('NA')
+                
+            # Contact Number
+            if len(item.text.split('\n')[3].split(': ')) > 1:
+                contact_number.append(item.text.split('\n')[3].split(': ')[1])
+            else:
+                contact_number.append('NA')
+            
+            # fax
+            if len(item.text.split('\n')[4].split(': ')) > 1:
+                fax.append(item.text.split('\n')[4].split(': ')[1])
+            else:
+                fax.append('NA')
+                        
+            # website
+            if len(item.text.split('\n')[5].split(': ')) > 1:
+                website.append(item.text.split('\n')[5].split(': ')[1])
+            else:
+                website.append('NA')
+                
+            # contact_person.append(item.text.split('\n')[1].split(': ')[1])
+            # e_mail.append(item.text.split('\n')[2].split(': ')[1])
+            # contact_number.append(item.text.split('\n')[3].split(': ')[1])
+            # fax.append(item.text.split('\n')[4].split(': ')[1])
+        
+        num_page = int(page[-2].text)
+        
+        # Pagination
+        for i in range(0,num_page-1):
+            print(i)
+            url_new = page[-1].get_attribute('href')
+            driver.get(url_new)
+            name = driver.find_element_by_class_name('crumb.global')
+            cat_name = name.text.split(' > ')[-1].split(' | ')[0]
+            
+            if 'Search' in cat_name:
+                cat_name = cat_name.split(" : ")[-1]
+            
+            f = driver.find_elements_by_class_name('box4')
+            page = driver.find_elements_by_class_name('page_count')
+    
+            # Scraping items
+            for item in f:
+                count += 1
+                print(f'Item {count}')
+                
+                category_name.append(cat_name)
+                companies.append(item.text.split('\n')[0])
+                
+                # Contact person
+                if len(item.text.split('\n')[1].split(': ')) > 1:
+                    contact_person.append(item.text.split('\n')[1].split(': ')[1])
+                else:
+                    contact_person.append('NA')
+                
+                # E-mail
+                if len(item.text.split('\n')[2].split(': ')) > 1:
+                    e_mail.append(item.text.split('\n')[2].split(': ')[1])
+                else:
+                    e_mail.append('NA')
+                    
+                # Contact Number
+                if len(item.text.split('\n')[3].split(': ')) > 1:
+                    contact_number.append(item.text.split('\n')[3].split(': ')[1])
+                else:
+                    contact_number.append('NA')
+                
+                # fax
+                if len(item.text.split('\n')[4].split(': ')) > 1:
+                    fax.append(item.text.split('\n')[4].split(': ')[1])
+                else:
+                    fax.append('NA')
+                
+                # website
+                if len(item.text.split('\n')[5].split(': ')) > 1:
+                    website.append(item.text.split('\n')[5].split(': ')[1])
+                else:
+                    website.append('NA')
+                
+    
+    # for item in f:
+    #     count += 1
+    #     print(f'Item {count}')
+        
+    #     category_name.append(cat_name)
+    #     companies.append(item.text.split('\n')[0])
+    #     contact_person.append(item.text.split('\n')[1].split(': ')[1])
+    #     e_mail.append(item.text.split('\n')[2].split(': ')[1])
+    #     contact_number.append(item.text.split('\n')[3].split(': ')[1])
+    #     fax.append(item.text.split('\n')[4].split(': ')[1])
+    #     website.append(item.text.split('\n')[5].split(': ')[1])
+    
+    #%% Close website
+driver.close()
+
 #%% Compile and Prepare Data for export
-df = pd.DataFrame({'Company':companies, 'Address': address, 'Country': country, 'Types':types, 'Products/Services':products_services, 'url':url})#, 'Product Keyword': searched_keyword})
-# df['email'] = 'found@noemail.com'
+df = pd.DataFrame({'Product Category': category_name, 'Company':companies, 'Contact Person': contact_person, 'E-mail': e_mail, 'Contact Number':contact_number, 'Fax':fax, 'Website':website})
 
-dateTimeObj = datetime.now()
-timestampStr = dateTimeObj.strftime("%d%b%Y_%H%M%S")
-filename = 'Chemicals1_africa1' + timestampStr
+import openpyxl
+# Create new workbook
+wb = openpyxl.Workbook()
 
-df.to_excel(filename+'.xls', index=False, encoding='utf-8')
+# Get SHEET name
+# Sheet_name = wb.sheetnames
+
+# Save created workbook at same path where .py file exist
+filename = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='E',nrows=1).iloc[0,0] +".xlsx"
+
+wb.save(filename)
+# dateTimeObj = datetime.now()
+# timestampStr = dateTimeObj.strftime("%d%b%Y_%H%M%S")
+
+# df.to_excel(filename+'.xlsx', index=False, encoding='utf-8')
+
+# filename = r'C:/Users/User/Documents/ghub_acceval/smarttradzt-python-services/WS_mrepc/MREPC_.xlsx'
+append_df_to_excel(filename, df)
+
