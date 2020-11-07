@@ -26,6 +26,9 @@ DRP/.pylint.d/
 DRP/others/
 DRP_v2/others/
 SDBal/others/
+WS_mrepc/others/
+chromedriver.exe
+
 # DRP/my_class.py
 # DRP/test.py
 DRP/~$demand_data.xlsx
