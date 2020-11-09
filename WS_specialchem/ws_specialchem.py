@@ -48,7 +48,7 @@ chrome_driver = r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-servic
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
-options.headless = False
+options.headless = True#False
 
 if options.headless == True:
     print ("Headless Chrome Initialized on Linux")
@@ -132,7 +132,7 @@ for i in range(0,len(containers)):
 
 # Scrape individual products
 
-for prod_url in product_urls[:3]:
+for prod_url in product_urls:
     
     driver.get(prod_url)
     
@@ -186,17 +186,25 @@ for prod_url in product_urls[:3]:
         print('No Product Properties for ' + prod_name + '...')
         
     else:            
-    
+        
+        # Put title for Properties
         pp_title = pp_start.find_element_by_class_name('tds_titre.c9').text
+        pp_title_df = pd.DataFrame(columns=[pp_title])
+        append_df_to_excel(filename, pp_title_df, sheet_name = f'{prod_name}')
+        
+        # Property container
         pp_box = pp_start.find_element_by_class_name('box_content')
         
+        # Property tables inside container
         pp_tables = pp_box.find_elements_by_class_name('box_limitable.limited')
         
+        # Initialisations
         ppt_df = {}
         i = 0
         
         # Scraping Individual Property tables
         for table in pp_tables:
+            
             # print('\n\t' + table.text)
             pp_t1 = table.find_elements_by_class_name('tr.h100')
             pp_t1_allheaders = pp_t1[0].find_elements_by_class_name('row.w100.h100')
@@ -227,18 +235,77 @@ for prod_url in product_urls[:3]:
                 pp_t1_heading3: h3_data,
                 pp_t1_heading4: h4_data,
                 })
-            ppt_df[i].head()
+            # ppt_df[i].head()
             
             # Append to excel file
             append_df_to_excel(filename, ppt_df[i], sheet_name=f'{prod_name}')
+            i += 1
+    
+# =============================================================================
+#     # Product Guidelines
+# =============================================================================
+    
+    pg_start = driver.find_element_by_class_name('tds_guidelines')
+    
+    if pg_start.text == '':
+        
+        print('No Product Guidelines for ' + prod_name + '...')
+            
+    else:            
+        
+        # Put title for Processing Guidelines
+        pg_title = pg_start.find_element_by_class_name('tds_titre.c9').text
+        pg_title_df = pd.DataFrame(columns=[pg_title])
+        append_df_to_excel(filename, pg_title_df, sheet_name = f'{prod_name}')
+        
+        # Guideline container
+        pg_box = pg_start.find_element_by_class_name('box_content')
+        
+        # Guideline tables inside container
+        pg_tables = pg_box.find_elements_by_class_name('box_limitable.limited')
+            
+        # Initialisations
+        pgt_df = {}
+        i = 0
+        
+        # Scraping Individual Property tables
+        for table in pg_tables:
+            
+            # print('\n\t' + table.text)
+            pg_t1 = table.find_elements_by_class_name('tr.h100')
+            pg_t1_allheaders = pg_t1[0].find_elements_by_class_name('row.w100.h100')
+            pg_t1_heading1 = pg_t1_allheaders[0].find_element_by_class_name('col.w70.medium-w66.fs18.small-w100.pt15').text
+            pg_t1_heading2 = pg_t1_allheaders[0].find_element_by_class_name('col.w30.medium-w33.c13.small-hidden.pt15').text
+            pg_t1_heading3 = pg_t1_allheaders[1].find_element_by_class_name('col.w60.c13.medium-hidden.small-hidden.pt15').text
+            pg_t1_heading4 = pg_t1_allheaders[1].find_element_by_class_name('col.w30.c13.medium-hidden.small-hidden.pt15').text
             
             
+            # Scrape Entries in pp table 1
+            pg_t1_en = table.find_element_by_class_name('container_properties')    
+            pg_t1_entries = pg_t1_en.find_elements_by_class_name('row.tds.pr')
             
+            h1_data = []
+            h2_data = []
+            h3_data = []
+            h4_data = []
             
+            for item in pg_t1_entries:
+                # print('\n\t\t' + item.text)
+                h1_data.append(item.find_element_by_class_name('col.w70.medium-w66.small-w100').text)
+                h2_data.append(item.find_element_by_class_name('col.w30.medium-w33.small-w100.value-unit').text)
+                h3_data.append(item.find_element_by_class_name('col.large-w70.medium-inbl.small-inbl.test-condition').text)
+                h4_data.append(item.find_element_by_class_name('col.large-w30.medium-inbl.small-inbl.test-method').text)
+                
+            pgt_df[i] = pd.DataFrame({
+                pg_t1_heading1: h1_data,
+                pg_t1_heading2: h2_data,
+                pg_t1_heading3: h3_data,
+                pg_t1_heading4: h4_data,
+                })
             
-            
-            
-            i +=1
+            # Append to excel file
+            append_df_to_excel(filename, pgt_df[i], sheet_name=f'{prod_name}')
+            i += 1
 
 # driver.close()
         #%%
