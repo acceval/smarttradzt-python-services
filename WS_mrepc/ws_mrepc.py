@@ -29,9 +29,9 @@ from lib_scrape import append_df_to_excel
 #%% Set URL
 # url = 'http://www.myrubbercouncil.com/marketplace/public/rubberproduct.php?rubbertype=RMD'
 # url = 'http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=002&subcategory=0000' #2pages
-# url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=167&subcategory=0000'
+url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=167&subcategory=0000'
 # url ='http://www.myrubbercouncil.com/marketplace/public/search_productscat.php?category=003&subcategory=0010' #3pages
-url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=003&subcategory=0000' # 9 pages
+# url ='http://www.myrubbercouncil.com/marketplace/public/search_products.php?category=003&subcategory=0000' # 9 pages
 
 urls = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='A')
 
@@ -86,8 +86,13 @@ for url in urls.iloc[:,0]:
         cat_name = cat_name.split(" : ")[-1]
         
     print('\n' + cat_name)
-    f = driver.find_elements_by_class_name('box4')
-    # g = f.find_elements_by_class_name("detail")
+    containers = driver.find_elements_by_class_name('box4')
+    # g = containers.find_elements_by_class_name("detail")
+    
+    comp_profile_urls = []
+    
+    a = containers.driver.find_elements_by_class_name('box6')
+    # comp_profile_urls = cont
     
     page = driver.find_elements_by_class_name('page_count')
     
@@ -95,7 +100,7 @@ for url in urls.iloc[:,0]:
         print('1 page')
         num_page = 0               
         
-        for item in f:
+        for item in containers:
             count += 1
             print(f'Item {count}')
             
@@ -135,7 +140,7 @@ for url in urls.iloc[:,0]:
     else:
         print('More than 2 pages')        
         
-        for item in f:
+        for item in containers:
             count += 1
             print(f'Item {count}')
             
@@ -190,11 +195,11 @@ for url in urls.iloc[:,0]:
             if 'Search' in cat_name:
                 cat_name = cat_name.split(" : ")[-1]
             
-            f = driver.find_elements_by_class_name('box4')
+            containers = driver.find_elements_by_class_name('box4')
             page = driver.find_elements_by_class_name('page_count')
     
             # Scraping items
-            for item in f:
+            for item in containers:
                 count += 1
                 print(f'Item {count}')
                 
