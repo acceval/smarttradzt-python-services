@@ -1,0 +1,359 @@
+{
+    "bi-weekly_allocation":[
+        {
+            "datetime_receive_goods_after_quarantine":"04-01-2021 00:00",
+            "quantity_uom":"boxes",
+            "allocation":[
+                {
+                    "name":"Hospital Sungai Buloh",
+                    "quantity": 13,
+                    "zipcode": "40000"
+                },
+                {
+                    "name":"Hospital Selayang",
+                    "quantity": 6,
+                    "zipcode": "68100"
+                },
+                {
+                    "name":"Hospital Ampang",
+                    "quantity": 3,
+                    "zipcode": "68000"
+                },
+                {
+                    "name":"Hospital Penang General",
+                    "quantity": 3,
+                    "zipcode": "10990"
+                },
+                {
+                    "name":"Hospital Penang Adventist",
+                    "quantity": 1,
+                    "zipcode": "10350"
+                },
+                {
+                    "name":"Hospital Balik Pulau",
+                    "quantity": 1,
+                    "zipcode": "11000"
+                },
+                {
+                    "name":"Hospital Sultanah Bahiyah",
+                    "quantity": 1,
+                    "zipcode": "05460"
+                },
+                {
+                    "name":"Hospital Sultan Abdul Halim",
+                    "quantity": 1,
+                    "zipcode": "08000"
+                },
+                {
+                    "name":"Hospital Jitra",
+                    "quantity": 1,
+                    "zipcode": "06000"
+                }
+            ]
+        }
+    ],    
+    "trucks": [
+        {
+            "name": "Truck 1",
+            "truck_type": "Cold Chain",
+            "current location": "Pharmaniaga Shah Alam",
+            "zipcode": "40000",
+            "min_lotsize": 5,
+            "max_lotsize": 7,
+            "lotsize_uom": "boxes",
+            "max_daily_delivery_hours": 8
+        },
+        {
+            "name": "Truck 2",
+            "truck_type": "Cold Chain",
+            "current location": "Pharmaniaga Shah Alam",
+            "zipcode": "40000",
+            "min_lotsize": 5,
+            "max_lotsize": 7,
+            "lotsize_uom": "boxes",
+            "max_daily_delivery_hours": 8
+        }
+    ],
+    "routes": [
+        {
+            "datetime_start_delivery":"04-01-2021 08:00",
+            "datetime_end_delivery":"08-01-2021 17:00",
+            "name":"Route 1",
+            "truck":"Truck 1",
+            "origin":"Pharmaniaga Shah Alam",
+            "destinations":[
+                {
+                    "name":"Hospital Sungai Buloh",
+                    "quantity": 2
+                },
+                {
+                    "name": "Hospital Selayang",
+                    "quantity": 2
+                }
+            ],
+            "final_destination": "Pharmaniaga Shah Alam"        
+        },
+        {
+            "datetime_start_delivery":"04-01-2021 08:00",
+            "datetime_end_delivery":"08-01-2021 17:00",
+            "name":"Route 2",
+            "truck":"Truck 2",
+            "origin":"Pharmaniaga Shah Alam",
+            "destinations":[
+                {
+                    "name":"Juru warehouse",
+                    "quantity": 7
+                }             
+            ],
+            "final_destination": ""
+        }
+    ],
+    "warehouses": [
+        {
+            "name" : "Juru warehouse",
+            "zipcode": "14100",
+            "supply_to": [
+                "Hospital Penang General",
+                "Hospital Penang Adventist",
+                "Hospital Balik Pulau",
+                "Hospital Sultanah Bahiyah",
+                "Hospital Sultan Abdul Halim",
+                "Hospital Jitra"
+            ]
+        },
+        {
+            "name" : "Test warehouse",
+            "zipcode": "00700",
+            "supply_to": [
+                "Hospital Sungai Buloh",
+                "Hospital Selayang",
+                "Hospital Ampang"
+            ]
+        }
+    ],
+    "suppliers": [
+        {
+            "name" : "Pharmaniaga Shah Alam",
+            "zipcode": "40000",
+            "supply_to": [
+                "Hospital Sungai Buloh",
+                "Hospital Selayang",
+                "Hospital Ampang",
+                "Juru warehouse" 
+                ]
+        }
+    ],
+    "entity_properties":[
+        {
+            "origin": "Pharmaniaga Shah Alam",
+            "zipcode": 40000,
+            "loading_time": 1,
+            "unloading_time": 0,
+            "loading_time_uom": "hr",            
+            "unloading_time_uom": "hr",
+            "leadtimes_uom": "hr",
+            "distance_uom": "km",
+            "to_destination_info": [
+                {
+                    "destination": "Hospital Sungai Buloh",
+                    "zipcode": "47000",
+                    "leadtime": 0.75,
+                    "distance": 35.5
+                },
+                {
+                    "destination": "Hospital Selayang",
+                    "zipcode": "68100",
+                    "leadtime": 0.75,
+                    "distance": 44.1
+                },
+                {
+                    "destination": "Hospital Ampang",
+                    "zipcode": "68000",
+                    "leadtime": 0.75,
+                    "distance": 38.3  
+                },
+                {
+                    "destination": "Juru warehouse",
+                    "zipcode": "14100",
+                    "leadtime": 4,
+                    "distance": 344.7  
+                },
+                {
+                    "destination": "HUKM",
+                    "zipcode": "56000",
+                    "leadtime": 0.75,
+                    "distance": 34.5
+                },
+                {
+                    "destination": "HKL",
+                    "zipcode": "50586",
+                    "leadtime": 0.75,
+                    "distance": 36.3
+                }
+            ]
+        },
+        {
+            "origin": "Hospital Sungai Buloh",
+            "zipcode": 47000,
+            "loading_time": 0,
+            "unloading_time": 0.5,
+            "loading_time_uom": "hr",            
+            "unloading_time_uom": "hr",
+            "leadtimes_uom": "hr",
+            "distance_uom": "km",
+            "to_destination_info": [
+                {
+                    "destination": "Pharmaniaga Shah Alam",
+                    "zipcode": "40000",
+                    "leadtime": 0.75,
+                    "distance": 35.5
+                },
+                {
+                    "destination": "Hospital Selayang",
+                    "zipcode": "68100",
+                    "leadtime": 0.5,
+                    "distance": 14.8
+                },
+                {
+                    "destination": "Hospital Ampang",
+                    "zipcode": "68000",
+                    "leadtime": 0.75,
+                    "distance": 32     
+                },
+                {
+                    "destination": "Juru warehouse",
+                    "zipcode": "14100",
+                    "leadtime": 3.5,
+                    "distance": 313.9     
+                },
+                {
+                    "destination": "HUKM",
+                    "zipcode": "56000",
+                    "leadtime": 0.75,
+                    "distance": 31.3
+                },
+                {
+                    "destination": "HKL",
+                    "zipcode": "50586",
+                    "leadtime": 0.5,
+                    "distance": 25
+                }
+            ]
+        },
+        {
+            "origin": "Hospital Selayang",
+            "zipcode": "68100",
+            "loading_time": 0,
+            "unloading_time": 0.5,
+            "loading_time_uom": "hr",            
+            "unloading_time_uom": "hr",
+            "leadtimes_uom": "hr",
+            "distance_uom": "km",
+            "to_destination_info": [
+                {
+                    "destination": "Pharmaniaga Shah Alam",
+                    "zipcode": "40000",
+                    "leadtime": 0.75,
+                    "distance": 42.7
+                },
+                {
+                    "destination": "Hospital Sungai Buloh",
+                    "zipcode": "47000",
+                    "leadtime": 0.5,
+                    "distance": 18.9
+                },
+                {
+                    "destination": "Hospital Ampang",
+                    "zipcode": "68000",
+                    "leadtime": 0.5,
+                    "distance": 24.6    
+                },
+                {
+                    "destination": "Juru warehouse",
+                    "zipcode": "14100",
+                    "leadtime": 3.75,
+                    "distance": 326.2    
+                },
+                {
+                    "destination": "HUKM",
+                    "zipcode": "56000",
+                    "leadtime": 0.5,
+                    "distance": 23
+                },
+                {
+                    "destination": "HKL",
+                    "zipcode": "50586",
+                    "leadtime": 0.25,
+                    "distance": 13.9
+                }
+            ]
+        },
+        {
+            "origin": "Hospital Ampang",
+            "zipcode": 68000,
+            "loading_time": 0,
+            "unloading_time": 0.5,
+            "loading_time_uom": "hr",            
+            "unloading_time_uom": "hr",
+            "leadtimes_uom": "hr",
+            "distance_uom": "km",
+            "to_destination_info": [
+                {
+                    "destination": "Pharmaniaga Shah Alam",
+                    "zipcode": "40000",
+                    "leadtime": 0.75,
+                    "distance": 38.1
+                },
+                {
+                    "destination": "Hospital Sungai Buloh",
+                    "zipcode": "47000",
+                    "leadtime": 0.75,
+                    "distance": 31.9
+                },
+                {
+                    "destination": "Hospital Selayang",
+                    "zipcode": "68100",
+                    "leadtime": 0.75,
+                    "distance": 27.3
+                },
+                {
+                    "destination": "Juru warehouse",
+                    "zipcode": "14100",
+                    "leadtime": 3.75,
+                    "distance": 341.1    
+                },
+                {
+                    "destination": "HUKM",
+                    "zipcode": "56000",
+                    "leadtime": 0.25,
+                    "distance": 8.5
+                },
+                {
+                    "destination": "HKL",
+                    "zipcode": "50586",
+                    "leadtime": 0.25,
+                    "distance": 10
+                }
+            ]
+        },
+        {
+            "origin": "Juru warehouse",
+            "zipcode": 14100,
+            "loading_time": 1,
+            "unloading_time": 0.5,
+            "loading_time_uom": "hr",            
+            "unloading_time_uom": "hr",
+            "leadtimes_uom": "hr",
+            "distance_uom": "km",
+            "to_destination_info": [
+                {
+                    "destination": "Pharmaniaga Shah Alam",
+                    "zipcode": "40000",
+                    "leadtime": 4,
+                    "distance": 344.7
+                }
+            ]
+        }
+    ]
+                   
+}
