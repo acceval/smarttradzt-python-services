@@ -56,8 +56,8 @@
         {
             "name": "Truck 1",
             "truck_type": "Cold Chain",
-            "current location": "Pharmaniaga Shah Alam",
-            "zipcode": "40000",
+            "current_location": "Pharmaniaga Shah Alam",
+            "current_location_zipcode": "40000",
             "min_lotsize": 5,
             "max_lotsize": 7,
             "lotsize_uom": "boxes",
@@ -66,10 +66,10 @@
         {
             "name": "Truck 2",
             "truck_type": "Cold Chain",
-            "current location": "Pharmaniaga Shah Alam",
-            "zipcode": "40000",
+            "current_location": "Pharmaniaga Shah Alam",
+            "current_location_zipcode": "40000",
             "min_lotsize": 5,
-            "max_lotsize": 7,
+            "max_lotsize": 9,
             "lotsize_uom": "boxes",
             "max_daily_delivery_hours": 8
         }
@@ -88,6 +88,10 @@
                 },
                 {
                     "name": "Hospital Selayang",
+                    "quantity": 2
+                },
+                {
+                    "name": "Hospital Ampang",
                     "quantity": 2
                 }
             ],
