@@ -7,7 +7,7 @@ Created on Tue Dec 22 23:55:14 2020
 
 
 import json
-from truck_push_lib import Allocations, Warehouses, Trucks, Suppliers, Routes, Entities
+from truck_push_lib import Allocations, Warehouses, Trucks, Suppliers, Routes, Entities, retjson
   
 # Opening JSON file 
 f = open('input_truck_push.json',) 
@@ -39,3 +39,6 @@ entity_property = [Entities(data) for data in data_entities]
 
 routes_all = [Routes(data, entity_property, supplier_all, trucks_all) for data in data_routes]
 
+#%% Extracting
+
+retJSON = retjson(routes_all)

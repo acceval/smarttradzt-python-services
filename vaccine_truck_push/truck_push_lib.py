@@ -78,25 +78,11 @@ class Suppliers:
         self.all_allocation = self.hosp_allocation + self.warehouse_allocation
         
         self.supplier_breakdown = []
-        self.supplier_breakdown_hosp_only = []
         
         for item in self.all_allocation :
             if item.get("name") in self.suppliers_supplyto:
                 # print(item.get("name"))
                 self.supplier_breakdown.append(item)
-                
-        # for item in self.hosp_allocation :
-        #     if item.get("name") in self.suppliers_supplyto:
-        #         # print(item.get("name"))
-        #         self.supplier_breakdown_hosp_only.append(item)
-                
-        # self.supplier_total_alloc_quantity = sum([data.get("quantity") for data in self.supplier_breakdown])
-        # self.supplier_allocation = [{'name':self.name,'quantity': self.supplier_total_alloc_quantity, 'zipcode': self.zipcode}]
-        # self.supplier_breakdown_df = pd.DataFrame(self.supplier_breakdown)
-        
-        # self.supplier_total_alloc_quantity_hosp_only = sum([data.get("quantity") for data in self.supplier_breakdown_hosp_only])
-        # self.supplier_breakdown_hosp_only_df = pd.DataFrame(self.supplier_breakdown_hosp_only)
-        # self.supplier_breakdown_hosp_only_df['percent'] = self.supplier_breakdown_hosp_only_df.loc[:,'quantity']*100/self.supplier_total_alloc_quantity_hosp_only
         
 class Routes:
     
@@ -109,7 +95,7 @@ class Routes:
         
         self.route_origin = self.data_route.get('origin')
         self.route_dest = [item.get('name') for item in self.data_route.get('destinations')]
-        self.route_qty = [item.get('quantity') for item in self.data_route.get('destinations')]
+        # self.route_qty = [item.get('quantity') for item in self.data_route.get('destinations')]
         self.route_final = self.data_route.get('final_destination')
         
         # Supplier - for 1 supplier
@@ -119,23 +105,17 @@ class Routes:
         self.supplier_breakdown_all = [item.supplier_breakdown for item in self.supplier_objs][self.supplier_index]
         self.supplier_breakdown_all_names = [item.get('name') for item in self.supplier_breakdown_all]
         
-        self.breakdown_route_only = []
-        for item in self.supplier_breakdown_all:
+        self.breakdown_route_only_weekly = []
+        for item in self.supplier_breakdown_all:    # There can be more hospitals, used that specified in route only
             if item.get("name") in self.route_dest:
                 # print(item.get("name"))
-                self.breakdown_route_only.append(item)
+                self.breakdown_route_only_weekly.append(item)
         
-        self.route_total_alloc_quantity = sum([data.get("quantity") for data in self.breakdown_route_only])
-        self.breakdown_route_only_df = pd.DataFrame(self.breakdown_route_only)
-        self.hosp_percent = self.breakdown_route_only_df.loc[:,'quantity']*100/self.route_total_alloc_quantity
-        
-        
-        # self.supplier_breakdown_hosp_only_df = [item.supplier_breakdown_hosp_only_df for item in self.supplier_objs][self.supplier_index]
-        # self.route_total_alloc_quantity = [item.supplier_total_alloc_quantity_hosp_only for item in self.supplier_objs][self.supplier_index]
-        # self.hosp_percent = self.supplier_breakdown_hosp_only_df['percent']
+        self.route_total_alloc_quantity = sum([data.get("quantity") for data in self.breakdown_route_only_weekly])
+        self.breakdown_route_only_weekly_df = pd.DataFrame(self.breakdown_route_only_weekly)
+        self.hosp_percent = self.breakdown_route_only_weekly_df.loc[:,'quantity']*100/self.route_total_alloc_quantity
         self.hosp_percent_col = [[item/100] for item in self.hosp_percent]
-        self.breakdown_route_hosp_names = self.breakdown_route_only_df['name'].to_list()
-        
+        self.breakdown_route_hosp_names = self.breakdown_route_only_weekly_df['name'].to_list()
         
         # Trucks
         self.trucks_obj = trucks
@@ -147,7 +127,6 @@ class Routes:
         self.truck_max_lotsize = [item.max_lotsize for item in self.trucks_obj][self.truck_index]
         self.truck_max_daily_delivery_hours = [item.max_daily_delivery_hours for item in self.trucks_obj][self.truck_index]
         
-                
         # Start datetime
         self.format_date = "%d-%m-%Y %H:%M"
         self.start_del_datetime_str = self.data_route.get('datetime_start_delivery')
@@ -166,7 +145,7 @@ class Routes:
         self.truck_daily_delivery = []
         remaining = self.route_total_alloc_quantity
         for i in range(0,len(self.date_range)):
-            print(i)
+            # print(i)
             if remaining > self.truck_max_lotsize:
                 
                 self.truck_daily_delivery.append(self.truck_max_lotsize)
@@ -176,9 +155,8 @@ class Routes:
                 remaining = remaining - remaining
         
         self.truck_daily_delivery_percent = [item/self.route_total_alloc_quantity for item in self.truck_daily_delivery]
-        self.delivery_calcd = np.round(np.dot(self.hosp_percent_col,[self.truck_daily_delivery_percent])*self.route_total_alloc_quantity)
-
-        self.delivery_calcd_df=pd.DataFrame(self.delivery_calcd, columns=self.date_range, index = self.breakdown_route_hosp_names)
+        delivery_calcd = np.round(np.dot(self.hosp_percent_col,[self.truck_daily_delivery_percent])*self.route_total_alloc_quantity)
+        self.route_daily_alloc=pd.DataFrame(delivery_calcd, columns=self.date_range, index = self.breakdown_route_hosp_names)
         
         # Extracting all entities objects and properties
         self.entity_objs = entity
@@ -188,86 +166,118 @@ class Routes:
         # Only Origin object and property
         self.origin_index =  self.entity_obj_names.index(self.route_origin)
         self.origin_entity_obj = self.entity_objs[self.origin_index]
-        
-        # Initialise start time, location, duration
-        self.start_time = self.date_range[0]
-        self.planned_time = [self.start_time]           # First entry - Start Time
-        self.planned_location = [self.route_origin]
-        self.planned_duration = ['-']
-        self.description = ['Start Time']
-        
-        # Loading at origin
-        self.entity_origin_loadingtime = self.origin_entity_obj.loading_time
-        self.planned_time.append(self.start_time + timedelta(hours=self.entity_origin_loadingtime))  # Second entry - Loading time
-        self.planned_location.append(self.route_origin)
-        self.planned_duration.append(f'{self.entity_origin_loadingtime} hr')
-        self.description.append(f'Loading Time at {self.route_origin}')
-                
         self.entity_ori_dest_names = self.origin_entity_obj.destination_names
         self.entity_ori_dest_leadtimes = self.origin_entity_obj.destination_leadtimes
         
+        self.schedules = []
+        # Iterating Daily
+        for dt in self.date_range:
+            # print(dt)
+            route_daily_alloc = self.route_daily_alloc.loc[:,dt]
+            self.route_dest_daily = route_daily_alloc[route_daily_alloc>0].index.to_list()
+            # print(self.route_dest_daily)
+            
+            if not self.route_dest_daily:
+                # print('yay')
+                pass
+            else:
                 
-        # First Destination from origin
-        self.first_dest_index = self.entity_ori_dest_names.index(self.route_dest[0])
-        self.first_dest_leadtime = self.entity_ori_dest_leadtimes[self.first_dest_index]
-        print(f" From Origin: {self.route_origin} to First Destination: {self.route_dest[0]}")
-        print(f" Route Destinations : {', '.join(self.route_dest)}")
+            
+                # Initialise start time, location, duration
+                self.start_time = dt
+                # self.start_time = self.date_range[0]
+                self.planned_time = [self.start_time]           # First entry - Start Time
+                self.planned_location = [self.route_origin]
+                self.planned_duration = ['-']
+                self.description = ['Start Time']
+            
+                # Loading at origin
+                self.entity_origin_loadingtime = self.origin_entity_obj.loading_time
+                self.planned_time.append(self.start_time + timedelta(hours=self.entity_origin_loadingtime))  # Second entry - Loading time
+                self.planned_location.append(self.route_origin)
+                self.planned_duration.append(f'{self.entity_origin_loadingtime} hr')
+                self.description.append(f'Loading Time at {self.route_origin}')
+                        
                 
-        # self.entity_origins = [item.origin for item in self.origin_entity_obj]
-        # self.entity_origin_loadingtimes = [item.loading_time for item in self.origin_entity_obj]
-        # self.entity_ori_dest_names = [item.destination_names for item in self.origin_entity_obj]
-        # self.entity_ori_dest_leadtimes = [item.destination_leadtimes for item in self.origin_entity_obj]
-        if not self.route_final:
-            self.route_names_all = [self.route_origin] + self.route_dest
-            print(f" Final Destinations : {self.route_dest[-1]}\n")
-        else:
-            self.route_names_all = [self.route_origin] + self.route_dest + [self.route_final]
-            print(f" Final Destinations : {self.route_final}\n")
+            
+                    
+                # First Destination from origin
+                
+                self.first_dest_index = self.entity_ori_dest_names.index(self.route_dest_daily[0])
+                self.first_dest_leadtime = self.entity_ori_dest_leadtimes[self.first_dest_index]
+                print(f" Origin: {self.route_origin} to First Destination: {self.route_dest_daily[0]}")
+                print(f" Routing Destinations : {', '.join(self.route_dest_daily)}")
+                    
+            
+                if not self.route_final:
+                    self.route_names_all = [self.route_origin] + self.route_dest_daily
+                    print(f" Final Destination : {self.route_dest_daily[-1]}\n")
+                else:
+                    self.route_names_all = [self.route_origin] + self.route_dest_daily + [self.route_final]
+                    print(f" Final Destination : {self.route_final}\n")
+            
+                # Route destination info
+            
+                # Calculate route time and display time
+                if len(self.route_names_all)>=2:
+                    for i in range(0,len(self.route_names_all)-1):
+                        # print(f"Delivering to Destination: {self.route_names_all[i+1]}")
+                        
+                        # Calculate lead times
+                        self.route_ori_index = self.entity_obj_names.index(self.route_names_all[i])     # getting index from entity list
+                        self.route_ori_obj = self.entity_objs[self.route_ori_index]
+                        self.route_dest_names = self.route_ori_obj.destination_names
+                        self.route_dest_leadtimes = self.route_ori_obj.destination_leadtimes
+                        self.route_dest_index = self.route_dest_names.index(self.route_names_all[i+1])
+                        self.route_dest_leadtime = self.route_ori_obj.destination_leadtimes[self.route_dest_index]
+                        
+                        self.planned_time.append(self.planned_time[-1] + timedelta(hours=self.route_dest_leadtime))  # Third entry - Travelling time
+                        self.planned_location.append(self.route_names_all[i+1])
+                        self.planned_duration.append(f'{self.route_dest_leadtime} hr')
+                        self.description.append(f'Travelling Time from {self.route_names_all[i]} to {self.route_names_all[i+1]}')
+                        
+                        
+                        # Calculate unload times
+                        self.dest_index =  self.entity_obj_names.index(self.route_names_all[i+1])
+                        self.dest_unload_time = self.entity_obj_unloading_times[self.dest_index]
+                        
+                        if self.dest_unload_time > 0:
+                            self.planned_time.append(self.planned_time[-1] + timedelta(hours=self.dest_unload_time))  # Fourth entry - Unloading time
+                            self.planned_location.append(self.route_names_all[i+1])
+                            self.planned_duration.append(f'{self.dest_unload_time} hr')
+                            self.description.append(f'Goods unloading time at {self.route_names_all[i+1]}')
+                        
+                else:
+                    pass
+                self.planned_time = [item.time() for item in self.planned_time]
+                self.daily_dict = {
+                    "time": self.planned_time, 
+                    "location": self.planned_location,
+                    "duration": self.planned_duration,
+                    "description": self.description
+                    }
+                self.table = pd.DataFrame(self.daily_dict)
+                self.table = json.loads(self.table.to_json(orient='records'))
+                self.table_final = {"date": dt.strftime("%d-%m-%Y"), "daily_schedule": self.table}
+                self.schedules.append(self.table_final)
         
-        # Route destination info
-        # self.dest_lead_times = []
-        # self.dest_unload_times_route = []
+        # For hospital daily allocated quantity
+        self.route_daily_hosp_alloc = []
         
-        # Calculate route time and display time
-        if len(self.route_names_all)>=2:
-            for i in range(0,len(self.route_names_all)-1):
-                print(f"Destinations: {self.route_names_all[i+1]}")
-                
-                # Calculate lead times
-                self.route_ori_index = self.entity_obj_names.index(self.route_names_all[i])
-                self.route_ori_obj = self.entity_objs[self.route_ori_index]
-                self.route_dest_names = self.route_ori_obj.destination_names
-                self.route_dest_leadtimes = self.route_ori_obj.destination_leadtimes
-                self.route_dest_index = self.route_ori_obj.destination_names.index(self.route_names_all[i+1])
-                self.route_dest_leadtime = self.route_ori_obj.destination_leadtimes[self.route_dest_index]
-                # self.dest_lead_times.append(self.route_dest_leadtime)
-                
-                self.planned_time.append(self.planned_time[-1] + timedelta(hours=self.route_dest_leadtime))  # Third entry - Travelling time
-                self.planned_location.append(self.route_names_all[i+1])
-                self.planned_duration.append(f'{self.route_dest_leadtime} hr')
-                self.description.append(f'Travelling Time from {self.route_names_all[i]} to {self.route_names_all[i+1]}')
-                
-                
-                # Calculate unload times
-                self.dest_index =  self.entity_obj_names.index(self.route_names_all[i+1])
-                self.dest_unload_time = self.entity_obj_unloading_times[self.dest_index]
-                # self.dest_unload_times_route.append(self.entity_obj_unloading_times[self.dest_index])
-                if self.dest_unload_time > 0:
-                    self.planned_time.append(self.planned_time[-1] + timedelta(hours=self.dest_unload_time))  # Fourth entry - Unloading time
-                    self.planned_location.append(self.route_names_all[i+1])
-                    self.planned_duration.append(f'{self.dest_unload_time} hr')
-                    self.description.append(f'Goods unloading time at {self.route_names_all[i+1]}')
-                
-        else:
-            pass
+        date_temp = [item.strftime("%d-%m-%Y") for item in self.date_range]
         
-        # # Last Destination - back to origin
-        # self.last_dest_index = self.entity_ori_dest_names.index(self.route_dest[-1])
-        # self.last_dest_leadtime = self.origin_entity_obj.destination_leadtimes[0]
+        for hosp_name in self.route_daily_alloc.index:
+            print(hosp_name)
+            quantity_temp = [item for item in self.route_daily_alloc.loc[hosp_name,:]]
+            route_daily_alloc_df = pd.DataFrame({ "date": date_temp ,"quantity": quantity_temp})
+            self.route_daily_alloc_df = json.loads(route_daily_alloc_df.to_json(orient='records'))
+            
+            self.daily_alloc = {"destination_name": hosp_name,"daily_alloc": self.route_daily_alloc_df}
+            self.route_daily_hosp_alloc.append(self.daily_alloc)
         
         # Total time
-        self.planned_completion_time = [item.strftime("%d-%m-%Y %H:%M") for item in self.planned_time]
-        self.total_time = self.entity_origin_loadingtime + self.first_dest_leadtime
+
+        # self.total_time = self.entity_origin_loadingtime + self.first_dest_leadtime
 
         
 class Entities:
@@ -282,5 +292,21 @@ class Entities:
         self.destination_names = [item.get('destination') for item in self.destination_info]
         self.destination_leadtimes = [item.get('leadtime') for item in self.destination_info]
         self.destination_distance = [item.get('distance') for item in self.destination_info]
-        # self.entities = self.data.get('entity_property')
-        # self.name = self.data.get('name')
+
+def retjson(routes_all):
+    
+    keys_to_extract = [
+    'route_daily_hosp_alloc',
+    'route_name',
+    'route_truck_name',
+    'schedules',
+    ]
+    
+    routes_out =[{key: hosp.__dict__[key] for key in keys_to_extract} for hosp in routes_all]
+    
+    retJSON = {
+    "routes": routes_out,
+    # "warehouses": warehouse_out,
+    # "suppliers": supplier_out,
+            }
+    return retJSON
