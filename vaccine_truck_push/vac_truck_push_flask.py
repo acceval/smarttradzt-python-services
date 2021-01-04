@@ -9,6 +9,7 @@ Created on Mon Mar 23 09:31:30 2020
 from flask import Flask, request
 from flask_restful import Resource, Api
 import sys
+import requests
 import pandas as pd
 from truck_push_lib import Allocations, Warehouses, Trucks, Suppliers, Routes, Entities, retjson
 
@@ -46,11 +47,16 @@ class drp_push(Resource):
         
         data_suppliers = data_json.get('suppliers')
         
-        data_entities = data_json.get('entity_properties')
+        # data_entities = data_json2.get('entity_properties')
         
         data_trucks = data_json.get('trucks')
         
         data_routes = data_json.get('routes')
+        
+        # API
+        response = requests.get("https://office.smarttradzt.com:8001/buy-ecommerce-service/lead-time/delivery/findAll/202012120000195")
+        
+        data_entities = response.json()
         
         #%% 
         allocation_all = [Allocations(data) for data in data_allocation]
@@ -64,9 +70,9 @@ class drp_push(Resource):
         entity_property = [Entities(data) for data in data_entities]
         
         routes_all = [Routes(data, entity_property, supplier_all, trucks_all) for data in data_routes]
-
-
-        #%% Extract data
+        
+        #%% Extracting
+        
         retJSON = retjson(routes_all)
         
         return retJSON
