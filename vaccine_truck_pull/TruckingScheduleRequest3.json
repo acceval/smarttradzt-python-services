@@ -1,0 +1,1635 @@
+{
+  "trucks": [
+    {
+      "name": "Truck 1"
+    },
+    {
+      "name": "Truck 2"
+    }
+  ],
+  "hospitals": [
+    {
+      "name": "Hospital Selayang",
+      "po_quantity": 6,
+      "safety_stock": 3,
+      "maximum_inventory": 15,
+      "initial_ending_inventory": 5,
+      "inventory_uom": "boxes",
+      "daily_consumption_plan": [
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 1,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "01-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 2,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "02-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 3,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "03-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 4,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "04-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 5,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "05-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 6,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "06-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 7,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "07-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 8,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "08-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 9,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "09-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 10,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "10-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 11,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "11-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 12,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "12-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 13,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "13-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 14,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "14-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 15,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "15-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 16,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "16-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 17,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "17-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 18,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "18-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "19-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 20,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "20-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 21,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "21-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 22,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "22-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 23,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "23-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 24,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "24-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 25,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "25-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 26,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "26-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 27,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "27-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 28,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "28-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 29,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "29-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 30,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "30-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 31,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "31-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        }
+      ]
+    },
+    {
+      "name": "Hospital Selayang2",
+      "po_quantity": 6,
+      "safety_stock": 3,
+      "maximum_inventory": 15,
+      "initial_ending_inventory": 5,
+      "inventory_uom": "boxes",
+      "daily_consumption_plan": [
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 1,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "01-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 2,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "02-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 3,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "03-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 4,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "04-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 5,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "05-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 6,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "06-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 7,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "07-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 8,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "08-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 9,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "09-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 10,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "10-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 11,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "11-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 12,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "12-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 13,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "13-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 14,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "14-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 15,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "15-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 16,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "16-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 17,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "17-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 18,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "18-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "19-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 20,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "20-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 21,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "21-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 22,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "22-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 23,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "23-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 24,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "24-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 25,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "25-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 26,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "26-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 27,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "27-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 28,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "28-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 29,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "29-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 30,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "30-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 31,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "31-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        }
+      ]
+    },
+    {
+      "name": "Hospital Selayang3",
+      "po_quantity": 6,
+      "safety_stock": 3,
+      "maximum_inventory": 15,
+      "initial_ending_inventory": 5,
+      "inventory_uom": "boxes",
+      "daily_consumption_plan": [
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 1,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "01-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 2,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "02-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 3,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "03-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 4,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "04-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 5,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "05-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 6,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "06-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 7,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "07-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 8,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "08-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 9,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "09-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 10,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "10-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 11,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "11-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 12,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "12-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 13,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "13-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 14,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "14-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 15,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "15-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 16,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "16-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 17,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "17-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 18,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "18-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "19-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 20,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "20-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 21,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "21-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 22,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "22-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 23,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "23-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 24,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "24-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 25,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "25-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 26,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "26-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 27,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "27-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 28,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "28-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 29,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "29-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 30,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "30-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 31,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "31-12-2020",
+          "consumption": 0,
+          "outbound": 0
+        }
+      ]
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "name",
+      "vaccine_name": "vaccine_name",
+      "safety_stock": 500,
+      "maximum_inventory": 2500,
+      "initial_ending_inventory": 0,
+      "inventory_uom": "boxes",
+      "daily_replenishment_after_quarantine": [
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 1,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "01-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 2,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "02-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 3,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "03-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 4,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "04-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 5,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "05-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 6,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "06-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 7,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "07-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 8,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "08-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 9,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "09-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 10,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "10-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 11,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "11-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 12,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "12-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 13,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "13-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 14,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "14-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 15,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "15-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 16,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "16-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 17,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "17-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 18,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "18-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 19,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "19-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 20,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "20-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 21,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "21-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 22,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "22-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 23,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "23-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 24,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "24-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 25,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "25-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 26,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "26-12-2020",
+          "quantity": 500
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 27,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "27-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 28,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "28-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 29,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "29-12-2020",
+          "quantity": 500
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 30,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "30-12-2020",
+          "quantity": 0
+        },
+        {
+          "dateDay": {
+            "year": 2020,
+            "month": 12,
+            "day": 31,
+            "hour": 0,
+            "minute": 0,
+            "second": 0
+          },
+          "day": "31-12-2020",
+          "quantity": 0
+        }
+      ]
+    }
+  ]
+}

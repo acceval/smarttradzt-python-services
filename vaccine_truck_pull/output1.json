@@ -1,0 +1,366 @@
+{
+    "hospitals": [
+        {
+            "name": "Hospital Sungai Buloh",
+            "table_final": [
+                {
+                    "day": "22-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 7,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "23-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 8,
+                    "replenishment_initial": 6,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "24-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "25-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 7,
+                    "replenishment_initial": 6,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "26-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 8,
+                    "replenishment_initial": 6,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "27-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 6,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "28-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 9,
+                    "replenishment_initial": 6,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                }
+            ]
+        },
+        {
+            "name": "Hospital Selayang",
+            "table_final": [
+                {
+                    "day": "22-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 5,
+                    "replenishment_initial": 4,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "23-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 5,
+                    "replenishment_initial": 4,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "24-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "25-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 4,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "26-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 6,
+                    "replenishment_initial": 4,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "27-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 5,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "28-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 6,
+                    "replenishment_initial": 4,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 0,
+                    "replenishment_final": 0
+                }
+            ]
+        },
+        {
+            "name": "Hospital Ampang",
+            "table_final": [
+                {
+                    "day": "22-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 4,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "23-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 2,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 2,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "24-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 5,
+                    "replenishment_initial": 5,
+                    "truck_count_final": 1,
+                    "proj_end_inv_final": 5,
+                    "replenishment_final": 5
+                },
+                {
+                    "day": "25-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 4,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "26-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 4,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 4,
+                    "replenishment_final": 0
+                },
+                {
+                    "day": "27-12-2020",
+                    "truck_count_initial": 0,
+                    "proj_end_inv_initial": 3,
+                    "replenishment_initial": 0,
+                    "truck_count_final": 1,
+                    "proj_end_inv_final": 8,
+                    "replenishment_final": 5
+                },
+                {
+                    "day": "28-12-2020",
+                    "truck_count_initial": 1,
+                    "proj_end_inv_initial": 6,
+                    "replenishment_initial": 5,
+                    "truck_count_final": 0,
+                    "proj_end_inv_final": 6,
+                    "replenishment_final": 0
+                }
+            ]
+        }
+    ],
+    "suppliers": [
+        {
+            "name": "Pharmaniaga Shah Alam",
+            "table_final": [
+                {
+                    "day": "22-12-2020",
+                    "total_truck_count_initial": 1,
+                    "total_demand_initial": 4,
+                    "proj_end_inv_initial": 21,
+                    "total_truck_count_final": 1,
+                    "total_demand_final ": 4,
+                    "proj_end_inv_final": 21
+                },
+                {
+                    "day": "23-12-2020",
+                    "total_truck_count_initial": 2,
+                    "total_demand_initial": 10,
+                    "proj_end_inv_initial": 11,
+                    "total_truck_count_final": 2,
+                    "total_demand_final ": 10,
+                    "proj_end_inv_final": 11
+                },
+                {
+                    "day": "24-12-2020",
+                    "total_truck_count_initial": 1,
+                    "total_demand_initial": 5,
+                    "proj_end_inv_initial": 6,
+                    "total_truck_count_final": 1,
+                    "total_demand_final ": 5,
+                    "proj_end_inv_final": 6
+                },
+                {
+                    "day": "25-12-2020",
+                    "total_truck_count_initial": 2,
+                    "total_demand_initial": 10,
+                    "proj_end_inv_initial": -4,
+                    "total_truck_count_final": 2,
+                    "total_demand_final ": 10,
+                    "proj_end_inv_final": -4
+                },
+                {
+                    "day": "26-12-2020",
+                    "total_truck_count_initial": 2,
+                    "total_demand_initial": 10,
+                    "proj_end_inv_initial": 56,
+                    "total_truck_count_final": 2,
+                    "total_demand_final ": 10,
+                    "proj_end_inv_final": 56
+                },
+                {
+                    "day": "27-12-2020",
+                    "total_truck_count_initial": 0,
+                    "total_demand_initial": 0,
+                    "proj_end_inv_initial": 56,
+                    "total_truck_count_final": 1,
+                    "total_demand_final ": 5,
+                    "proj_end_inv_final": 51
+                },
+                {
+                    "day": "28-12-2020",
+                    "total_truck_count_initial": 3,
+                    "total_demand_initial": 15,
+                    "proj_end_inv_initial": 41,
+                    "total_truck_count_final": 2,
+                    "total_demand_final ": 10,
+                    "proj_end_inv_final": 41
+                }
+            ],
+            "truck_sched_initial": [
+                {
+                    "day": "22-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": "Truck 1",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "23-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "24-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": 0,
+                    "Hospital Ampang": "Truck 1"
+                },
+                {
+                    "day": "25-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "26-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "27-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": 0,
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "28-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": "Unavailable"
+                }
+            ],
+            "truck_sched_final": [
+                {
+                    "day": "22-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": "Truck 1",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "23-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "24-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": 0,
+                    "Hospital Ampang": "Truck 1"
+                },
+                {
+                    "day": "25-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "26-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                },
+                {
+                    "day": "27-12-2020",
+                    "Hospital Sungai Buloh": 0,
+                    "Hospital Selayang": 0,
+                    "Hospital Ampang": "Truck 1"
+                },
+                {
+                    "day": "28-12-2020",
+                    "Hospital Sungai Buloh": "Truck 1",
+                    "Hospital Selayang": "Truck 2",
+                    "Hospital Ampang": 0
+                }
+            ]
+        }
+    ]
+}

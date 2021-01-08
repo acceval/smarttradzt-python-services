@@ -1,0 +1,36 @@
+{
+    "monthly_allocation":[
+        {
+            "vaccine_name" : "Pfizer Covid-19 Vaccine",
+            "allocation_uom" : "doses",
+            "from" : "Germany",
+            "to" : "Malaysia",
+            "allocation":[
+                {
+                    "month":"Jan-2021",
+                    "quantity": 341250
+                },
+                {
+                    "month":"Feb-2021",
+                    "quantity": 458250
+                }
+            ]
+        },
+        {
+            "vaccine_name" : "Pfizer",
+            "allocation_uom" : "doses",
+            "from" : "Germany",
+            "to" : "UK",
+            "allocation":[
+                {
+                    "month":"Jan-2021",
+                    "quantity": 1438125
+                },
+                {
+                    "month":"Feb-2021",
+                    "quantity": 1384500
+                }
+            ]
+        }
+    ]
+}

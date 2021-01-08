@@ -1,0 +1,229 @@
+{
+    "trucks" : [
+        {
+            "name" : "Truck 1"
+        }
+    ],
+    "hospitals" : [
+        {
+            "name" : "Hospital Sungai Buloh",
+            "po_quantity" : 6,
+            "safety_stock" : 3,
+            "maximum_inventory" : 20,
+            "initial_ending_inventory": 5,
+            "inventory_uom" : "boxes",
+            "daily_consumption_plan": [
+                {
+                    "day":"22-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"23-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"24-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"25-12-2020",
+                    "outbound": 5,
+                    "consumption": 0
+                },
+                {
+                    "day":"26-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"27-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"28-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"29-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"30-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                }
+                
+
+            ]
+
+        },
+        {
+            "name" : "Hospital Selayang",
+            "po_quantity" : 6,
+            "safety_stock" : 3,
+            "maximum_inventory" : 15,
+            "initial_ending_inventory": 4,
+            "inventory_uom" : "boxes",
+            "daily_consumption_plan": [
+                {
+                    "day":"22-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"23-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"24-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"25-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"26-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"27-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"28-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"29-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"30-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                }
+            ]
+
+        },
+        {
+            "name" : "Hospital Ampang",
+            "po_quantity" : 5,
+            "safety_stock" : 2,
+            "maximum_inventory" : 10,
+            "initial_ending_inventory": 3,
+            "inventory_uom" : "boxes",
+            "daily_consumption_plan": [
+                {
+                    "day":"22-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"23-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"24-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"25-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"26-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"27-12-2020",
+                    "outbound": 0,
+                    "consumption": 1
+                },
+                {
+                    "day":"28-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"29-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                },
+                {
+                    "day":"30-12-2020",
+                    "outbound": 0,
+                    "consumption": 0
+                }
+                
+
+            ]
+
+        }
+    ],
+    "suppliers": [
+        {
+            "name" : "Pharmaniaga Shah Alam",
+            "vaccine_name" : "Pfizer",
+            "safety_stock" : 0,
+            "maximum_inventory" : 100,
+            "inventory_uom" : "boxes",
+            "initial_ending_inventory": 20,
+            "daily_replenishment_after_quarantine": [
+                {
+                    "day":"22-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"23-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"24-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"25-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"26-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"27-12-2020",
+                    "quantity": 70
+                },
+                {
+                    "day":"28-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"29-12-2020",
+                    "quantity": 0
+                },
+                {
+                    "day":"30-12-2020",
+                    "quantity": 0
+                }
+            ]
+        }
+    ]
+}
