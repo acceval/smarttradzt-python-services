@@ -27,8 +27,15 @@ DRP/others/
 DRP_v2/others/
 SDBal/others/
 WS_mrepc/others/
+WS_mrepc/others_v2/
+WS_specialchem/others/
+WS_specialchem/scraped_by_company/
+WS_specialchem/scraped/
+WS_specialchem/.pylint.d/
+WS_specialchem/db.ini
 chromedriver.exe
-
+vaccine_supdemand/
+vaccine_truck_push/previous
 # DRP/my_class.py
 # DRP/test.py
 DRP/~$demand_data.xlsx

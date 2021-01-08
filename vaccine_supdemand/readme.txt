@@ -1,1 +1,1 @@
-This code is to scrape specialchem website.
+This folder if for vaccine supply and demand.

@@ -29,26 +29,17 @@ import requests
 from bs4 import BeautifulSoup
 
 from lib_scrape import append_df_to_excel
+import configparser
 
 
-
-#%% Set URL
-# login = 'james.ang@acceval-intl.com'
-login = 'james.ang@smarttradzt.com'
-pw = 'J@mes123'
-
-login_page = 'https://omnexus.specialchem.com/login'
-
-# urls = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='A')
-
-#%% Linkedin: Set Driver and open webpage
+#%% Set Driver and open webpage
 print('\nMREPC: Open URL...')
 chrome_driver = r'C:\Users\User\Documents\ghub_acceval\smarttradzt-python-services\chromedriver.exe'
 
 from selenium.webdriver.chrome.options import Options
 
 options = Options()
-options.headless = True#False
+options.headless = False
 
 if options.headless == True:
     print ("Headless Chrome Initialized on Linux")
@@ -59,6 +50,19 @@ else:
 # options.add_argument("--window-size=1920,1080");
 options.add_argument("--start-maximized");
 
+
+#%% Set URL and login
+input_file = 'input_comp.xlsx'
+config = configparser.ConfigParser()
+config.read('db.ini')
+
+name = ['ummi','sofea','jones', 'rina', 'james1','james2']
+selection = pd.read_excel(input_file, sheet_name='Sheet1', usecols='D', skiprows=14, nrows=1).iloc[0,0]
+
+login = config[name[selection]]['user']
+pw = config[name[selection]]['passwd']
+
+login_page = "https://omnexus.specialchem.com/login"
 #%% login
 driver = webdriver.Chrome(chrome_driver, options=options)
 driver.get(login_page)
@@ -83,7 +87,6 @@ product_detail = []
 product_properties = []
 
 # product_type = []
-
 # contact_person = []
 # e_mail = []
 # contact_number = []
@@ -97,10 +100,11 @@ count= 0
 page = 1
 
 #%% Create new workbook
+
 wb = openpyxl.Workbook()
 
 # Save created workbook at same path where .py file exist
-filename = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='E',nrows=1).iloc[0,0] +".xlsx"
+filename = pd.read_excel(input_file, sheet_name='Sheet1', usecols='E',nrows=1).iloc[0,0] +".xlsx"
 
 wb.save(filename)
 
@@ -108,7 +112,7 @@ writer = pd.ExcelWriter(filename, engine = 'xlsxwriter')
 
 #%% 
 
-urls = pd.read_excel('input.xlsx', sheet_name='Sheet1', usecols='A')
+urls = pd.read_excel(input_file, sheet_name='Sheet1', usecols='A')
 url = urls.iloc[0,0]
 # url = 'https://omnexus.specialchem.com/selectors/c-thermoplastics-ionomer'
 time.sleep(2)
@@ -129,22 +133,33 @@ for i in range(0,len(containers)):
     container = containers[i].find_element_by_class_name('col.w60.zone2.small-w100.medium-w100')
     product_urls.append(container.find_element_by_tag_name('a').get_attribute('href'))
 
+product_urls = list(filter(None, product_urls))
 
-# Scrape individual products
 
-for prod_url in product_urls:
-    
+#%% Scrape individual products
+start_from = pd.read_excel(input_file, sheet_name='Sheet1', usecols='D', skiprows=15, nrows=1).iloc[0,0]
+# start_from =242
+
+for prod_url in product_urls[start_from:]:
+    print(prod_url)
     driver.get(prod_url)
     
-    # Product Name
-    prod_name = driver.find_element_by_class_name('foro.c9').text
-    print('\n')
-    print('Scraping ' + prod_name +'...')
+    WebDriverWait(driver,5).until(EC.presence_of_all_elements_located((By.CLASS_NAME,'foro.c9')))
     
 # =============================================================================
-#     # product_name.append(prod_name)
+#     # Product Name
 # =============================================================================
+    prod_name = driver.find_element_by_class_name('foro.c9').text
+    print('\n')
+    print('Scraping ' + prod_name + f'...index: {product_urls.index(prod_url)}')        
+    
     prod_name_df = pd.DataFrame({'Product Name': [prod_name]})
+        
+# =============================================================================
+#     # Supplier Name
+# =============================================================================
+    supplier_name = driver.find_element_by_class_name('box_sous_titre').text
+    supplier_name_df = pd.DataFrame({'Supplier' : [supplier_name.split(' | ')[-1].split('by ')[-1]]})
     
 # =============================================================================
 #     # Product Description
@@ -152,8 +167,7 @@ for prod_url in product_urls:
     prod_desc = driver.find_element_by_class_name('box_comments.box_limitable.limited').text
     
     # product_description.append(driver.find_element_by_class_name('box_comments.box_limitable.limited').text)
-    prod_desc_df = pd.DataFrame({'Product Description': [prod_desc]})
-    
+    prod_desc_df = pd.DataFrame({'Product Description': [prod_desc]})    
     
 # =============================================================================
 #     # Product Details
@@ -172,7 +186,10 @@ for prod_url in product_urls:
     pdt_df = pd.DataFrame({'Product Details Header': pdt_cat, 'Product Details Data':pdt_val})
     
     # Append to excel file
+    prod_name = prod_name.translate({ord('/'): '_'})
+    # prod_name = prod_name.translate({ord('-'): ''})
     append_df_to_excel(filename, prod_name_df, sheet_name = f'{prod_name}')
+    append_df_to_excel(filename, supplier_name_df, sheet_name = f'{prod_name}')
     append_df_to_excel(filename, prod_desc_df, sheet_name = f'{prod_name}')
     append_df_to_excel(filename, pdt_df, sheet_name = f'{prod_name}')
     
@@ -200,6 +217,7 @@ for prod_url in product_urls:
         
         # Initialisations
         ppt_df = {}
+        ''
         i = 0
         
         # Scraping Individual Property tables
@@ -210,11 +228,12 @@ for prod_url in product_urls:
             pp_t1_allheaders = pp_t1[0].find_elements_by_class_name('row.w100.h100')
             pp_t1_heading1 = pp_t1_allheaders[0].find_element_by_class_name('col.w70.medium-w66.fs18.small-w100.pt15').text
             pp_t1_heading2 = pp_t1_allheaders[0].find_element_by_class_name('col.w30.medium-w33.c13.small-hidden.pt15').text
-            pp_t1_heading3 = pp_t1_allheaders[1].find_element_by_class_name('col.w60.c13.medium-hidden.small-hidden.pt15').text
-            pp_t1_heading4 =pp_t1_allheaders[1].find_element_by_class_name('col.w30.c13.medium-hidden.small-hidden.pt15').text
+            if len(pp_t1_allheaders) >= 2: # some table only have 2 headers
+                pp_t1_heading3 = pp_t1_allheaders[1].find_element_by_class_name('col.w60.c13.medium-hidden.small-hidden.pt15').text
+                pp_t1_heading4 = pp_t1_allheaders[1].find_element_by_class_name('col.w30.c13.medium-hidden.small-hidden.pt15').text
             
             # Scrape Entries in pp table 1
-            pp_t1_en = table.find_element_by_class_name('container_properties')    
+            pp_t1_en = table.find_element_by_class_name('container_properties')
             pp_t1_entries = pp_t1_en.find_elements_by_class_name('row.tds.pr')
             
             h1_data = []
@@ -226,21 +245,32 @@ for prod_url in product_urls:
                 # print('\n\t\t' + item.text)
                 h1_data.append(item.find_element_by_class_name('col.w70.medium-w66.small-w100').text)
                 h2_data.append(item.find_element_by_class_name('col.w30.medium-w33.small-w100.value-unit').text)
-                h3_data.append(item.find_element_by_class_name('col.large-w70.medium-inbl.small-inbl.test-condition').text)
-                h4_data.append(item.find_element_by_class_name('col.large-w30.medium-inbl.small-inbl.test-method').text)
+                if len(pp_t1_allheaders) >= 2:
+                    h3_data.append(item.find_element_by_class_name('col.large-w70.medium-inbl.small-inbl.test-condition').text)
+                    h4_data.append(item.find_element_by_class_name('col.large-w30.medium-inbl.small-inbl.test-method').text)
+            
+            if len(pp_t1_allheaders) >= 2:
                 
-            ppt_df[i] = pd.DataFrame({
+                ppt_df[i] = pd.DataFrame({
+                    pp_t1_heading1: h1_data,
+                    pp_t1_heading2: h2_data,
+                    pp_t1_heading3: h3_data,
+                    pp_t1_heading4: h4_data,
+                    })
+            else:
+                ppt_df[i] = pd.DataFrame({
                 pp_t1_heading1: h1_data,
                 pp_t1_heading2: h2_data,
-                pp_t1_heading3: h3_data,
-                pp_t1_heading4: h4_data,
+                # pp_t1_heading3: h3_data,
+                # pp_t1_heading4: h4_data,
                 })
             # ppt_df[i].head()
-            
+            # ppt_df[i]['Test Condition'].str.replace('','')
+            ppt_df[i]=ppt_df[i].replace('','',regex=True)
             # Append to excel file
             append_df_to_excel(filename, ppt_df[i], sheet_name=f'{prod_name}')
             i += 1
-    
+
 # =============================================================================
 #     # Product Guidelines
 # =============================================================================

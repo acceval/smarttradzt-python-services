@@ -36,3 +36,8 @@ keys_to_extract = [
 hosp_out =[{key: hosp.__dict__[key] for key in keys_to_extract} for hosp in hospitals_all]
 warehouse_out =[{key: wh.__dict__[key] for key in keys_to_extract} for wh in warehouse_all]
 supplier_out = [{key: supp.__dict__[key] for key in keys_to_extract} for supp in supplier_all]
+
+retJSON = {"hospitals": hosp_out,
+            "warehouses": warehouse_out,
+            "suppliers": supplier_out,
+            }
