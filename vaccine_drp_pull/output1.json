@@ -1,0 +1,590 @@
+{
+    "hospitals": [
+        {
+            "name": "Hospital Sungai Buloh",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 30,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 15,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 20,
+                    "planned_receipts": 20,
+                    "planned_orders": 20
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 10,
+                    "planned_receipts": 10,
+                    "planned_orders": 10
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 30,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                }
+            ]
+        },
+        {
+            "name": "Hospital Selayang",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 30,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 15,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 20,
+                    "planned_receipts": 20,
+                    "planned_orders": 20
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 10,
+                    "planned_receipts": 10,
+                    "planned_orders": 10
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 30,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                }
+            ]
+        },
+        {
+            "name": "Hospital Ampang",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 30,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 15,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 20,
+                    "planned_receipts": 20,
+                    "planned_orders": 20
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 10,
+                    "planned_receipts": 10,
+                    "planned_orders": 10
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 30,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                }
+            ]
+        },
+        {
+            "name": "Penang General Hospital",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 30,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 15,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 20,
+                    "planned_receipts": 20,
+                    "planned_orders": 20
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 10,
+                    "planned_receipts": 10,
+                    "planned_orders": 10
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 30,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                }
+            ]
+        },
+        {
+            "name": "Sultanah Bahiyah Hospital - Kedah",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 30,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 15,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 20,
+                    "planned_receipts": 20,
+                    "planned_orders": 20
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 10,
+                    "planned_receipts": 10,
+                    "planned_orders": 10
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 5,
+                    "net_requirements_safety": 30,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 25,
+                    "planned_receipts": 30,
+                    "planned_orders": 30
+                }
+            ]
+        }
+    ],
+    "warehouses": [
+        {
+            "name": "Juru warehouse",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 80,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 80,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 80,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 80,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 40,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 50
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 20,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 60
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 45,
+                    "planned_receipts": 50,
+                    "planned_orders": 60
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 55,
+                    "planned_receipts": 60,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "net_requirements_safety": 55,
+                    "planned_receipts": 60,
+                    "planned_orders": 0
+                }
+            ]
+        }
+    ],
+    "suppliers": [
+        {
+            "name": "Pharmaniaga Shah Alam",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 540,
+                    "planned_receipts": 270
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 540,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 540,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 540,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 540,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 430,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 340,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 190,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 100,
+                    "planned_receipts": 0
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 10,
+                    "planned_receipts": 0
+                }
+            ]
+        }
+    ],
+    "dryice_suppliers": [
+        {
+            "name": "Dry Ice Supplier",
+            "table_final": [
+                {
+                    "week": "22-12-2020",
+                    "proj_end_inv": 3752,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 12500
+                },
+                {
+                    "week": "29-12-2020",
+                    "proj_end_inv": 104,
+                    "net_requirements_safety": 0,
+                    "planned_receipts": 0,
+                    "planned_orders": 12000
+                },
+                {
+                    "week": "05-01-2020",
+                    "proj_end_inv": 356,
+                    "net_requirements_safety": 12243,
+                    "planned_receipts": 12500,
+                    "planned_orders": 12500
+                },
+                {
+                    "week": "12-01-2020",
+                    "proj_end_inv": 108,
+                    "net_requirements_safety": 11991,
+                    "planned_receipts": 12000,
+                    "planned_orders": 9500
+                },
+                {
+                    "week": "19-01-2020",
+                    "proj_end_inv": 360,
+                    "net_requirements_safety": 12239,
+                    "planned_receipts": 12500,
+                    "planned_orders": 8000
+                },
+                {
+                    "week": "26-01-2020",
+                    "proj_end_inv": 107,
+                    "net_requirements_safety": 9492,
+                    "planned_receipts": 9500,
+                    "planned_orders": 4500
+                },
+                {
+                    "week": "02-02-2020",
+                    "proj_end_inv": 395,
+                    "net_requirements_safety": 7704,
+                    "planned_receipts": 8000,
+                    "planned_orders": 2000
+                },
+                {
+                    "week": "09-02-2020",
+                    "proj_end_inv": 585,
+                    "net_requirements_safety": 4014,
+                    "planned_receipts": 4500,
+                    "planned_orders": 500
+                },
+                {
+                    "week": "16-02-2020",
+                    "proj_end_inv": 317,
+                    "net_requirements_safety": 1783,
+                    "planned_receipts": 2000,
+                    "planned_orders": 0
+                },
+                {
+                    "week": "23-02-2020",
+                    "proj_end_inv": 590,
+                    "net_requirements_safety": 9,
+                    "planned_receipts": 500,
+                    "planned_orders": 0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,482 @@
+{
+    "hospitals" : [
+        {
+            "name" : "Hospital Sungai Buloh",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "days",
+            "supply_lot_size" : 6,
+            "safety_stock" : 3,
+            "maximum_inventory" : 20,
+            "initial_ending_inventory": 3,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "demand": 4,
+                    "confirmed_order": 6
+                },
+                {
+                    "week":"29-12-2020",
+                    "demand": 9,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "demand": 8,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "demand": 4,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "demand": 9,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "demand": 4,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "demand": 8,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "demand": 4,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "demand": 9,
+                    "confirmed_order": 0
+                }
+
+            ]
+
+        },
+        {
+            "name" : "Hospital Selayang",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "days",
+            "supply_lot_size" : 6,
+            "safety_stock" : 3,
+            "maximum_inventory" : 15,
+            "initial_ending_inventory": 7,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"29-12-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "demand": 3,
+                    "confirmed_order": 0
+                }
+
+            ]
+
+        },
+        {
+            "name" : "Hospital Ampang",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "days",
+            "supply_lot_size" : 5,
+            "safety_stock" : 2,
+            "maximum_inventory" : 10,
+            "initial_ending_inventory": 3,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"29-12-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                }
+
+            ]
+
+        },
+        {
+            "name" : "Penang General Hospital",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "days",
+            "supply_lot_size" : 5,
+            "safety_stock" : 1,
+            "maximum_inventory" : 10,
+            "initial_ending_inventory": 2,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"29-12-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "demand": 2,
+                    "confirmed_order": 0
+                }
+
+            ]
+
+        },
+        {
+            "name" : "Sultanah Bahiyah Hospital - Kedah",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "days",
+            "supply_lot_size" : 5,
+            "safety_stock" : 1,
+            "maximum_inventory" : 10,
+            "initial_ending_inventory": 2,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"29-12-2020",
+                    "demand": 0,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "demand": 0,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "demand": 1,
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "demand": 0,
+                    "confirmed_order": 0
+                }
+
+            ]
+
+        }
+    ],
+    "warehouses": [
+        {
+            "name" : "Juru warehouse",
+            "supply_lead_time" : 2,
+            "lead_time_UOM": "weeks",
+            "supply_lot_size" : 7,
+            "safety_stock" : 3,
+            "maximum_inventory" : 30,
+            "initial_ending_inventory": 3,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "confirmed_order": 7
+                },
+                {
+                    "week":"29-12-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "confirmed_order": 0
+                }
+
+            ]
+        }
+    ],
+    "suppliers": [
+        {
+            "name" : "Pharmaniaga Shah Alam",
+            "quarantine_lead_time" : 6,
+            "quarantine_lead_time_UOM": "days",
+            "safety_stock" : 10,
+            "maximum_inventory" : 200,
+            "initial_ending_inventory": 5,
+            "supply_quarantine": [
+                {
+                    "week":"22-12-2020",
+                    "confirmed_order": 29
+                },
+                {
+                    "week":"29-12-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"05-01-2020",
+                    "confirmed_order": 29
+                },
+                {
+                    "week":"12-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "confirmed_order": 29
+                },
+                {
+                    "week":"26-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "confirmed_order": 29
+                },
+                {
+                    "week":"09-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "confirmed_order": 29
+                },
+                {
+                    "week":"23-02-2020",
+                    "confirmed_order": 0
+                }
+
+            ]
+        }
+    ],
+    "dryice_suppliers": [
+        {
+            "name" : "Dry Ice Supplier",
+            "sourcing_lead_time" : 14,
+            "sourcing_lead_time_UOM": "days",
+            "sourcing_lot_size" : 100,
+            "dry_ice_weight_perbox": 22.68,
+            "dry_ice_UOM": "kg",
+            "safety_stock" : 50,
+            "maximum_inventory" : 500,
+            "initial_ending_inventory": 200,
+            "weekly_allocation_plan": [
+                {
+                    "week":"22-12-2020",
+                    "confirmed_order": 500
+                },
+                {
+                    "week":"29-12-2020",
+                    "confirmed_order": 100
+                },
+                {
+                    "week":"05-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"12-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"19-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"26-01-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"02-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"09-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"16-02-2020",
+                    "confirmed_order": 0
+                },
+                {
+                    "week":"23-02-2020",
+                    "confirmed_order": 0
+                }
+
+            ]
+        }
+    ]
+}

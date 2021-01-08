@@ -1,0 +1,579 @@
+{
+    "hospitals": [
+        {
+            "lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 6.4,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Sungai Buloh Hospital",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        },
+        {
+            "lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 3,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Selayang Hospital",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        },
+        {
+            "lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 3,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 3,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Ampang Hospital",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        },
+        {
+            "lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 1.5,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Penang General Hospital",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        },
+        {
+            "lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 0.8,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Sultanah Bahiyah Hospital",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        }
+    ],
+    "warehouses": [
+        {
+            "lead_time_UOM": "weeks",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 0,
+                    "confirmed_order": 30,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 10,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Juru Warehouse",
+            "supply_lead_time": 2,
+            "supply_lot_size": 10,
+            "safety_stock": 5,
+            "maximum_inventory": 69,
+            "initial_ending_inventory": 30
+        }
+    ],
+    "suppliers": [
+        {
+            "quarantine_lead_time_UOM": "days",
+            "supply_quarantine": [
+                {
+                    "demand": 0,
+                    "confirmed_order": 270,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Pharmaniaga Shah Alam",
+            "quarantine_lead_time": 6,
+            "safety_stock": 30,
+            "maximum_inventory": 900,
+            "initial_ending_inventory": 270
+        }
+    ],
+    "dryice_suppliers": [
+        {
+            "sourcing_lead_time_UOM": "days",
+            "weekly_allocation_plan": [
+                {
+                    "demand": 0,
+                    "confirmed_order": 8000,
+                    "week": "04-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 8600,
+                    "week": "11-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "18-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "25-01-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-02-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "01-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "08-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "15-03-2021"
+                },
+                {
+                    "demand": 0,
+                    "confirmed_order": 0,
+                    "week": "22-03-2021"
+                }
+            ],
+            "name": "Dry Ice Supplier",
+            "sourcing_lead_time": 14,
+            "sourcing_lot_size": 500,
+            "dry_ice_weight_perbox": 22.68,
+            "dry_ice_UOM": "kg",
+            "safety_stock": 100,
+            "maximum_inventory": 8000,
+            "initial_ending_inventory": 8000
+        }
+    ]
+}

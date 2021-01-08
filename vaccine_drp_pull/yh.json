@@ -1,0 +1,238 @@
+{
+	"hospitals" : [
+		{
+			"name" : "Sungai Buloh",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemand" : [
+				{
+					"demandFrom" : "Sungai Buloh",
+					"forecastPeriod" : [
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+					]
+				}
+			]
+		},
+		{
+			"name" : "Selayang",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemand" : [
+				{
+					"demandFrom" : "Selayang",
+					"forecastPeriod" : [
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+					]
+				}
+			]
+		},
+		{
+			"name" : "Penang General Hospital",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemand" : [
+				{
+					"demandFrom" : "Selayang",
+					"forecastPeriod" : [
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+					]
+				}
+			]
+		},
+		{
+			"name" : "Sultanah Bahiyah Hospital - Kedah",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemand" : [
+				{
+					"demandFrom" : "Selayang",
+					"forecastPeriod" : [
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+						{
+							"week": "15-12-2020",
+							"demand" : 0,
+						},
+					]
+				}
+			]
+		},
+	],
+	"warehouse" : [
+		{
+			"name" : "Juru Warehouse",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemandSource" : [
+				"Penang General Hospital", "Sultanah Bahiyah Hospital - Kedah"
+			]
+		},
+		{
+			"name" : "Pharmaniaga Shah Alam",
+			"leadtime": 1,
+			"lotsize": 10,
+			"safestock" : 5,
+			"safestockuom": "boxes",
+			"maximuminventory": 69,
+			"startingInventory": 30,
+			"forecastDemandSource" : [
+				"Hospital 1","Hospital 2","Hospital 3","Juru Warehouse",
+			]
+		},
+	]
+}
