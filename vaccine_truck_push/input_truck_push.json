@@ -1,8 +1,9 @@
 {
-    "bi-weekly_allocation":[
+    "weekly_allocation":[
         {
             "datetime_receive_goods_after_quarantine":"04-01-2021 00:00",
             "quantity_uom":"boxes",
+            "vaccine" : "Pfizer",
             "allocation":[
                 {
                     "name":"Hospital Sungai Buloh",
@@ -51,7 +52,7 @@
                 }
             ]
         }
-    ],    
+    ],
     "trucks": [
         {
             "name": "Truck 1",
@@ -76,31 +77,33 @@
     ],
     "routes": [
         {
-            "datetime_start_delivery":"08-01-2021 08:00",
-            "datetime_end_delivery":"09-01-2021 17:00",
+            "datetime_start_delivery":"10-01-2021 08:00",
+            "datetime_end_delivery":"10-01-2021 17:00",
             "name":"Route 1",
+            "route_type": "single",
             "truck":"Truck 1",
             "origin":"Shah Alam Warehouse",
             "destinations":[
                 {
                     "name":"Hospital Sungai Buloh",
-                    "quantity": 2
+                    "quantity": 13
                 },
                 {
                     "name": "Hospital Selayang",
-                    "quantity": 2
+                    "quantity": 6
                 },
                 {
                     "name": "Hospital Ampang",
-                    "quantity": 2
+                    "quantity": 3
                 }
             ],
             "final_destination": "Shah Alam Warehouse"        
         },
         {
-            "datetime_start_delivery":"08-01-2021 08:00",
-            "datetime_end_delivery":"09-01-2021 17:00",
+            "datetime_start_delivery":"10-01-2021 08:00",
+            "datetime_end_delivery":"10-01-2021 17:00",
             "name":"Route 2",
+            "route_type": "shared",
             "truck":"Truck 2",
             "origin":"Shah Alam Warehouse",
             "destinations":[

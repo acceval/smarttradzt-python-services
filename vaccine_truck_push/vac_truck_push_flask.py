@@ -41,7 +41,7 @@ class drp_push(Resource):
         
         #print(dat.get('hospitals'))   
 
-        data_allocation = data_json.get('bi-weekly_allocation')
+        data_allocation = data_json.get('weekly_allocation')
 
         data_warehouses = data_json.get('warehouses')
         

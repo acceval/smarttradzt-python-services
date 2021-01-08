@@ -1,0 +1,168 @@
+{
+   "routes":[
+      {
+         "route_daily_hosp_alloc":[
+            {
+               "destination_name":"Hospital Sungai Buloh",
+               "daily_alloc":[
+                  {
+                     "date":"10-01-2021",
+                     "quantity":7
+                  }
+               ]
+            },
+            {
+               "destination_name":"Hospital Selayang",
+               "daily_alloc":[
+                  {
+                     "date":"10-01-2021",
+                     "quantity":6
+                  }
+               ]
+            },
+            {
+               "destination_name":"Hospital Ampang",
+               "daily_alloc":[
+                  {
+                     "date":"10-01-2021",
+                     "quantity":3
+                  }
+               ]
+            }
+         ],
+         "route_name":"Route 1",
+         "route_truck_name":"Truck 1",
+         "schedules":[
+            {
+               "date":"10-01-2021",
+               "daily_schedule":[
+                  {
+                     "time":"08:00:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"-",
+                     "description":"Start Time"
+                  },
+                  {
+                     "time":"09:00:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"1.0 hr",
+                     "description":"Loading Time at Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"09:30:00",
+                     "location":"Hospital Sungai Buloh",
+                     "duration":"0.5 hr",
+                     "description":"Travelling Time from Shah Alam Warehouse to Hospital Sungai Buloh"
+                  },
+                  {
+                     "time":"10:00:00",
+                     "location":"Hospital Sungai Buloh",
+                     "duration":"0.5 hr",
+                     "description":"Goods unloading time at Hospital Sungai Buloh"
+                  },
+                  {
+                     "time":"10:45:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"0.75 hr",
+                     "description":"Travelling Time from Hospital Sungai Buloh to Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"11:45:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"1.0 hr",
+                     "description":"Goods loading time at Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"12:30:00",
+                     "location":"Hospital Selayang",
+                     "duration":"0.75 hr",
+                     "description":"Travelling Time from Shah Alam Warehouse to Hospital Selayang"
+                  },
+                  {
+                     "time":"13:00:00",
+                     "location":"Hospital Selayang",
+                     "duration":"0.5 hr",
+                     "description":"Goods unloading time at Hospital Selayang"
+                  },
+                  {
+                     "time":"13:45:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"0.75 hr",
+                     "description":"Travelling Time from Hospital Selayang to Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"14:45:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"1.0 hr",
+                     "description":"Goods loading time at Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"15:30:00",
+                     "location":"Hospital Ampang",
+                     "duration":"0.75 hr",
+                     "description":"Travelling Time from Shah Alam Warehouse to Hospital Ampang"
+                  },
+                  {
+                     "time":"16:00:00",
+                     "location":"Hospital Ampang",
+                     "duration":"0.5 hr",
+                     "description":"Goods unloading time at Hospital Ampang"
+                  },
+                  {
+                     "time":"16:45:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"0.75 hr",
+                     "description":"Travelling Time from Hospital Ampang to Shah Alam Warehouse"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "route_daily_hosp_alloc":[
+            {
+               "destination_name":"Juru Warehouse",
+               "daily_alloc":[
+                  {
+                     "date":"10-01-2021",
+                     "quantity":8.0
+                  }
+               ]
+            }
+         ],
+         "route_name":"Route 2",
+         "route_truck_name":"Truck 2",
+         "schedules":[
+            {
+               "date":"10-01-2021",
+               "daily_schedule":[
+                  {
+                     "time":"08:00:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"-",
+                     "description":"Start Time"
+                  },
+                  {
+                     "time":"09:00:00",
+                     "location":"Shah Alam Warehouse",
+                     "duration":"1.0 hr",
+                     "description":"Loading Time at Shah Alam Warehouse"
+                  },
+                  {
+                     "time":"12:45:00",
+                     "location":"Juru Warehouse",
+                     "duration":"3.75 hr",
+                     "description":"Travelling Time from Shah Alam Warehouse to Juru Warehouse"
+                  },
+                  {
+                     "time":"13:15:00",
+                     "location":"Juru Warehouse",
+                     "duration":"0.5 hr",
+                     "description":"Goods unloading time at Juru Warehouse"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

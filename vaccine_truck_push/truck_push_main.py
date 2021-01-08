@@ -17,7 +17,7 @@ f = open('input_truck_push.json',)
 data_json = json.load(f)
 # data_json2 = json.load(g)
 
-data_allocation = data_json.get('bi-weekly_allocation')
+data_allocation = data_json.get('weekly_allocation')
 
 data_warehouses = data_json.get('warehouses')
 
