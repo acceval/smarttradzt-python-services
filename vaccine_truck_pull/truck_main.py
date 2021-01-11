@@ -11,7 +11,7 @@ import json
 from truck_lib import Hospital, Truck, Supplier, truck_stat, supp_inv_stat
 
 # Opening JSON file 
-f = open('input_scenario6.json',) 
+f = open('input_scenario6.json',)
 # f = open('input_scenario1_2trucks.json',) 
 
 # returns JSON object as  
