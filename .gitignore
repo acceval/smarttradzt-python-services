@@ -35,7 +35,9 @@ WS_specialchem/.pylint.d/
 WS_specialchem/db.ini
 chromedriver.exe
 vaccine_supdemand/
+vaccine_test/
 vaccine_truck_push/previous
+vaccine_truck_pull/old
 # DRP/my_class.py
 # DRP/test.py
 DRP/~$demand_data.xlsx
