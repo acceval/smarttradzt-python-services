@@ -1,0 +1,69 @@
+Irrevocable Letter of Credit Sample
+
+17 October 2012 Wednesday
+
+11:14:31
+
+—————-— Instance Type and Transmission ———————Original received from SWIFT
+
+Priority/Delivery : Normal
+
+Message Output Reference : 1225 121016XXXXXXXXX5657939061
+Correspondent Input Reference : 1225 121016XXXXXXXXX1178375172
+————\———- Message Header ———————————
+Swift OUTPUT FIN 700 Issue of a Documentary Credit
+
+Sender : ARABBANKXXX
+
+ARAB BANK
+
+(COMMERCIAL BRANCH)
+
+MANAMA BH
+
+Receiver : TRADEBANKXXX
+
+TRADE BANK
+
+(ALL TURKEY OFFICES)
+
+ISTANBUL TR
+
+———————~ Message Text ———————————
+27: Sequence of Total
+
+1/1
+
+40A: Form of Documentary Credit
+
+IRREVOCABLE
+
+20: Documentary Credit Number
+
+2012AML201203366
+
+31C: Date of Issue
+
+121016
+
+AOE: Applicable Rules
+
+UCPURR LATEST VERSION
+
+31D: Date and Place of Expiry
+
+130106-TURKEY
+
+50: Applicant
+
+BAHRAIN MANUFACTURING COMPANY W.L.L
+
+P.O. BOX 30000,
+
+KINGDOM OF BAHRAIN
+
+59: Beneficiary - Name & Address
+
+INTERNATIONAL IMPORT COMPANY LTD, STI.
+
+(FULL BENEFS. NAME AND ADDRESS UNDER FIELD 47A ITEM NO.6)
