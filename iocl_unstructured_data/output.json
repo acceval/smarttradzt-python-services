@@ -1,0 +1,499 @@
+{
+    "overall_sentiment": [
+        {
+            "filename": "FW Urea Weekly Report 02-04-2016.pdf",
+            "percentage_positive": 48,
+            "overall_doc_sentiment": "neutral"
+        }
+    ],
+    "sentence_sentiment": [
+        {
+            "sentences": "while bery maritime makes all reasonable efforts to ensure the reliability of the data, it does not guarantee its accuracy nor take liability for any direct, indirect or consequential loss arising from any use of the data.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "monthly forecasts  urea commodity/type unit jan 2016 [actual] feb 2016 mar 2016 apr 2016 may 2016 jun 2016 jul 2016 urea                 prilled bulk fob                 black sea spot  usd/t 214 180 195 210 205 200 180 baltic sea spot  usd/t 209 165 180 200 195 190 170 middle east spot  usd/t 212 180 190 210 205 200 180 china spot 1 usd/t 212 185 195 200 200 200 180 granular bulk fob                 middle east spot (all netbacks) usd/t 200 180 195 220 220 210 180 egypt spot  usd/t 237 220 230 240 240 230 200 us new orleans spot barge usd/st 199 195 205 225 220 205 175 notes: (1) china urea tax = flat rmb 80/mt january 1-december 31. vat at 13% is incorporated from september for both  analysis undertone firmer on prospects of pent-up demand a firmer undertone was evident in global urea markets as the first week of february progressed, albeit after some downward adjustments from select sources.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the january slide in prices from all origins has halted, and some improvements were registered in delivered values, which in turn prompted more buyers to reappear for coverage.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "priced substantially above other sources, egyptian producers did concede a discount of around $9/mt on deals concluded at $224/mt fob last week, but producers are since claiming to have recaptured the lost ground.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "outages in egypt on a ruptured pipeline were initially expected to fuel substantial price-increases, but a rapid return to normality will likely limit prospects for significant improvement in the short term.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "european values also lost some ground based on sales concluded last week from the middle east and poorer returns on us sales to regional producers at that time, but the reversal in the us pricing has since provided better netbacks and boosted expectations for further gains.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the us has been and remains the key market in supporting a change in direction so far.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "prompt granular urea barge values at new orleans gained $17/st from the start of the week to the end, although the average week over week rose only $1/st.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "however, forward physical sales for late february and march reached",
+            "classification": "pos"
+        },
+        {
+            "sentences": "overall us traders were marginally bullish on granular urea heading into next week's annual tfi business meeting in orlando, florida.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "more optimism has also spilled over to fsu supply of granular urea.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "after failing to achive interest much above $190/mt fob in prior sessions, grodnoazot opted to reject bids more than $10/mt higher in its february 1 tender, and is aiming for more when retendering february 5 for the sale of 20,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "brazilian prices for granular urea have improved on the back of firmer us sentiment, and suppliers are optimimistic that relatively inexpensive credit available to small and mid-sized farms will combine with significantly higher corn prices in the domestic market to stimulate forward offtake and imports of urea.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "other importers in the americas also appear to have sensed that urea values may be closer to a floor, and have emerged with requirements for prompt and forward positions of prilled and granular urea.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "prices are being tested this week for both grades in mexico, while buying interest also reappeared for granular imports from canada.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "markets and supply-sources in asia have been relatively quiet leading up to celebrations and holidays for lunar new year, but buyers needing to cover short positions for prompt loading did have to concede higher costs to secure cover.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "while too early to predict a major surge in prices, traders that shorted prills and granular urea at netbacks some $20/mt below current values appear unlikely to secure cover at a margin on positions that need to load by march, and some positions could well result in substantial losses.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "highlights of the week  us nola prompt and forward prices gained all week, and   inland distributors can support $5-10/st higher barge costs even without raising inland prices   brazilian buyers face higher offers, accordingly, and are left with few options but to accept   middle east netbacks up on us and brazilian improvements and spot sales   egyptian prices adjust lower via sale of 20,000 mt for prompt loading   baltic prices surge as traders cover in, and prior short sales look scary   black sea values stable to firm and traders unwilling to add aggressive shorts   chinese domestic market quiet ahead of lunar new year, but demand is up   chinese sellers reject bid to cover prior low-priced trader shorts   turkish prices set to move up as traders are unwilling to provide additional aggressive quotes   short term outlook improving.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "oversupply remains, but the return of buyers needing to cover pent-up demand is set to influnce prices positively in the short term.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "a price-rally is not in the cards yet, but cannot be excluded if demand from the us remains strong and brazilan developments trigger added purchasing in the region.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "increasingly quotes to retailers are not based on prompt pick up, but on when warehouses can be restocked by barge when the upper mississippi river system reopens for the spring.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "this situation is why prompt offers for the remaining granular urea as far north as the twin cities in minnesota are holding at $260/st fob, while river-open prices for the same point are closer to $250/st fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the lowest prompt price tag in the midwest region remains $235/st fob around st. louis, missouri, which still is accessible by barge.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "canada: coop federee purchase suggested canadian importer coop federee is reported to have booked a cargo of 20-25,000 mt granular urea with a trader supplying from the baltic in february or early march at $212/mt cfr basis one-port discharge.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "evidently convinced that the market for granular urea may have reached a floor, the importer is suggested to be seeking an additional cargo for march loading.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "us nola: thin trading, wide price spread by the end of the week's trading, prompt granular urea barges had changed hands at $187-204/st fob new orleans, but with the market trending higher on amost each transaction.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "new orleans values jumped starting february 2 after cf went shopping for prompt barges.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the producer paid $198/st fob new orleans or more for two-four barges, but stepped away from the market when offers rose to $200/st fob.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "multiple sales were confirmed as low as $187/st fob february 1, but most prompt business appears to have occurred around $195-200/st fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "bids for 2h february started the week at $194/st fob, but forward business has been booked up to $208/st fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "import lineup meanwhile, a 40-45,000 mt cargo of granular urea and a 30-35,000 mt cargo of granular urea have been booked for march arrival in the us.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the urea was bought at $195-200/mt fob middle east.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the smaller of the two cargos is believed to belong to keytrade, and will arrive in early march, thanks to taking the short route through the suez canal.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the larger cargo has been linked to just about every importer to the us market, but confirmation of ownership could not be secured at press time.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "mexico: group testing prices february 4 the mexican group of importers is evaluating offers for 25,000 mt prilled or granular urea february 4. the enquiry called for offers to be submitted for the quantity to load in february/early march for discharge at three east coast mexico ports.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "other importers are also contemplating purchases, and will be following the group tender closely for price guidance.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "mexican imports of urea from january through november were meanwhile assessed by customs at 1.43 million mt, down by 0.5% on the same period in 2014. imports from china were down by 5.9% to 756,000 mt and russia was off by 1.2% to 484,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "arrivals from the uae were up from zero to 52,000 mt while ukraine was down by 52% to 43,400 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "november imports were off sharply from 149,000 in 2014 to 19,000 mt in 2015. russia accounted for 18,200 mt of the november 2015 volume while arrivals from china were down from 127,000 mt in 2014 to 140 mt in 2015. us s. plains: sales may support higher prices some distributors along the arkansas river who have sold most of their granular urea at $240/st fob in recent days, believe demand is sufficient to move back up to $245/st fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "many sellers in the region report a steady stream of retail demand, almost all of which appears to have been sold to meet prior sales to farmers.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "this means a great deal of retailer space remains to be filled before the top-dress run on winter wheat gets underway in force.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "central and south america brazil: credit and domestic corn values to aid imports as was highlighted in the february 2 short term urea forecast, optimism for additional demand for fertilizers in brazil, particularly of urea, is fuelled following an announcement made by the brazilian government in conjunction with banco do brasil (bank of brazil) regarding available credit.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "small to medium sized farmers can receive loans for input purchasing through the national program to help medium sized rural producers (pronamp).",
+            "classification": "neg"
+        },
+        {
+            "sentences": "with credit issues now resolved at rates of 7.75% p.a.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "for loans up to brl 710,000 ($178,000) and at 8.75% for loans up to brl 1.2 million ($300,000), farmers will have a highly significant advantage compared to rates charged by commercial banks in excess of 20% p.a.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the early credit announcement follows complaints in 2015 that credit was not available until may/june, significantly cutting farm budgets and fertilizer demand.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "brazilian calendar 2015 urea imports of 2.85 million mt were down by about 32.5% on 2014, according to gtis customs data.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the decline was mainly attributed to these credit issues and the sinking value of the real against the us dollar.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "on a further positive note for brazilian farmers, domestic corn prices have surged substantially despite the sideways move in international corn values.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "corn prices for domestic buyers in rio grande do sul where farmers have harvested about 20% of the full-season crop are up by 45%.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "this is primarily due to a surge in corn exports, triggered via the significant depreciation of the brazilian currency.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "domestic livestock producers have faced shortages of corn due to the increase in exports, forcing values higher.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "favourable prices are expected to increase forward corn-planting.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "farmers in southern brazil have been reducing full-season corn acreage over the past decade in favour of more first-crop soybeans.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "after soybeans.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "brazil: prompt values move higher delivered values for granular urea to arrive in february/early march are up this week following confirmed purchases ranging from a repeat of last week's $195/mt cfr up to $205/mt cfr.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the earlier fertipar deal for 40,000 mt at numbers suggested in the upper $180s/mt cfr is based on open origin and furthermore with an option to load as late as may/june.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "trammo is still suggested as the supplier.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "offers for additional cargoes for forward delivery are pegged no lower than $210/mt cfr, but these are yet to elicit firm buying interest.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "colombia: imports through november off slightly january-november imports of urea into colombia of 489,000 mt were down by about 1.4% on the same period in 2014.  arrivals from china in 2015 were down by 8% and venezuela was off by 14% to 169,000 mt and 142,000 mt, respectively.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "russia was up 22% to 93,000 mt, uae was up from zero to 45,000 mt while venezuela suffered 56% setback to 18,600 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "november imports were down by 54% on the prior year, to reach 46,300 mt in 2015. china accounted for 27,000 mt (down 48%) and venezuela was at 18,600 mt (down 56%).",
+            "classification": "neg"
+        },
+        {
+            "sentences": "peru and guatemala accounted for about 40,000 mt each, up from zero in november 2014. january-november exports of 4.3 million mt were however off by 8.9% on the same months in 2014. brazil retained the lead with 1 million mt, but this was down by 12.7% on the prior year.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "shipments to the us were up 28% to 591,000 mt while turkey did not yet fully recover with 272,000 mt, a 3.1% decline.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "peru accounted for 206,000 mt, a 21% decline, and germany was off by 21.4% to 198,000 mt.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "ukraine was ahead 24.3% to 190,000 mt while shipments to mexico declined 58% to 160,000 mt.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "black sea: trade still lacks substantial drive trade in prilled urea from yuzhnyy/tis remains slow following sales as reported last week.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "neither sellers nor buyers are prepared to make the necessary adjustments in price ideas needed to trigger additional deals in the short term, but sellers have the definite upper hand as requests for cover from traders increase.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "offers for february from producers and marketers were firmly above $195/mt fob at the beginning of the week, with trades confirmed at $200/mt fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "march is quoted no lower than $205/mt fob, and firm bids bids are suggested at that number.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the weekly range has been set accordingly.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "various estimates circulate on the pricing in the deal between salavat and eurochem pursuant to the salavat tender last week.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "while unconfirmed, consensus is building for a number around an even $180/mt fob tuapse or possibly marginally higher.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "salavat prills regularly sell at a significant discount to regular black sea prills due to quality issues, and the sales-price is therefore not included in the week's black sea assessment.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the level accepted by the producer is nevertheless widely used in negotiations for regular quality material, but efforts to that effect are being rejected by sellers.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "january shipments from yuzhnyy/tis did meanwhile marginally exceed 100,000 mt, and shipments plus fully firm nominations for february are close to 23,500 mt:",
+            "classification": "pos"
+        },
+        {
+            "sentences": "gubretas is evaluating offers received in its february 4 tender for 10,000 mt for prompt loading for yarimca, but a decision is not expected to emerge before february 5. details on offers submitted were not released, but repeat deals below $200/mt cfr with credit are highly unlikely given current quotes from the black sea around that number on fob basis with payment at sight.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "trades in granular urea in the french bay this week were concluded in a relatively wide spread at -225/mt fca, with the most recent deals done at the low end of the range.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the low end reflects about $230/mt cif, duty paid, which in turn suggests values from egypt some $10/mt below the most recent sale at $215/mt fob.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "middle east and africa middle east: outlook improving via sales formula deals middle east producers are enjoying improvements in returns on spot sales and on quantities priced via formulae, with the netbacks from markets assessed at $195-204/mt fob.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "contract cargoes destined for thailand are about $10/mt lower based on spot sales into that market below $200/mt cfr, but that number appears very unlikely to be repeated in the short term.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "two traders are reported to have booked cargoes from oman for february/early march loading at $195/mt fob and $200/mt fob, respectively, and siuci has adjusted offers for additional march availability to $205/mt, according to traders in discussions with the producer.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "us prices that surged to a peak of $204/st fob barge at new orleans over the week would provide sellers with returns around $218/mt cif mississippi river.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "forward deals were also concluded some $5-7/mt lower, for netbacks at $197-204/mt fob middle east after deduction of freight, charges and a small margin to intermediaries on cargoes with freight fixed in the spot market.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "qatar was down from 26,000 mt in november 2014 to zero in 2015. calendar 2015 imports were nevertheless down by almost 27% on 2014, to 663,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "qatar retained the lead with 231,000 mt, a 1.6% decline, while arrivals from saudi arabia were down 11% to 184,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the uae accounted for 141,000 mt, up from 45,000 mt in the prior year.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "russian arrivals were down 15% to 28,000 mt while china nosedived from 236,000 mt in 2014 to 25,000 mt in 2015, and oman was off by 73% to 22,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "egypt: new sale at lower number mainstream bids for granular urea from traders are in the low $210s/mt fob, but these are rejected by producers.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "suppliers are stating firm intent not to concede numbers below the $215/mt fob low concluded for a spot prompt 20,000 mt this week, and also cite significant demand at substantially higher returns in the domestic free-trade market.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "a subsequent sale at $220/mt fob has been reported, but this could not be verified and has not been included in the week's assessment.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "hfc is planning to tender next week for the sale of as much as 30,000 mt granular urea to load by the end of february, and other producers are likely to follow with tenders.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "mopco reported this week that the rupture/explosion that occurred january 25 on the petrogas pipeline between port said and damietta feeding the mopco i, ii and iii ammonia and urea units interrupted all output of urea.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the producer expects pipeline repairs to be completed within about 10 days, and regular flow of urea to recommence around february 15.  mopco is confident that gas supply to its plants at damietta will be not interrupted this summer in favour of power generation.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "new lng import facilities and the need for egypt to draw in foreign currency from export sales will keep summer operating rates around 70-75%, the company said in cairo.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the government plans as many as three new lng regasification terminals over the next two years, taking the total to five.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the three new terminals are all planned for the red sea coast.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "egyfert (efc) is reporting output at about 80% of rated capacity and alexfert (afc) is at 85%.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "helwan (hfc) reported february 3 that output was restored after a 72 hour outage, and the plant is now running at 90% of rated capacity.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "indian subcontinent india: november imports down, but jan-nov up imports of urea by india ascertained by customs in november 2015 were 620,000 mt, a 51% drop on november 2014, but iranian arrivals were up from 33,000 mt to 311,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "chinese arrivals were down from 1.16 million mt in november 2014 to 169,000 mt in 2015 while oman was up 71% to 134,000 mt.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "the january-november volume was nevertheless up by 59% to 8.66 million mt with china in the lead at 4.6 million mt, an increase of 27%.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "omani arrivals were up by 58% to 2.07 million mt and iran was up from 407,000 mt to 1.62 million mt.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "imports from ukraine were 118,000 mt and qatar accounted for 71,000 mt.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "asia and oceania indonesia: kaltim formula tender yet to be floated the expected pupuk kaltim tender for the sale of up to 500,000 mt granular urea to load via formula contracts through june is yet to be floated by the new management of the producer.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "local reports suggest that kaltim low regional prices in recent weeeks may result in a switch from urea exports to ammonia exports, but this is yet to be confirmed.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "with regional urea values improving slightly while prices for ammonia continue to decline, urea may again become the favoured product.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "that will however be contingent on further increases to match kaltim's costs assessed above $230/mt fob which form part of the formula agreements with urea offtakers.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "china: market defies short traders activity in china is at low ebb due to the regional lunar new year festivities, but prices for prilled and granular urea have been moving up in recent days, triggered not only by domestic demand for blending and",
+            "classification": "pos"
+        },
+        {
+            "sentences": "sales of prills are reported back up to $195/mt fob, and standard quality granular has traded a fraction below $200/mt fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "offers for additional february tonnage are suggested closer to $205/mt fob for both grades from main ports.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "smaller lots from river ports can still be secured in the low $190s/mt fob, according to regional traders, but bids from buyers attempting to cover prior shorts requiring values into the $170s/mt to become profitable are being ignored/rejected.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "thailand: liven books granular liven booked a cargo of about 20,000 mt middle east granular urea with a thai importer for february loading.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "the trader did not disclose the price agreed, but local reports suggests a delivered value in the mid to upper $190s/mt cfr.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "this implies a producer-return in the low $180s/mt fob from the middle east for liven to generate a margin.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "offers are since up significantly for middle east material, reflecting recent sales to other markets in the $190s/mt fob and forward quotes above $200/mt fob.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "malaysia: nafas books prills from china malaysian importer/farmers' union nafas secured cover for 6,000 mt prilled urea for february loading for western malaysia discharge around an even $200/mt cfr, according to regional traders.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "netbacks to chinese suppliers from river-ports are assessed below $185/mt fob.",
+            "classification": "neg"
+        },
+        {
+            "sentences": "south korea: sales of chinese granular at low prices pricing slightly south of $200/mt cfr is reported in the two tenders for granular urea in south korea in the end-january tenders by pungnong (6,000 mt) and kg chemical (3,000 mt).",
+            "classification": "pos"
+        },
+        {
+            "sentences": "shipment was requested by 20-29 february in the sessions.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "freight and transaction charges are assessed marginally above $15/mt.",
+            "classification": "pos"
+        },
+        {
+            "sentences": "this is indicative of netbacks to sellers loading from small chinese river-ports in the low $180s/mt fob, more than $12/mt below current mainstream quotes for large parcels to load from main ports.",
+            "classification": "neg"
+        }
+    ]
+}
