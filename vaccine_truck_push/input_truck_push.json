@@ -78,23 +78,23 @@
     "routes": [
         {
             "datetime_start_delivery":"10-01-2021 08:00",
-            "datetime_end_delivery":"10-01-2021 17:00",
+            "datetime_end_delivery":"15-01-2021 17:00",
             "name":"Route 1",
-            "route_type": "single",
+            "route_type": "shared",
             "truck":"Truck 1",
             "origin":"Shah Alam Warehouse",
             "destinations":[
                 {
                     "name":"Hospital Sungai Buloh",
-                    "quantity": 13
+                    "quantity": 0
                 },
                 {
                     "name": "Hospital Selayang",
-                    "quantity": 6
+                    "quantity": 0
                 },
                 {
                     "name": "Hospital Ampang",
-                    "quantity": 3
+                    "quantity": 0
                 }
             ],
             "final_destination": "Shah Alam Warehouse"        
@@ -149,5 +149,5 @@
                 "Juru Warehouse" 
             ]
         }
-    ]              
+    ]
 }

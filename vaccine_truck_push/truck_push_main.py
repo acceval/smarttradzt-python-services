@@ -50,3 +50,5 @@ routes_all = [Routes(data, entity_property, supplier_all, trucks_all) for data i
 #%% Extracting
 
 retJSON = retjson(routes_all)
+
+print(retJSON)
