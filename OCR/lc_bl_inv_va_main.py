@@ -29,7 +29,9 @@ if sys.platform == "win32":
     
 else:    
     # UPLOAD_FOLDER = r'/home/alfred/uploads'
-    UPLOAD_FOLDER = r'/home/alfred/Documents/deploy/lc_bl_inv/uploads'
+    UPLOAD_FOLDER = r'/home/alfred/Documents/deploy/lc_bl_inv2/uploads'
+    UPLOAD_FOLDER1 = r'/home/alfred/Documents/deploy/lc_bl_inv2'
+
 
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -69,6 +71,7 @@ bl_list =[
             ]
 
 inv_list =[
+            'Invoice',
             'Commercial Invoice',
             ]
 
@@ -104,7 +107,7 @@ class upload(Resource):
                 
                 else:           
                     PDF_file = UPLOAD_FOLDER+'/'+ secure_filename(file.filename)
-            elif file_ext == 'jpg':
+            elif file_ext == 'jpg' or file_ext == 'png':
                 if sys.platform == "win32":            
                     PDF_file = UPLOAD_FOLDER1+'\\'+ secure_filename(file.filename)
                 
@@ -115,7 +118,7 @@ class upload(Resource):
             
             if file_ext == 'pdf':
                 file.save(os.path.join(UPLOAD_FOLDER, PDF_file))
-            elif file_ext == 'jpg':
+            elif file_ext == 'jpg' or file_ext == 'png':
                 file.save(os.path.join(UPLOAD_FOLDER1, PDF_file))
             else:
                 pass
@@ -170,11 +173,11 @@ class upload(Resource):
                             ALLOWED_EXTENSIONS
                             )
                         break        
-        elif file_ext == 'jpg':
+        elif file_ext == 'jpg' or file_ext == 'png':
 
-            doc_type = "LC"
-            #retJSON = "i'm  an image"
-            retJSON = scan_image(file.filename, doc_type, start_time)
+            #doc_type = "LC"
+
+            retJSON = scan_image(file.filename, file_ext, start_time)
 
         else:
             pass    

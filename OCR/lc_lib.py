@@ -120,11 +120,44 @@ def page2text(PDF_file,pages,dpi,poss_lc_list):
     return outfile
 
 
-def scan_image(filename, word_lc, start_time):
+def scan_image(filename, file_ext, start_time):
+
+    lc_list =[
+            'Letter of Credit',
+            'LC',
+            'L/C',
+            'DLC',
+            'Documentary Letter of Credit',
+            'Documentary Credit',
+            'Credit Slip'
+            ]
+
+    bl_list =[
+                'Bill of lading',
+                'BL',
+                'B/L',
+                'Waybill',
+                'Consignment Note',
+                'Shipping bill',
+                'Transport Document',
+                'Freight Bill',
+                'Cargo Manifest',
+                'Transport Document',            
+                ]
+
+    inv_list =[
+                'Invoice',
+                'Commercial Invoice',
+                ]
+    doc_type = []
 
     # Creating a text file to write the output 
-    outfile = filename.rstrip('.jpg')+".txt"
-
+    if file_ext == 'jpg': 
+        outfile = filename.rstrip('.jpg')+".txt"
+    elif file_ext == 'png':
+        outfile = filename.rstrip('.png')+".txt"
+    else:
+        pass
     # All contents of all images are added to the same file 
     f = open(outfile, "w")
     
@@ -134,6 +167,28 @@ def scan_image(filename, word_lc, start_time):
     text = str(((pytesseract.image_to_string(Image.open(filename),lang='eng',config='--psm 6'))))
     
     text = text.replace('-\n', '')
+
+    for word in lc_list:
+        if word.lower() in text.lower():
+            doc_type = "LC"
+            print ('It is LC')
+            break
+        
+    if doc_type==[]:
+        for word in bl_list:
+            if word in text:
+                doc_type = "BL"
+                print ('It is BL')
+                break
+
+    if doc_type==[]:
+        for word in inv_list:
+            if word in text:
+                doc_type = "Invoice"
+                print ('It is Invoice')
+                break
+
+    print(type(text))
 
     # Finally, write the processed text to the file. 
     f.write(text)
@@ -148,7 +203,7 @@ def scan_image(filename, word_lc, start_time):
     retJSON = { 
                 'Filename':outfile.rstrip('.txt'),       # File name
                 'Time Taken': str(time_taken),                # Time taken
-                'document_type': word_lc,                   # Equivalent LC word
+                'document_type': doc_type,                   # Equivalent LC word
                 'scanned_text': text
                 }
 
