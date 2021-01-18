@@ -12,10 +12,9 @@ import pandas as pd
 
 class Hospital:
     
-    def __init__(self, data, hosp_num = 0):
+    def __init__(self, data):
         
-        self.hosp_num = hosp_num
-        self.data = data[self.hosp_num]
+        self.data = data
         self.supplier_leadtime = 0 #HardCode
         self.truck_size = 10 #HardCode - boxes
         self.name = self.data.get('name')        
@@ -92,7 +91,7 @@ class Hospital:
         self.replenishment_final = copy.deepcopy(self.planned_receipts)
         self.replenishment_final.name = "replenishment_final"
         
-    def calc(self):
+    # def calc(self):
         
         for i in range(0, len(self.table)-int(self.supplier_leadtime)):
             
@@ -117,7 +116,7 @@ class Hospital:
         self.truck_count_final.name = "truck_count_final"
         
         
-        return self.planned_orders, self.truck_count
+        # return self.planned_orders, self.truck_count
     
     def calc_scen_1(self, troubled_index, prob_type):
         print(f"Problem Type = {prob_type}")        
@@ -273,12 +272,60 @@ class Truck:
     
     def __init__(self, data_truck):
         
-        self.num_of_trucks = len(data_truck)
-        self.data = data_truck
+        # self.num_of_trucks = len(data_truck)
+        # self.data = data_truck
+        self.name = data_truck.get('name')
+        self.truck_type = data_truck.get('truck_type')
+        self.current_location = data_truck.get('current_location')
+        self.min_lotsize = data_truck.get('min_lotsize')
+        self.max_lotsize = data_truck.get('max_lotsize')
+        self.max_daily_delivery_hours = data_truck.get('max_daily_delivery_hours')
+        
+        
         
 class Supplier:
     
-    def __init__(self, data, supplier_demand, total_truck_count, truck_schedule_initial):
+    def __init__(self, data, hospitals_all, trucks_all):
+        
+        
+        self.df_order = pd.concat([hosp.planned_orders for hosp in hospitals_all], axis=1)
+
+        self.hosp_names = [hosp.name for hosp in hospitals_all]        
+        
+        truck_list = [data.truck_count for data in hospitals_all]        
+        
+        self.df_truck = pd.concat(truck_list, axis=1)
+        
+        self.num_of_trucks = len(trucks_all)
+        
+        # Supplier
+        supplier_demand = self.df_order.sum(axis=1)
+        total_truck_count = self.df_truck.sum(axis=1)
+        
+        # Assign trucks
+        df_truck_cum_sum = self.df_truck.cumsum(axis=1)
+        for i in reversed(range(1,len(hospitals_all))):
+        
+            a = df_truck_cum_sum.iloc[:,i] == df_truck_cum_sum.iloc[:,i-1]
+            df_truck_cum_sum.iloc[:,i][a] = 0
+        
+        truck_available = [data.name for data in trucks_all]
+        
+        self.truck_name = []
+        for i in range(0,len(hospitals_all)):
+            if i<len(truck_available):
+                self.truck_name.append(truck_available[i])
+            else:
+                self.truck_name.append('Unavailable')
+                
+        hospital_names = [data.name for data in hospitals_all]
+        
+        truck_schedule_initial = df_truck_cum_sum.replace(list(range(1, len(hospitals_all)+1)),self.truck_name)
+        
+        truck_schedule_initial.columns = self.hosp_names
+        
+        
+        
         
         self.data = data[0]
     #     # self.hosp_num = hosp_num
@@ -293,8 +340,10 @@ class Supplier:
         # self.planned_receipts = pd.Series(data=[0]*len(self.table), index = self.table.index)
         # self.planned_receipts = self.table.iloc[:,1]
         self.planned_receipts = self.table.loc[:,'quantity']
+        
         self.total_truck_count_initial = total_truck_count
         self.total_truck_count_initial.name = "total_truck_count_initial"
+        
         self.truck_schedule_initial = truck_schedule_initial
         self.truck_schedule_initial.name = "truck_schedule_initial"
         # self.supply_quarantine = self.table.iloc[:,0]

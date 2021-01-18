@@ -15,38 +15,47 @@
             "daily_consumption_plan": [
                 {
                     "day":"22-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"23-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"24-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"25-12-2020",
-                    "consumption": 5
+                    "outbound": 5,
+                    "consumption": 0
                 },
                 {
                     "day":"26-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"27-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"28-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"29-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"30-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 }
                 
@@ -64,38 +73,47 @@
             "daily_consumption_plan": [
                 {
                     "day":"22-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"23-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"24-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"25-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"26-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"27-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"28-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"29-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"30-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 }
             ]
@@ -111,38 +129,47 @@
             "daily_consumption_plan": [
                 {
                     "day":"22-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"23-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"24-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"25-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"26-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"27-12-2020",
+                    "outbound": 0,
                     "consumption": 1
                 },
                 {
                     "day":"28-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"29-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 },
                 {
                     "day":"30-12-2020",
+                    "outbound": 0,
                     "consumption": 0
                 }
                 
