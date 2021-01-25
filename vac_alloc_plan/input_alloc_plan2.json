@@ -1,0 +1,516 @@
+{
+    "basic_data":[
+        {
+            "state": "Selangor",
+            "region": "Central KL",
+            "population": 4000000,
+            "uom": "person",
+            "overlap_p23": 1000,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 1500
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 1000
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 10000
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 3988500
+                }
+            ]
+        },
+        {
+            "state": "Selangor",
+            "region": "Ampang",
+            "population": 3000000,
+            "uom": "person",
+            "overlap_p23": 2000,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 1000
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 2000
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 11000
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 2988000
+                }
+            ]
+        },
+        {
+            "state": "Johor",
+            "region": "Johor Bahru",
+            "population": 3000000,
+            "uom": "person",
+            "overlap_p23": 500,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 500
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 500
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 12000
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 2987500
+                }
+            ]
+        },
+        {
+            "state": "Malacca",
+            "region": "Malacca",
+            "population": 1000000,
+            "uom": "person",
+            "overlap_p23": 0,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 500
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 0
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 2500
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 997000
+                }
+            ]
+        },
+        {
+            "state": "Penang",
+            "region": "George Town",
+            "population": 400000,
+            "uom": "person",
+            "overlap_p23": 0,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 1000
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 0
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 11000
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 388000
+                }
+            ]
+        },
+        {
+            "state": "Kedah",
+            "region": "Alor Setar",
+            "population": 1000000,
+            "uom": "person",
+            "overlap_p23": 0,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 500
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 0
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 4500
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 995000
+                }
+            ]
+        },
+        {
+            "state": "Others",
+            "region": "Others",
+            "population": 9020000,
+            "uom": "person",
+            "overlap_p23": 0,
+            "basic_alloc":[
+                {
+                    "priority": 1,
+                    "num_persons": 8500
+                },
+                {
+                    "priority": 2,
+                    "num_persons": 0
+                },
+                {
+                    "priority": 3,
+                    "num_persons": 21000
+                },
+                {
+                    "priority": 4,
+                    "num_persons": 8990500
+                }
+            ]
+        }
+    ],
+    "vaccine_allocation":[
+        {
+            "state": "Selangor",
+            "region": "Central KL",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Sungai Buloh",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 1500
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 10000
+                        }
+                    ]
+                    
+                },
+                {
+                    "name":"Hospital Selayang",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc":[
+                        {
+                            "priority":1,
+                            "num_people":0
+                        },
+                        {
+                            "priority":3,
+                            "num_people":0
+                        }
+                    ]
+                },
+                {
+                    "name": "Elderly Care Home 1",
+                    "type": "echome",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority":2,
+                            "num_people":1000
+                        }
+                    ]
+                },
+                {
+                    "name": "Clinic 1",
+                    "type": "clinic",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority":4,
+                            "num_people":1500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Selangor",
+            "region": "Ampang",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Ampang",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 1000
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 11000
+                        }
+                    ]
+                    
+                },
+                {
+                    "name": "Elderly Care Home 2",
+                    "type": "echome",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc":[
+                        {
+                            "priority":2,
+                            "num_people":1500
+                        }
+                    ]
+                },
+                {
+                    "name": "Elderly Care Home 3",
+                    "type": "echome",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority":2,
+                            "num_people":500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Johor",
+            "region": "Johor Bahru",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Sultan Aminah",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 500
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 12000
+                        }
+                    ]
+                },
+                {
+                    "name": "Elderly Care Home 4",
+                    "type": "echome",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority":2,
+                            "num_people":500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Malacca",
+            "region": "Malacca",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Malacca",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 500
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 2500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Penang",
+            "region": "George Town",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Penang General",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 1000
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 11000
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Kedah",
+            "region": "Alor Setar",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Hospital Sultanah Bahiyah",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 500
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 4500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "state": "Others",
+            "region": "Others",
+            "month": "Dec-2020",
+            "vac_centres": [
+                {
+                    "name": "Other Hospitals",
+                    "type": "hospital",
+                    "vaccine_type": "Pfizer",
+                    "prio_alloc": [
+                        {
+                            "priority": 1,
+                            "num_people": 8500
+                        },
+                        {
+                            "priority": 3,
+                            "num_people": 21000
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "weighted_scores": [
+        {
+            "state": "Selangor",
+            "region": "Central KL",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Sungai Buloh",
+            "weight_score": 4.5
+        },
+        {
+            "state": "Selangor",
+            "region": "Central KL",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Selayang",
+            "weight_score": 4.3
+        },
+        {
+            "state": "Selangor",
+            "region": "Central KL",
+            "month": "Dec-2020",
+            "vac_centre_name": "Clinic1",
+            "weight_score": 3.1
+        },
+        {
+            "state": "Selangor",
+            "region": "Ampang",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Ampang",
+            "weight_score": 3.9
+        },
+        {
+            "state": "Johor",
+            "region": "Johor Bahru",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Sultan Aminah",
+            "weight_score": 4.1
+        },
+        {
+            "state": "Malacca",
+            "region": "Malacca",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Malacca",
+            "weight_score": 3.2
+        },
+        {
+            "state": "Penang",
+            "region": "George Town",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Penang General",
+            "weight_score": 4.1
+        },
+        {
+            "state": "Kedah",
+            "region": "Alor Setar",
+            "month": "Dec-2020",
+            "vac_centre_name": "Hospital Sultanah Bahiyah",
+            "weight_score": 4.0
+        },
+        {
+            "state": "Others",
+            "region": "Others",
+            "month": "Dec-2020",
+            "vac_centre_name": "Other Hospitals",
+            "weight_score": 2.8
+        }
+    ],
+    "supplier_monthly_alloc": [
+        {
+            "supp_name": "Pfizer",
+            "safety_stock_percent":10,
+            "dose_per_person":2,
+            "box_to_dose_conversion": 4875,
+            "uom":"doses",
+            "monthly_alloc": [
+                {
+                    "month": "Dec-2020",
+                    "quantity": 199875
+                },
+                {
+                    "month": "Jan-2021",
+                    "quantity": 399750
+                },
+                {
+                    "month": "Feb-2021",
+                    "quantity": 399750
+                }
+            ]
+        },
+        {
+            "supp_name": "Astrazeneca",
+            "safety_stock_percent":5,
+            "dose_per_person":2,
+            "box_to_dose_conversion": 4875,
+            "uom":"doses",
+            "monthly_alloc": [
+                {
+                    "month": "Dec-2020",
+                    "quantity": 0
+                },
+                {
+                    "month": "Jan-2021",
+                    "quantity": 0
+                },
+                {
+                    "month": "Feb-2021",
+                    "quantity": 500000
+                }
+            ]
+        }
+    ]
+}
