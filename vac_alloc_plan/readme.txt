@@ -1,1 +1,1 @@
-aThis is alloc plan using supplier demand push.
+This is alloc plan using supplier demand push.

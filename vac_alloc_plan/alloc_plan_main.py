@@ -5,12 +5,11 @@ Created on Thu Jan 21 13:36:35 2021
 @author: James Ang
 """
 
-
 import json
 from alloc_plan_lib import Supplier_Alloc, Weight_Score, Calc_Month
 
 # Opening JSON file
-f = open('input_alloc_plan2.json',)
+f = open('input_alloc_plan.json',)
 
 data = json.load(f)
 
